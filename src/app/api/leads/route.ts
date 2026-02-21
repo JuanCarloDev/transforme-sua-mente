@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Check duplicata (se blob disponível)
     const existing = await findLeadByEmail(email.trim().toLowerCase());
     if (existing) {
       return NextResponse.json({
@@ -35,7 +36,8 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    await insertLead(
+    // Salva no blob (se disponível)
+    const { persisted } = await insertLead(
       name.trim(),
       email.trim().toLowerCase(),
       phoneClean,
@@ -44,13 +46,14 @@ export async function POST(req: NextRequest) {
 
     const total = await countLeads();
 
+    // Telegram sempre funciona — é o backup se blob não estiver configurado
     const telegramMsg =
       `<b>🔔 Nova inscrição - Fila de Espera</b>\n` +
       `<b>📖 Transforme Sua Mente</b>\n\n` +
       `👤 <b>Nome:</b> ${name.trim()}\n` +
       `📧 <b>Email:</b> ${email.trim().toLowerCase()}\n` +
       `📱 <b>Telefone:</b> ${phoneClean}\n` +
-      `📊 <b>Total na fila:</b> ${total}\n` +
+      (persisted ? `📊 <b>Total na fila:</b> ${total}\n` : `⚠️ <b>Blob não configurado</b> — lead salvo apenas no Telegram\n`) +
       `⏰ <b>Horário:</b> ${new Date().toLocaleString("pt-BR")}`;
 
     sendTelegramMessage(telegramMsg).catch(() => {});
@@ -59,22 +62,28 @@ export async function POST(req: NextRequest) {
       success: true,
       message: "Você está na fila de espera!",
     });
-  } catch {
+  } catch (err) {
+    console.error("[leads/POST]", err);
     return NextResponse.json({ error: "Erro interno" }, { status: 500 });
   }
 }
 
 export async function GET() {
-  const leads = await getAllLeads();
-  const total = await countLeads();
+  try {
+    const leads = await getAllLeads();
+    const total = await countLeads();
 
-  return NextResponse.json({
-    total,
-    leads: leads.map((l) => ({
-      name: l.name,
-      email: l.email,
-      phone: l.phone,
-      createdAt: l.created_at,
-    })),
-  });
+    return NextResponse.json({
+      total,
+      leads: leads.map((l) => ({
+        name: l.name,
+        email: l.email,
+        phone: l.phone,
+        createdAt: l.created_at,
+      })),
+    });
+  } catch (err) {
+    console.error("[leads/GET]", err);
+    return NextResponse.json({ total: 0, leads: [] });
+  }
 }

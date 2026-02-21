@@ -2,6 +2,8 @@ import { put, list } from "@vercel/blob";
 
 const BLOB_NAME = "leads.json";
 
+const HAS_BLOB_TOKEN = !!process.env.BLOB_READ_WRITE_TOKEN;
+
 export interface Lead {
   name: string;
   email: string;
@@ -11,6 +13,7 @@ export interface Lead {
 }
 
 async function getLeadsFromBlob(): Promise<Lead[]> {
+  if (!HAS_BLOB_TOKEN) return [];
   try {
     const { blobs } = await list({ prefix: BLOB_NAME });
     if (blobs.length === 0) return [];
@@ -24,11 +27,17 @@ async function getLeadsFromBlob(): Promise<Lead[]> {
   }
 }
 
-async function saveLeadsToBlob(leads: Lead[]): Promise<void> {
-  await put(BLOB_NAME, JSON.stringify(leads, null, 2), {
-    access: "public",
-    addRandomSuffix: false,
-  });
+async function saveLeadsToBlob(leads: Lead[]): Promise<boolean> {
+  if (!HAS_BLOB_TOKEN) return false;
+  try {
+    await put(BLOB_NAME, JSON.stringify(leads, null, 2), {
+      access: "public",
+      addRandomSuffix: false,
+    });
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export async function insertLead(
@@ -36,7 +45,7 @@ export async function insertLead(
   email: string,
   phone: string,
   source: string
-): Promise<Lead> {
+): Promise<{ lead: Lead; persisted: boolean }> {
   const leads = await getLeadsFromBlob();
   const lead: Lead = {
     name,
@@ -46,8 +55,8 @@ export async function insertLead(
     created_at: new Date().toISOString(),
   };
   leads.push(lead);
-  await saveLeadsToBlob(leads);
-  return lead;
+  const persisted = await saveLeadsToBlob(leads);
+  return { lead, persisted };
 }
 
 export async function findLeadByEmail(
