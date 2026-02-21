@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Editorial Completa — Livro Ricardo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --bg: #0c0a09;
+            --bg-card: #1c1917;
+            --bg-card-hover: #292524;
+            --bg-elevated: #1a1816;
+            --border: #44403c;
+            --border-subtle: #292524;
+            --text: #fafaf9;
+            --text-secondary: #a8a29e;
+            --text-muted: #78716c;
+            --accent: #d97706;
+            --accent-light: #f59e0b;
+            --accent-dim: #92400e;
+            --green: #22c55e;
+            --green-dim: #166534;
+            --red: #ef4444;
+            --red-dim: #991b1b;
+            --blue: #3b82f6;
+            --blue-dim: #1e40af;
+            --purple: #a855f7;
+            --purple-dim: #6b21a8;
+            --cyan: #06b6d4;
+            --yellow: #eab308;
+            --pink: #ec4899;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .hero {
+            position: relative;
+            padding: 80px 40px 60px;
+            background: linear-gradient(135deg, #1c1917 0%, #0c0a09 50%, #1a0f05 100%);
+            border-bottom: 1px solid var(--border-subtle);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(217, 119, 6, 0.12);
+            border: 1px solid rgba(217, 119, 6, 0.25);
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-light);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fafaf9 0%, #d6d3d1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle { font-size: 18px; color: var(--text-secondary); max-width: 700px; line-height: 1.7; }
+
+        .hero-meta { display: flex; gap: 32px; margin-top: 32px; flex-wrap: wrap; }
+        .hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
+        .hero-meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; }
+        .hero-meta-value { font-size: 15px; color: var(--text); font-weight: 500; }
+
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(12, 10, 9, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 0 40px;
+        }
+
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+        .nav-inner::-webkit-scrollbar { display: none; }
+
+        .nav-tab {
+            padding: 14px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            white-space: nowrap;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-tab:hover { color: var(--text-secondary); }
+        .nav-tab.active { color: var(--accent-light); border-bottom-color: var(--accent); }
+
+        .main { max-width: 1200px; margin: 0 auto; padding: 40px; }
+
+        .section { margin-bottom: 64px; scroll-margin-top: 70px; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .section-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .section-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; }
+        .section-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+        .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+
+        .score-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .score-value { font-size: 36px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+        .score-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+        .score-bar { width: 100%; height: 6px; background: var(--border-subtle); border-radius: 3px; margin-top: 12px; overflow: hidden; }
+        .score-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .card:hover { border-color: var(--border); }
+        .card-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .card p, .card li { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
+        .card ul, .card ol { padding-left: 20px; margin-top: 8px; }
+        .card li { margin-bottom: 8px; }
+
+        .tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+        .tag-red { background: rgba(239,68,68,0.12); color: #fca5a5; border: 1px solid rgba(239,68,68,0.2); }
+        .tag-yellow { background: rgba(234,179,8,0.12); color: #fde047; border: 1px solid rgba(234,179,8,0.2); }
+        .tag-green { background: rgba(34,197,94,0.12); color: #86efac; border: 1px solid rgba(34,197,94,0.2); }
+        .tag-blue { background: rgba(59,130,246,0.12); color: #93c5fd; border: 1px solid rgba(59,130,246,0.2); }
+        .tag-purple { background: rgba(168,85,247,0.12); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.2); }
+        .tag-cyan { background: rgba(6,182,212,0.12); color: #67e8f9; border: 1px solid rgba(6,182,212,0.2); }
+        .tag-pink { background: rgba(236,72,153,0.12); color: #f9a8d4; border: 1px solid rgba(236,72,153,0.2); }
+
+        .verdict {
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.08) 0%, rgba(217, 119, 6, 0.02) 100%);
+            border: 1px solid rgba(217, 119, 6, 0.2);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 16px;
+        }
+
+        .verdict-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--accent-light); margin-bottom: 12px; }
+        .verdict p { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
+
+        .quote-block {
+            border-left: 3px solid var(--accent);
+            padding: 16px 24px;
+            margin: 16px 0;
+            background: rgba(217, 119, 6, 0.04);
+            border-radius: 0 12px 12px 0;
+        }
+
+        .quote-block p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: var(--text); line-height: 1.7; }
+        .quote-block cite { display: block; margin-top: 8px; font-size: 13px; color: var(--text-muted); font-style: normal; }
+
+        .table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 12px; border: 1px solid var(--border-subtle); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--bg-elevated); padding: 12px 16px; text-align: left; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); border-bottom: 1px solid var(--border-subtle); }
+        td { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .chapter-map { display: flex; flex-direction: column; gap: 12px; }
+
+        .chapter-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            transition: border-color 0.2s;
+        }
+
+        .chapter-item:hover { border-color: var(--border); }
+
+        .chapter-num {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; font-weight: 700; font-family: 'JetBrains Mono', monospace; flex-shrink: 0;
+        }
+
+        .chapter-content { flex: 1; }
+        .chapter-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .chapter-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+        .chapter-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+
+        .flow-arrow { display: flex; align-items: center; justify-content: center; padding: 4px 0; color: var(--text-muted); font-size: 18px; }
+
+        .hl { color: var(--accent-light); font-weight: 600; }
+        .hl-green { color: var(--green); font-weight: 600; }
+        .hl-red { color: var(--red); font-weight: 600; }
+        .hl-blue { color: var(--blue); font-weight: 600; }
+        .hl-purple { color: var(--purple); font-weight: 600; }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .meter { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+        .meter-label { width: 160px; font-size: 13px; color: var(--text-secondary); flex-shrink: 0; }
+        .meter-bar { flex: 1; height: 8px; background: var(--border-subtle); border-radius: 4px; overflow: hidden; }
+        .meter-fill { height: 100%; border-radius: 4px; }
+        .meter-value { width: 40px; text-align: right; font-size: 13px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+
+        .errata-item { padding: 16px; background: rgba(239, 68, 68, 0.04); border: 1px solid rgba(239, 68, 68, 0.1); border-radius: 10px; margin-bottom: 10px; }
+        .errata-original { font-size: 14px; color: var(--red); text-decoration: line-through; opacity: 0.7; }
+        .errata-corrected { font-size: 14px; color: var(--green); margin-top: 4px; }
+        .errata-location { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+
+        .step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .step-card { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; }
+        .step-num { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .step-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+        .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+        .tool-card { display: flex; gap: 16px; padding: 20px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; margin-bottom: 12px; }
+        .tool-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .tool-info { flex: 1; }
+        .tool-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .tool-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+        .tool-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+
+        @media (max-width: 768px) {
+            .hero { padding: 48px 20px 40px; }
+            .hero h1 { font-size: 32px; }
+            .nav-bar { padding: 0 16px; }
+            .main { padding: 24px 16px; }
+            .two-col, .step-grid { grid-template-columns: 1fr; }
+            .score-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-meta { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">Analise Editorial Completa v2.0</div>
+        <h1>Renovacao da Mente:<br>Trauma, Cura e Identidade</h1>
+        <p class="hero-subtitle">
+            Analise profunda do manuscrito pre-revisado de Ricardo — sob o olhar de um <strong>ghostwriter/redator editorial</strong>,
+            com lentes da <strong>psicanalise</strong>, <strong>teologia crista</strong>, <strong>neurociencia</strong> e <strong>tecnica literaria</strong>.
+            Inclui guia completo de <strong>producao editorial</strong>, <strong>diagramacao</strong> e <strong>ferramentas</strong>.
+        </p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <span class="hero-meta-label">Autor</span>
+                <span class="hero-meta-value">Ricardo</span>
+            </div>
+            <div class="hero-meta-item">
+                <span class="hero-meta-label">Palavras</span>
+                <span class="hero-meta-value">~38.000</span>
+            </div>
+            <div class="hero-meta-item">
+                <span class="hero-meta-label">Paginas</span>
+                <span class="hero-meta-value">~112</span>
+            </div>
+            <div class="hero-meta-item">
+                <span class="hero-meta-label">Secoes</span>
+                <span class="hero-meta-value">35+ blocos tematicos</span>
+            </div>
+            <div class="hero-meta-item">
+                <span class="hero-meta-label">Versao analisada</span>
+                <span class="hero-meta-value">Pre-revisado (Fev 2026)</span>
+            </div>
+            <div class="hero-meta-item">
+                <span class="hero-meta-label">Data da analise</span>
+                <span class="hero-meta-value">21 Fev 2026</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-bar">
+    <div class="nav-inner">
+        <a href="#panorama" class="nav-tab active">Panorama</a>
+        <a href="#estrutura" class="nav-tab">Estrutura</a>
+        <a href="#concordancia" class="nav-tab">Concordancia</a>
+        <a href="#coerencia" class="nav-tab">Coerencia</a>
+        <a href="#linguagem" class="nav-tab">Linguagem</a>
+        <a href="#teologica" class="nav-tab">Teologica</a>
+        <a href="#psicanalitica" class="nav-tab">Psicanalitica</a>
+        <a href="#editorial" class="nav-tab">Editorial</a>
+        <a href="#errata" class="nav-tab">Errata</a>
+        <a href="#recomendacoes" class="nav-tab">Recomendacoes</a>
+        <a href="#producao" class="nav-tab">Producao</a>
+        <a href="#diagramacao" class="nav-tab">Diagramacao</a>
+        <a href="#ferramentas" class="nav-tab">Ferramentas</a>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- ==================== 1. PANORAMA ==================== -->
+    <div class="section" id="panorama">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(217,119,6,0.12); color: var(--accent-light);">🎯</div>
+            <div>
+                <div class="section-title">Panorama Geral</div>
+                <div class="section-subtitle">Visao do ghostwriter sobre o estado atual do manuscrito pre-revisado</div>
+            </div>
+        </div>
+
+        <div class="score-grid">
+            <div class="score-card">
+                <div class="score-value" style="color: var(--accent-light);">7.4</div>
+                <div class="score-label">Nota Global</div>
+                <div class="score-bar"><div class="score-fill" style="width: 74%; background: var(--accent);"></div></div>
+            </div>
+            <div class="score-card">
+                <div class="score-value" style="color: var(--green);">8.5</div>
+                <div class="score-label">Conteudo Teologico</div>
+                <div class="score-bar"><div class="score-fill" style="width: 85%; background: var(--green);"></div></div>
+            </div>
+            <div class="score-card">
+                <div class="score-value" style="color: var(--blue);">8.0</div>
+                <div class="score-label">Base Psicanalitica</div>
+                <div class="score-bar"><div class="score-fill" style="width: 80%; background: var(--blue);"></div></div>
+            </div>
+            <div class="score-card">
+                <div class="score-value" style="color: var(--yellow);">6.0</div>
+                <div class="score-label">Estrutura</div>
+                <div class="score-bar"><div class="score-fill" style="width: 60%; background: var(--yellow);"></div></div>
+            </div>
+            <div class="score-card">
+                <div class="score-value" style="color: var(--purple);">6.5</div>
+                <div class="score-label">Linguagem</div>
+                <div class="score-bar"><div class="score-fill" style="width: 65%; background: var(--purple);"></div></div>
+            </div>
+            <div class="score-card">
+                <div class="score-value" style="color: var(--cyan);">9.0</div>
+                <div class="score-label">Integracao Fe-Ciencia</div>
+                <div class="score-bar"><div class="score-fill" style="width: 90%; background: var(--cyan);"></div></div>
+            </div>
+        </div>
+
+        <div class="verdict">
+            <div class="verdict-title">Veredito do Ghostwriter</div>
+            <p>
+                O manuscrito pre-revisado de Ricardo e um trabalho <span class="hl">genuinamente rico e ambicioso</span> — a combinacao de fundamentacao biblica,
+                psicanalitica e neurociencia e rara e valiosa no mercado editorial evangelico brasileiro. O autor demonstra dominio conceitual solido,
+                sensibilidade pastoral e capacidade narrativa genuina (analogias dos macacos, unha encravada, feijao).
+                <br><br>
+                Com ~38.000 palavras e 112 paginas, o manuscrito ja tem <span class="hl">materia-prima suficiente para um livro completo</span>.
+                No entanto, <span class="hl-red">ainda nao esta pronto para publicacao</span>. Os principais problemas sao:
+                <strong>(1)</strong> ausencia de estrutura capitular formal, <strong>(2)</strong> trechos repetitivos que diluem o impacto,
+                <strong>(3)</strong> oscilacao entre registro academico e pastoral, <strong>(4)</strong> 3 das 5 feridas emocionais nao foram desenvolvidas,
+                <strong>(5)</strong> falta de introducao autoral, conclusao e capitulo pratico, e <strong>(6)</strong> ~20 erros gramaticais que precisam de correcao.
+                <br><br>
+                Com um trabalho de <span class="hl">reorganizacao estrutural + edicao de linguagem + corte cirurgico de repeticoes + escrita dos capitulos faltantes</span>,
+                este manuscrito tem potencial para se tornar uma <strong>referencia na intersecao entre fe crista, psicanalise e cura emocional</strong>.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Resumo Quantitativo</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Metrica</th><th>Valor</th><th>Observacao</th></tr>
+                    <tr><td>Palavras totais</td><td><strong>~38.000</strong></td><td>Suficiente para 180-220 paginas diagramado (14x21cm)</td></tr>
+                    <tr><td>Paragrafos com conteudo</td><td><strong>~200+</strong></td><td>Apos remover linhas em branco e separadores</td></tr>
+                    <tr><td>Secoes/blocos tematicos</td><td><strong>35+</strong></td><td>Conforme sumario do autor, com paginas definidas</td></tr>
+                    <tr><td>Paginas do manuscrito</td><td><strong>~112</strong></td><td>Conforme numeracao do sumario original</td></tr>
+                    <tr><td>Referencias biblicas</td><td><strong>30+</strong></td><td>AT + NT — Romanos, Galatas, Genesis, Salmos, Mateus, etc.</td></tr>
+                    <tr><td>Autores citados</td><td><strong>15+</strong></td><td>Freud, Winnicott, Bandura, Bowlby, Jung, Mate, Young, Janet, etc.</td></tr>
+                    <tr><td>Erros gramaticais</td><td><strong>20+</strong></td><td>Concordancia, grafia, pontuacao, crase</td></tr>
+                    <tr><td>Repeticoes identificadas</td><td><strong>8</strong></td><td>Conceitos explicados 2-3x com mesmas palavras</td></tr>
+                    <tr><td>Feridas desenvolvidas</td><td><strong>2 de 5</strong></td><td>Injustica e abandono ok — faltam rejeicao, traicao, humilhacao</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Pontos Fortes (o que ja funciona muito bem)</div>
+            <ul>
+                <li><strong>Integracao fe-ciencia excepcional:</strong> o autor nao opoe psicanalise a fe nem usa a Biblia para "provar" conceitos psicologicos — mostra que ambas apontam para as mesmas verdades por caminhos diferentes. Isso e sofisticado e raro.</li>
+                <li><strong>Analogias poderosas:</strong> os 5 macacos (transmissao cultural), a unha encravada (enfrentamento da dor), o feijao (semeadura e colheita), os oculos invisiveis (esquemas cognitivos) — sao recursos narrativos que fixam o conteudo na memoria do leitor.</li>
+                <li><strong>Caso clinico de "Ana" e do homem com dificuldade relacional:</strong> historias que criam identificacao emocional e humanizam a teoria.</li>
+                <li><strong>Leitura psicanalitica de Galatas 5:</strong> interpretar "obras da carne" como manifestacoes de trauma e fragmentacao e original e teologicamente defensavel.</li>
+                <li><strong>Profundidade das citacoes:</strong> Freud (1920), Bowlby (apego), Winnicott (falso self), Gabor Mate (trauma), Young (esquemas) — todas usadas com precisao conceitual.</li>
+                <li><strong>Tom pastoral autentico:</strong> o autor escreve com empatia genuina, sem julgamento, convidando o leitor a um processo de cura.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== 2. ESTRUTURA ==================== -->
+    <div class="section" id="estrutura">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(59,130,246,0.12); color: var(--blue);">🏗️</div>
+            <div>
+                <div class="section-title">Mapa Estrutural</div>
+                <div class="section-subtitle">Ordem dos blocos tematicos conforme sumario do autor (pre-revisado)</div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-title">Diagnostico de Estrutura</div>
+            <p>
+                O manuscrito pre-revisado ja possui um <span class="hl">sumario com 35+ secoes e paginacao</span>, o que e uma melhoria significativa
+                em relacao a versoes anteriores. No entanto, <span class="hl-red">nao ha divisao formal em capitulos</span> — as secoes sao listadas
+                como topicos de uma dissertacao, nao como capitulos de um livro. A ausencia de hierarquia clara (partes → capitulos → secoes)
+                torna a leitura linear e cansativa. O fluxo tematico tambem apresenta saltos: a secao sobre "carne vs espirito" (p.63) aparece
+                ANTES de completar o arco sobre trauma (p.40-60), quebrando a progressao logica.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Sumario Original do Autor (35+ secoes)</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Pag.</th><th>Secao</th><th>Status</th></tr>
+                    <tr><td>01</td><td>Introducao</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>—</td><td>Mudancas externas comecam com transformacoes internas</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>—</td><td>Crianca interior</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>—</td><td>Formacao de crencas limitantes / Falsos profetas</td><td><span class="tag tag-yellow">Longo</span></td></tr>
+                    <tr><td>—</td><td>Forma de aprendizagem / Modelagem</td><td><span class="tag tag-yellow">Repetitivo</span></td></tr>
+                    <tr><td>—</td><td>Identidade no processo da criacao</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>—</td><td>A Queda e o distanciamento da verdadeira identidade</td><td><span class="tag tag-green">Excelente</span></td></tr>
+                    <tr><td>—</td><td>Papel da figura paterna / Afirmacao de Jesus</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>36</td><td>Formacao da identidade precede o nascimento</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>40</td><td>Compreendendo o trauma emocional</td><td><span class="tag tag-yellow">Mega-secao</span></td></tr>
+                    <tr><td>42</td><td>Analogia da unha encravada</td><td><span class="tag tag-green">Excelente</span></td></tr>
+                    <tr><td>45</td><td>Trauma na visao de Gabor Mate</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>48-56</td><td>Visao de Janet, Bowlby, van der Kolk, Levine, Estes, Solomon, Skinner, Bandura</td><td><span class="tag tag-yellow">Catalogo</span></td></tr>
+                    <tr><td>58</td><td>Experimento da formacao do trauma em laboratorio</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>60</td><td>Importancia do aqui e agora</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>63</td><td>Viver no Espirito vs carne (Galatas 5)</td><td><span class="tag tag-green">Forte</span></td></tr>
+                    <tr><td>65</td><td>Trauma e ciclo de comportamentos impulsionados pela dor</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>67</td><td>Espirito como principio de integracao</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>69</td><td>Abordagem psicanalitica dos frutos da carne</td><td><span class="tag tag-green">Original</span></td></tr>
+                    <tr><td>77</td><td>O pai da mentira quer distorcer sua identidade</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>81</td><td>Traumas geracionais e visao biblica</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>84</td><td>Consequencias comportamentais das feridas emocionais</td><td><span class="tag tag-red">Incompleto</span></td></tr>
+                    <tr><td>100</td><td>Reconexao com meu Eu</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>102</td><td>Natureza do habito e processo de mudanca</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>107</td><td>A mudanca comeca no enfrentamento</td><td><span class="tag tag-green">Ok</span></td></tr>
+                    <tr><td>112</td><td>Ha esperanca</td><td><span class="tag tag-yellow">Abrupto</span></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Proposta de Reorganizacao em 12 Capitulos</div>
+            <p style="margin-bottom: 16px;">O manuscrito precisa de hierarquia. Abaixo, proposta de 12 capitulos com fluxo logico progressivo:</p>
+            <div class="chapter-map">
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(217,119,6,0.15); color: var(--accent-light);">01</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">Nao se Conforme</div>
+                        <div class="chapter-desc">Romanos 12:2 como tese central. Convocacao a renovacao. Billy Graham. Apresentacao do livro.</div>
+                        <div class="chapter-tags"><span class="tag tag-green">Existente</span><span class="tag tag-blue">Teologico</span></div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(168,85,247,0.15); color: var(--purple);">02</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">O Molde do Mundo</div>
+                        <div class="chapter-desc">Padroes distorcidos, ambiente, modelagem. Bandura, Young, esquemas cognitivos. Cadeia pensamento→destino. FUSAO das secoes sobre crencas, falsos profetas e modelagem.</div>
+                        <div class="chapter-tags"><span class="tag tag-yellow">Fusao de 3 secoes</span><span class="tag tag-purple">Psicologico</span></div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(59,130,246,0.15); color: var(--blue);">03</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">A Escada Proibida</div>
+                        <div class="chapter-desc">Experimento dos 5 macacos. Transmissao cultural. Ferenczi, Winnicott transgeracional. Traumas geracionais + visao biblica.</div>
+                        <div class="chapter-tags"><span class="tag tag-green">Existente</span><span class="tag tag-purple">Psicanalitico</span></div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(34,197,94,0.15); color: var(--green);">04</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">O Paraiso Perdido</div>
+                        <div class="chapter-desc">Eden como estado original. Queda. Vergonha→medo→culpa→fuga. Proto-evangelho. Identidade no processo da criacao.</div>
+                        <div class="chapter-tags"><span class="tag tag-green">Existente</span><span class="tag tag-blue">Teologico</span></div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(236,72,153,0.15); color: var(--pink);">05</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">Duas Naturezas, Um Coracao</div>
+                        <div class="chapter-desc">Galatas 5: carne vs. espirito. Obras vs. fruto. Eu fragmentado vs. integrado. Leitura psicanalitica dos frutos da carne.</div>
+                        <div class="chapter-tags"><span class="tag tag-green">Existente</span><span class="tag tag-green">Ponto forte</span></div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(6,182,212,0.15); color: var(--cyan);">06</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">Mascaras que Protegem, Mascaras que Prendem</div>
+                        <div class="chapter-desc">Falso self (Winnicott). Fragmentacao disfarcada. Comportamentos "bondosos" como defesa. Consequencias comportamentais.</div>
+                        <div class="chapter-tags"><span class="tag tag-green">Existente</span><span class="tag tag-purple">Psicanalitico</span></div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(239,68,68,0.15); color: var(--red);">07</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">A Ferida que Nao Fecha</div>
+                        <div class="chapter-desc">Definicao de trauma. Freud, Mate, Euripides Mendes, Janet, van der Kolk, Levine. Trauma tipo A e B. Crianca de 2-3 anos abandonada.</div>
+                        <div class="chapter-tags"><span class="tag tag-green">Existente</span><span class="tag tag-yellow">Condensar catalogo</span></div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(234,179,8,0.15); color: var(--yellow);">08</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">A Crianca que Ainda Vive em Nos</div>
+                        <div class="chapter-desc">Crianca interior (Bradshaw, Rogers). Apego (Bowlby, Ainsworth). Infancia e formacao da identidade. Figura paterna.</div>
+                        <div class="chapter-tags"><span class="tag tag-green">Existente</span><span class="tag tag-purple">Psicanalitico</span></div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(217,119,6,0.15); color: var(--accent-light);">09</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">Tocar Onde Doi</div>
+                        <div class="chapter-desc">Analogia da unha encravada. Enfrentamento. Aqui e agora. Catarse. A mudanca comeca no enfrentamento.</div>
+                        <div class="chapter-tags"><span class="tag tag-green">Existente</span><span class="tag tag-green">Ponto forte</span></div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(168,85,247,0.15); color: var(--purple);">10</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">As Cinco Feridas</div>
+                        <div class="chapter-desc">Injustica, abandono, rejeicao, traicao, humilhacao. Causas e consequencias de cada uma.</div>
+                        <div class="chapter-tags"><span class="tag tag-red">Completar 3 feridas</span><span class="tag tag-purple">Psicanalitico</span></div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(34,197,94,0.15); color: var(--green);">11</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">O Caminho da Cura</div>
+                        <div class="chapter-desc"><em>A ESCREVER:</em> Pratica da renovacao. Oracao, terapia, comunidade, perdao. Habitos. Integracao fe + ciencia. Perguntas reflexivas.</div>
+                        <div class="chapter-tags"><span class="tag tag-red">Novo capitulo</span><span class="tag tag-blue">Pratico</span></div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="chapter-item">
+                    <div class="chapter-num" style="background: rgba(6,182,212,0.15); color: var(--cyan);">12</div>
+                    <div class="chapter-content">
+                        <div class="chapter-name">O Rosto que Ele Sonhou para Voce</div>
+                        <div class="chapter-desc"><em>A ESCREVER:</em> Conclusao. Identidade restaurada. Chamada a acao. Esperanca. Ha esperanca (expandido).</div>
+                        <div class="chapter-tags"><span class="tag tag-red">Novo capitulo</span><span class="tag tag-cyan">Conclusao</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 3. CONCORDANCIA ==================== -->
+    <div class="section" id="concordancia">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(34,197,94,0.12); color: var(--green);">🔗</div>
+            <div>
+                <div class="section-title">Analise de Concordancia</div>
+                <div class="section-subtitle">Coesao entre secoes, referencias cruzadas e progressao tematica</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">O que Funciona Bem</div>
+            <ul>
+                <li><strong>Fio condutor Romanos 12:2:</strong> o versiculo ancora o livro inteiro e reaparece em momentos-chave — introducao, crencas limitantes, habitos, enfrentamento. E a espinha dorsal tematica.</li>
+                <li><strong>Progressao trauma → crenca → comportamento → cura:</strong> quando lido na ordem proposta (12 capitulos), o arco narrativo e coerente e satisfatorio.</li>
+                <li><strong>Ponte psicanalise-teologia consistente:</strong> cada conceito psicologico e conectado a um principio biblico correspondente, criando um dialogo genuino (nao forcado).</li>
+                <li><strong>Recorrencia de metaforas:</strong> "oculos invisiveis", "caminho na floresta", "infernos conhecidos" — o autor cria um vocabulario proprio que unifica o texto.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Problemas de Concordancia</div>
+            <ul>
+                <li><strong>Bandura aparece 2x com mesma explicacao:</strong> o experimento Bobo Doll e a teoria da modelagem sao explicados de forma quase identica em duas secoes distintas. Manter apenas uma ocorrencia.</li>
+                <li><strong>Definicao tripla de trauma:</strong> o conceito de trauma e definido formalmente em 3 momentos diferentes — manter a definicao mais completa e nas outras apenas referenciar.</li>
+                <li><strong>Galatas 5 antes de completar trauma:</strong> no sumario original, a secao sobre "carne vs espirito" (p.63) aparece no meio das secoes sobre trauma, quebrando o fluxo. Na reorganizacao proposta, ela fica no capitulo 5, depois de Eden e antes de mascaras.</li>
+                <li><strong>"Renovacao da mente" aparece ~8x:</strong> com o mesmo sentido e mesmas palavras. Variar: "reestruturacao interna", "reconstrucao do olhar", "metanoia", "transformacao da percepcao".</li>
+                <li><strong>Secao "Ha esperanca" e abrupta:</strong> termina o livro sem amarrar os fios. Precisa ser expandida em um capitulo de conclusao completo.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Mapa de Referencias Cruzadas</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Conceito</th><th>Onde aparece</th><th>Status</th></tr>
+                    <tr><td>Romanos 12:2</td><td>Intro, crencas, habitos, enfrentamento, conclusao</td><td><span class="tag tag-green">Consistente</span></td></tr>
+                    <tr><td>Falso self (Winnicott)</td><td>Crianca interior, mascaras, consequencias</td><td><span class="tag tag-green">Consistente</span></td></tr>
+                    <tr><td>Modelagem (Bandura)</td><td>Crencas limitantes + Forma de aprendizagem</td><td><span class="tag tag-red">Duplicado</span></td></tr>
+                    <tr><td>Gabor Mate (citacao)</td><td>Trauma + Enfrentamento</td><td><span class="tag tag-yellow">2x ok, nao mais</span></td></tr>
+                    <tr><td>Galatas 5</td><td>Carne vs espirito + frutos da carne</td><td><span class="tag tag-green">Consistente</span></td></tr>
+                    <tr><td>Genesis 1-3 (Queda)</td><td>Eden, identidade, figura paterna</td><td><span class="tag tag-green">Consistente</span></td></tr>
+                    <tr><td>5 feridas emocionais</td><td>Consequencias comportamentais</td><td><span class="tag tag-red">Incompleto (2/5)</span></td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 4. COERENCIA ==================== -->
+    <div class="section" id="coerencia">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(234,179,8,0.12); color: var(--yellow);">⚖️</div>
+            <div>
+                <div class="section-title">Analise de Coerencia</div>
+                <div class="section-subtitle">Logica interna, contradicoes e consistencia argumentativa</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Coerencia Tematica: Forte</div>
+            <p>
+                O livro mantem uma <span class="hl-green">coerencia tematica solida</span>. A tese central — "traumas de infancia fragmentam a identidade;
+                a cura vem pela renovacao da mente (Rm 12:2) com apoio da psicanalise e da fe" — e sustentada do inicio ao fim.
+                O autor nao se contradiz em nenhum ponto central. As transicoes entre psicologia e teologia sao organicas, nao forcadas.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Pontos de Atencao</div>
+            <ul>
+                <li><strong>Pecado original vs. ferida emocional:</strong> o texto oscila entre tratar a Queda como evento teologico (hamartiologia) e como metafora psicologica (primeiro trauma). Funciona pastoralmente, mas teologicamente pode gerar critica de "psicologizar" o pecado. Recomendacao: ser explicito na distincao.</li>
+                <li><strong>Determinismo vs. livre-arbitrio:</strong> ao enfatizar o poder dos traumas de infancia, o texto pode involuntariamente sugerir que somos "vitimas" do passado sem agencia. O capitulo sobre enfrentamento corrige isso, mas a tensao deveria ser reconhecida mais cedo.</li>
+                <li><strong>Tom prescritivo vs. descritivo:</strong> em alguns momentos o autor descreve fenomenos psicologicos (descritivo), em outros diz o que o leitor "deve" fazer (prescritivo). Padronizar: secoes teoricas = descritivo; secoes praticas = prescritivo.</li>
+                <li><strong>Experimento dos 5 macacos:</strong> apresentado como se fosse real. E uma parabola/lenda urbana, nao um experimento cientifico documentado. O autor deve esclarecer isso desde o inicio para nao comprometer a credibilidade academica.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Medidor de Coerencia por Area</div>
+            <div class="meter">
+                <div class="meter-label">Tese central</div>
+                <div class="meter-bar"><div class="meter-fill" style="width: 95%; background: var(--green);"></div></div>
+                <div class="meter-value" style="color: var(--green);">9.5</div>
+            </div>
+            <div class="meter">
+                <div class="meter-label">Arco narrativo</div>
+                <div class="meter-bar"><div class="meter-fill" style="width: 70%; background: var(--yellow);"></div></div>
+                <div class="meter-value" style="color: var(--yellow);">7.0</div>
+            </div>
+            <div class="meter">
+                <div class="meter-label">Teologia interna</div>
+                <div class="meter-bar"><div class="meter-fill" style="width: 82%; background: var(--green);"></div></div>
+                <div class="meter-value" style="color: var(--green);">8.2</div>
+            </div>
+            <div class="meter">
+                <div class="meter-label">Psicanalise interna</div>
+                <div class="meter-bar"><div class="meter-fill" style="width: 85%; background: var(--green);"></div></div>
+                <div class="meter-value" style="color: var(--green);">8.5</div>
+            </div>
+            <div class="meter">
+                <div class="meter-label">Transicoes entre secoes</div>
+                <div class="meter-bar"><div class="meter-fill" style="width: 55%; background: var(--yellow);"></div></div>
+                <div class="meter-value" style="color: var(--yellow);">5.5</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 5. LINGUAGEM ==================== -->
+    <div class="section" id="linguagem">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(168,85,247,0.12); color: var(--purple);">✍️</div>
+            <div>
+                <div class="section-title">Analise de Linguagem</div>
+                <div class="section-subtitle">Registro, clareza, acessibilidade e qualidade da escrita</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Registro Linguistico (Escala 1-10)</div>
+            <p style="margin-bottom: 16px;">1 = infantil | 5 = acessivel | 7 = academico | 10 = ultra-tecnico</p>
+            <div class="meter">
+                <div class="meter-label">Secoes teologicas</div>
+                <div class="meter-bar"><div class="meter-fill" style="width: 55%; background: var(--green);"></div></div>
+                <div class="meter-value">5.5</div>
+            </div>
+            <div class="meter">
+                <div class="meter-label">Secoes psicanaliticas</div>
+                <div class="meter-bar"><div class="meter-fill" style="width: 72%; background: var(--yellow);"></div></div>
+                <div class="meter-value">7.2</div>
+            </div>
+            <div class="meter">
+                <div class="meter-label">Analogias e historias</div>
+                <div class="meter-bar"><div class="meter-fill" style="width: 40%; background: var(--green);"></div></div>
+                <div class="meter-value">4.0</div>
+            </div>
+            <div class="meter">
+                <div class="meter-label">Secoes sobre autores</div>
+                <div class="meter-bar"><div class="meter-fill" style="width: 78%; background: var(--red);"></div></div>
+                <div class="meter-value">7.8</div>
+            </div>
+            <p style="margin-top: 12px;">
+                <strong>Problema:</strong> oscilacao de 4.0 a 7.8 no mesmo livro. O publico-alvo (cristaos leigos, 25-45 anos)
+                pede um registro entre <span class="hl">5.0-6.0</span>. Quando o autor narra historias, atinge esse nivel naturalmente.
+                Quando cita autores, sobe demais. <strong>Regra:</strong> toda vez que usar termo tecnico, explicar em linguagem simples na sequencia.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Exemplos de Oscilacao</div>
+            <div class="quote-block">
+                <p>"A psicologia chama isso de autorregulacao; a psicanalise, de integracao psiquica; Paulo, de vida no Espirito."</p>
+                <cite>Excelente — nivel 5.5, acessivel e elegante</cite>
+            </div>
+            <div class="quote-block" style="border-left-color: var(--red);">
+                <p>"O ego, que e o mediador da realidade, ainda imaturo, esta em pleno desenvolvimento, e esse processo e profundamente influenciado pelas experiencias que a crianca vivencia."</p>
+                <cite>Nivel 7.5 — "ego mediador da realidade" precisa de traducao para leigo</cite>
+            </div>
+            <div class="quote-block">
+                <p>"Imagine que sua mente funciona como um caminho ja bem definido em uma floresta, quanto mais voce percorre esse caminho, mais ele fica claro e facil de trilhar."</p>
+                <cite>Excelente — nivel 4.5, analogia perfeita para o publico-alvo</cite>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Recomendacoes de Linguagem</div>
+            <ul>
+                <li><strong>Paragrafos mais curtos:</strong> varios paragrafos excedem 15 linhas. Para livro impresso, ideal: 5-8 linhas. Quebrar paragrafos longos em 2-3 menores.</li>
+                <li><strong>Glossario ao final:</strong> incluir glossario com termos tecnicos (recalque, clivagem, dissociacao, falso self, esquema cognitivo, etc.).</li>
+                <li><strong>Variar "renovacao da mente":</strong> usar sinonimos — "metanoia", "reestruturacao interna", "reconstrucao do olhar", "transformacao da percepcao".</li>
+                <li><strong>Eliminar repeticoes de "por tanto" / "dessa forma" / "nesse contexto":</strong> conectivos repetidos a cada 2-3 paragrafos. Variar ou simplesmente cortar.</li>
+                <li><strong>Acentos e grafia:</strong> corrigir "CRINAÇA" → "CRIANÇA", "com sigo" → "consigo", "muitas fezes" → "muitas vezes", "por tanto" → "portanto".</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== 6. TEOLOGICA ==================== -->
+    <div class="section" id="teologica">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(34,197,94,0.12); color: var(--green);">✝️</div>
+            <div>
+                <div class="section-title">Analise Teologica</div>
+                <div class="section-subtitle">Fundamentacao biblica, precisao doutrinaria e profundidade pastoral</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Mapa de Referencias Biblicas</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Passagem</th><th>Uso no texto</th><th>Avaliacao</th></tr>
+                    <tr><td>Romanos 12:2</td><td>Tese central — renovacao da mente</td><td><span class="tag tag-green">Excelente</span></td></tr>
+                    <tr><td>Galatas 5:16-26</td><td>Carne vs Espirito como leitura psicanalitica</td><td><span class="tag tag-green">Original e forte</span></td></tr>
+                    <tr><td>Genesis 1-3</td><td>Eden, Queda, vergonha, identidade original</td><td><span class="tag tag-green">Bem fundamentado</span></td></tr>
+                    <tr><td>Genesis 3:17</td><td>"Maldita e a terra, nao o homem" — graca de Deus</td><td><span class="tag tag-green">Teologia pastoral excelente</span></td></tr>
+                    <tr><td>Salmo 34:18</td><td>Deus perto dos quebrantados</td><td><span class="tag tag-green">Adequado</span></td></tr>
+                    <tr><td>Salmo 147:3</td><td>Cura dos feridos de coracao</td><td><span class="tag tag-green">Adequado</span></td></tr>
+                    <tr><td>Mateus 18:3</td><td>Tornar-se como crianca</td><td><span class="tag tag-green">Boa ressignificacao</span></td></tr>
+                    <tr><td>Marcos 10:51</td><td>"O que quer que eu te faca?" — nomear a dor</td><td><span class="tag tag-green">Brilhante</span></td></tr>
+                    <tr><td>Dt 29:29</td><td>"Coisas encobertas pertencem ao Senhor"</td><td><span class="tag tag-yellow">Uso criativo mas eisegese</span></td></tr>
+                    <tr><td>Apocalipse 12:4</td><td>Satanas e 1/3 dos anjos</td><td><span class="tag tag-yellow">Interpretacao disputada</span></td></tr>
+                    <tr><td>Jaco no Jaboque</td><td>Luta como metafora de enfrentamento da sombra</td><td><span class="tag tag-green">Brilhante</span></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Destaques Teologicos</div>
+            <ul>
+                <li><strong>Gn 3:17 — "maldita e a terra, nao o homem":</strong> excelente observacao sobre a graca de Deus que desvia a maldicao. Teologia pastoral de altissimo nivel. Conecta com a antropologia agostiniana e a teologia reformada do pecado original.</li>
+                <li><strong>Jaco no Jaboque:</strong> usar a luta de Jaco como metafora de enfrentamento da sombra interior e brilhante — conecta psicanalise junguiana com narrativa biblica sem forcar.</li>
+                <li><strong>"O que quer que eu te faca?" (Mc 10:51):</strong> a conexao entre Cristo perguntando ao cego e a necessidade de nomear a dor para que a cura comece e pastoral, psicanalitica e homiletica ao mesmo tempo.</li>
+                <li><strong>Galatas 5 como mapa psicanalitico:</strong> interpretar "imoralidade, impureza, idolatria, inimizades, ciumes, iras" como manifestacoes de trauma e nao apenas "pecados morais" e teologicamente defensavel e pastoralmente genial.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Pontos de Atencao Teologica</div>
+            <ul>
+                <li><strong>Satanas e o terco dos anjos:</strong> a afirmacao vem de interpretacao de Ap 12:4, que e disputada. Adicionar "conforme a tradicao teologica" ou citar a passagem.</li>
+                <li><strong>Pecado original vs. ferida emocional:</strong> o texto oscila entre hamartiologia e metafora psicologica. Ser mais explicito na distincao.</li>
+                <li><strong>Ausencia de cristologia explicita:</strong> o livro fala muito sobre o problema (trauma, fragmentacao) e pouco sobre a solucao cristologica (cruz, ressurreicao, redencao). Jesus como agente restaurador e subdesenvolvido. Para publico cristao, isso e lacuna importante.</li>
+                <li><strong>Dt 29:29 fora do contexto original:</strong> no contexto original refere-se a misterios divinos, nao a traumas recalcados. Usar como "ilustracao", nao como "fundamento".</li>
+                <li><strong>Falta de mencao a oracao/pratica espiritual:</strong> o texto fala sobre renovacao da mente mas nao oferece praticas concretas (oracao, meditacao biblica, confissao, comunhao). O capitulo 11 proposto resolveria isso.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== 7. PSICANALITICA ==================== -->
+    <div class="section" id="psicanalitica">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(168,85,247,0.12); color: var(--purple);">🧠</div>
+            <div>
+                <div class="section-title">Analise Psicanalitica</div>
+                <div class="section-subtitle">Uso de autores, precisao conceitual e integracao ciencia-fe</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Mapa de Autores e Conceitos</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Autor</th><th>Conceitos usados</th><th>Precisao</th><th>Observacao</th></tr>
+                    <tr><td><strong>Freud</strong></td><td>Recalque, clivagem, repeticao compulsiva, ego, inconsciente, Alem do Principio do Prazer (1920)</td><td><span class="tag tag-green">Preciso</span></td><td>Bem fundamentado. Citacao de 1920 correta.</td></tr>
+                    <tr><td><strong>Winnicott</strong></td><td>Falso self, ambiente suficientemente bom, espontaneidade</td><td><span class="tag tag-green">Preciso</span></td><td>Uso consistente em multiplas secoes.</td></tr>
+                    <tr><td><strong>Bandura</strong></td><td>Aprendizagem por modelagem, Bobo Doll</td><td><span class="tag tag-green">Preciso</span></td><td>Redundancia: aparece em 2 secoes identicas.</td></tr>
+                    <tr><td><strong>Bowlby</strong></td><td>Teoria do apego, apego seguro</td><td><span class="tag tag-green">Preciso</span></td><td>Expandir: apego ansioso, evitativo, desorganizado.</td></tr>
+                    <tr><td><strong>Gabor Mate</strong></td><td>"Trauma nao e o que aconteceu com voce..."</td><td><span class="tag tag-green">Preciso</span></td><td>Citacao usada 2x — ok, mas nao mais.</td></tr>
+                    <tr><td><strong>Jung</strong></td><td>Sombra ("o que evitamos olhar torna-se sombra")</td><td><span class="tag tag-yellow">Superficial</span></td><td>Apenas 1 mencao. Se citar, desenvolver ou remover.</td></tr>
+                    <tr><td><strong>Young (Jeffrey)</strong></td><td>Esquemas iniciais desadaptativos</td><td><span class="tag tag-green">Preciso</span></td><td>Citacao correta (Young, 2003).</td></tr>
+                    <tr><td><strong>Pierre Janet</strong></td><td>Dissociacao</td><td><span class="tag tag-green">Preciso</span></td><td>Apenas 1 mencao. "Pai da dissociacao".</td></tr>
+                    <tr><td><strong>Ferenczi</strong></td><td>Transmissao transgeracional do trauma</td><td><span class="tag tag-green">Preciso</span></td><td>Mencao breve mas correta.</td></tr>
+                    <tr><td><strong>Euripides Mendes</strong></td><td>Trauma como dor persistente</td><td><span class="tag tag-blue">Referencia BR</span></td><td>Boa inclusao de autor nacional.</td></tr>
+                    <tr><td><strong>Ainsworth</strong></td><td>Padroes de apego</td><td><span class="tag tag-yellow">Apenas citada</span></td><td>Mencionada junto com Bowlby sem desenvolver.</td></tr>
+                    <tr><td><strong>van der Kolk</strong></td><td>Corpo e trauma</td><td><span class="tag tag-green">Preciso</span></td><td>"The Body Keeps the Score" referenciado.</td></tr>
+                    <tr><td><strong>Peter Levine</strong></td><td>Liberacao de emocoes armazenadas</td><td><span class="tag tag-green">Preciso</span></td><td>Somatic Experiencing mencionado.</td></tr>
+                    <tr><td><strong>Clarissa Pinkola Estes</strong></td><td>Trauma nas mulheres</td><td><span class="tag tag-green">Preciso</span></td><td>"Mulheres que Correm com os Lobos".</td></tr>
+                    <tr><td><strong>B.F. Skinner</strong></td><td>Condicionamento operante e trauma</td><td><span class="tag tag-green">Preciso</span></td><td>Conexao comportamento-reforco.</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Qualidade da Integracao Ciencia-Fe</div>
+            <p>A integracao entre psicanalise/psicologia e teologia e o <span class="hl">ponto mais forte</span> do manuscrito. O autor nao comete o erro comum de opor ciencia a fe ou de usar a Biblia para "provar" conceitos psicologicos. Mostra que ambas apontam para as mesmas verdades por caminhos diferentes. Isso e sofisticado e raro na literatura crista brasileira.</p>
+            <br>
+            <p><strong>Trechos destaque:</strong></p>
+            <div class="quote-block">
+                <p>"Freud observaria pulsoes mal elaboradas; Winnicott reconheceria o falso eu; Gabor Mate identificaria raizes traumaticas. A Biblia, porem, ilumina tudo isso com uma verdade espiritual."</p>
+                <cite>Excelente construcao — triade ciencia + fe sem subordinacao</cite>
+            </div>
+            <div class="quote-block">
+                <p>"A psicologia chama isso de autorregulacao; a psicanalise, de integracao psiquica; Paulo, de vida no Espirito."</p>
+                <cite>Sintese perfeita em uma frase</cite>
+            </div>
+            <div class="quote-block">
+                <p>"A mudanca de pensamento literalmente muda o cerebro. A Biblia ja dizia: renovai-vos. A psicanalise diria: ressignificai. A neurociencia confirma: novos caminhos neurais."</p>
+                <cite>Triade poderosa — fe, psicanalise, neurociencia</cite>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 8. EDITORIAL ==================== -->
+    <div class="section" id="editorial">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(236,72,153,0.12); color: var(--pink);">📝</div>
+            <div>
+                <div class="section-title">Analise Editorial — Olhar do Ghostwriter</div>
+                <div class="section-subtitle">Reescrita, cortes, fusoes e reorganizacao propostos</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Cortes Recomendados</div>
+            <ul>
+                <li><strong>Definicao tripla de trauma:</strong> manter apenas a mais completa e acessivel. Cortar as outras ou transformar em paragrafos de transicao.</li>
+                <li><strong>Repeticao sobre Bandura:</strong> a teoria da modelagem aparece explicada quase identica em 2 lugares. Manter na secao "O Molde do Mundo" apenas.</li>
+                <li><strong>Analogia da unha encravada + ferida aberta:</strong> ambas dizem a mesma coisa (enfrentar a dor para curar). Manter a unha encravada (mais poderosa e original). Comprimir a outra para 2-3 paragrafos.</li>
+                <li><strong>Repeticao de "renovacao da mente":</strong> ~8 ocorrencias com mesmo sentido. Variar o vocabulario.</li>
+                <li><strong>Catalogo de autores (p.48-56):</strong> 8 autores listados sequencialmente como verbetes de enciclopedia. Integrar os mais relevantes (Bowlby, van der Kolk, Levine) no texto e comprimir os demais em 1-2 paragrafos ou nota de rodape.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">O que Esta Faltando</div>
+            <ul>
+                <li><strong>INTRODUCAO AUTORAL:</strong> "Quem sou eu, por que escrevi isso, para quem e este livro, o que voce vai encontrar aqui." O livro entra direto no tema.</li>
+                <li><strong>CONCLUSAO:</strong> "Ha esperanca" (p.112) e abrupta. Precisa amarrar todos os fios — do Eden a cura, do trauma a identidade restaurada.</li>
+                <li><strong>CAPITULO PRATICO:</strong> orientacoes concretas — buscar terapia, exercicios de auto-reflexao, praticas espirituais, perguntas para journaling ao final de cada capitulo.</li>
+                <li><strong>TESTEMUNHOS/HISTORIAS:</strong> o texto e muito conceitual. Faltam 3-5 historias reais (anonimizadas) de pessoas que viveram transformacao.</li>
+                <li><strong>3 FERIDAS FALTANTES:</strong> o autor lista 5 feridas (injustica, abandono, rejeicao, traicao, humilhacao) mas so desenvolveu 2. Faltam rejeicao, traicao e humilhacao.</li>
+                <li><strong>REFERENCIAS BIBLIOGRAFICAS:</strong> o texto cita autores mas nao tem lista formal de referencias. Essencial para credibilidade.</li>
+            </ul>
+        </div>
+
+        <div class="verdict">
+            <div class="verdict-title">Estimativa de Trabalho Restante</div>
+            <p>
+                <strong>Edicao do existente:</strong> 40-60 horas (reorganizar, cortar repeticoes, padronizar linguagem, corrigir erros)<br>
+                <strong>Escrita nova:</strong> 20-30 horas (introducao autoral, conclusao, capitulo pratico, 3 feridas faltantes, historias)<br>
+                <strong>Revisao final:</strong> 10-15 horas (leitura completa, checagem de referencias, consistencia)<br>
+                <strong>Total estimado:</strong> <span class="hl">70-105 horas de trabalho editorial</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== 9. ERRATA ==================== -->
+    <div class="section" id="errata">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(239,68,68,0.12); color: var(--red);">🔍</div>
+            <div>
+                <div class="section-title">Errata — Correcoes de Texto</div>
+                <div class="section-subtitle">Erros de concordancia, digitacao, pontuacao e gramatica encontrados no manuscrito pre-revisado</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="errata-item">
+                <div class="errata-original">"CRINAÇA INTERIOR"</div>
+                <div class="errata-corrected">→ "CRIANCA INTERIOR"</div>
+                <div class="errata-location">Titulo de secao — erro de digitacao</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"muitas fezes uma fuga emocional"</div>
+                <div class="errata-corrected">→ "muitas vezes uma fuga emocional"</div>
+                <div class="errata-location">Historia do homem abandonado — "fezes" → "vezes" (erro grave que muda completamente o sentido)</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"trazem com sigo uma linguagem"</div>
+                <div class="errata-corrected">→ "trazem consigo uma linguagem"</div>
+                <div class="errata-location">"com sigo" → "consigo" (junto)</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"por tanto"</div>
+                <div class="errata-corrected">→ "portanto"</div>
+                <div class="errata-location">Multiplas ocorrencias — "por tanto" → "portanto" (junto)</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"O que tem nos influenciados?"</div>
+                <div class="errata-corrected">→ "O que tem nos influenciado?"</div>
+                <div class="errata-location">Concordancia verbal — participio invariavel com "ter"</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"A forma que vivemos, funcional ou disfuncional, saudavel ou adoecido"</div>
+                <div class="errata-corrected">→ "A forma como vivemos — funcional ou disfuncional, saudavel ou adoecida"</div>
+                <div class="errata-location">"a forma que" → "a forma como" + concordancia "adoecida" (feminino)</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"padroes comportamentais construido pautado pelo medo"</div>
+                <div class="errata-corrected">→ "padroes comportamentais construidos e pautados pelo medo"</div>
+                <div class="errata-location">Concordancia plural + falta de conjuncao</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"que ja o tem porem, porem nao sabe usufruir"</div>
+                <div class="errata-corrected">→ "que ja possui, porem nao sabe usufruir"</div>
+                <div class="errata-location">"porem" duplicado + construcao truncada</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"A neuro ciencia confirma"</div>
+                <div class="errata-corrected">→ "A neurociencia confirma"</div>
+                <div class="errata-location">Palavra composta, sem espaco</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"Unindo a esses olhares"</div>
+                <div class="errata-corrected">→ "Unindo esses olhares"</div>
+                <div class="errata-location">Crase indevida antes de "esses"</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"O dor nunca esta no passado"</div>
+                <div class="errata-corrected">→ "A dor nunca esta no passado"</div>
+                <div class="errata-location">Concordancia artigo-substantivo</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"a criacao veio foi formada atraves da palavra"</div>
+                <div class="errata-corrected">→ "a criacao foi formada atraves da palavra"</div>
+                <div class="errata-location">"veio" sobrando — residuo de edicao</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"ou se quer mesmo ter permitido"</div>
+                <div class="errata-corrected">→ "ou sequer ter permitido"</div>
+                <div class="errata-location">"se quer" → "sequer" (junto)</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"mantem seu amor ao homem"</div>
+                <div class="errata-corrected">→ "mantem seu amor ao homem"</div>
+                <div class="errata-location">Acento circunflexo ausente em "mantem"</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"escreveu ele em 1915" (referindo-se a Baldwin)</div>
+                <div class="errata-corrected">→ "como Freud escreveu em 1915"</div>
+                <div class="errata-location">Ambiguidade referencial — paragrafo anterior cita Baldwin, gerando confusao sobre quem e "ele"</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"figuras de autoridade que passao por nossa vida"</div>
+                <div class="errata-corrected">→ "figuras de autoridade que passam por nossa vida"</div>
+                <div class="errata-location">"passao" → "passam" — conjugacao incorreta</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"Os habitos e uma das bases da nossa vida"</div>
+                <div class="errata-corrected">→ "Os habitos sao uma das bases da nossa vida"</div>
+                <div class="errata-location">Concordancia verbal — sujeito plural "os habitos" exige "sao"</div>
+            </div>
+            <div class="errata-item">
+                <div class="errata-original">"pra gerar uma hipertrofia"</div>
+                <div class="errata-corrected">→ "para gerar hipertrofia" (ou manter "pra" se o registro for intencional)</div>
+                <div class="errata-location">Registro informal — decidir se "pra" e aceitavel no livro (aparece varias vezes)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 10. RECOMENDACOES ==================== -->
+    <div class="section" id="recomendacoes">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(6,182,212,0.12); color: var(--cyan);">🎯</div>
+            <div>
+                <div class="section-title">Recomendacoes Finais</div>
+                <div class="section-subtitle">Plano de acao para levar o manuscrito a publicacao</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Prioridade 1 — Estrutura (Impacto: Alto)</div>
+            <ul>
+                <li>Definir os 12 capitulos propostos com titulos finais</li>
+                <li>Reorganizar a ordem: Eden ANTES de Galatas 5</li>
+                <li>Fundir secoes sobre crencas + falsos profetas + modelagem em um unico capitulo</li>
+                <li>Dividir a mega-secao de Trauma (p.40-60) em 3-4 capitulos</li>
+                <li>Escrever Introducao autoral + Conclusao + Capitulo Pratico</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Prioridade 2 — Linguagem (Impacto: Medio-Alto)</div>
+            <ul>
+                <li>Padronizar registro em 5.0-6.0 (acessivel mas nao superficial)</li>
+                <li>Toda vez que usar termo tecnico, explicar em linguagem simples na sequencia</li>
+                <li>Quebrar paragrafos longos (maximo 6-7 linhas no Word)</li>
+                <li>Corrigir todos os 18+ erros gramaticais listados na errata</li>
+                <li>Eliminar repeticoes de "renovacao da mente" — variar vocabulario</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Prioridade 3 — Conteudo (Impacto: Medio)</div>
+            <ul>
+                <li>Completar as 5 feridas (faltam rejeicao, traicao e humilhacao)</li>
+                <li>Expandir a cristologia — Jesus como agente de cura, nao apenas diagnostico</li>
+                <li>Adicionar 3-5 historias reais (anonimizadas) para criar identificacao</li>
+                <li>Esclarecer que o experimento dos macacos e parabola desde o inicio</li>
+                <li>Adicionar perguntas reflexivas ao final de cada capitulo</li>
+                <li>Incluir referencias bibliograficas formais (ABNT ou APA)</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Prioridade 4 — Acabamento (Impacto: Baixo)</div>
+            <ul>
+                <li>Adicionar glossario de termos tecnicos ao final</li>
+                <li>Adicionar notas de rodape onde necessario</li>
+                <li>Solicitar revisao de um teologo e um psicologo para validacao cruzada</li>
+                <li>Testar leitura com 3-5 pessoas do publico-alvo (cristaos leigos, 25-45 anos)</li>
+                <li>Preparar ficha catalografica (ISBN, CDD, etc.)</li>
+            </ul>
+        </div>
+
+        <div class="verdict">
+            <div class="verdict-title">Palavra Final do Ghostwriter</div>
+            <p>
+                Ricardo tem em maos um manuscrito com <span class="hl">materia-prima de excelente qualidade</span>. O conhecimento teologico e solido,
+                a base psicanalitica e bem fundamentada, e a capacidade de criar analogias (macacos, unha, feijao, oculos) mostra talento narrativo genuino.
+                <br><br>
+                O que falta e <span class="hl">trabalho editorial</span>: organizar, cortar, reorganizar, completar e polir. Isso nao e fraqueza — e o processo
+                natural de todo livro. Nenhum autor publicado entrega o primeiro rascunho como versao final.
+                <br><br>
+                Com as correcoes propostas nesta analise, este livro tem potencial para se tornar uma referencia na intersecao entre
+                <strong>fe crista, psicanalise e cura emocional</strong> no mercado editorial evangelico brasileiro.
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== 11. PRODUCAO ==================== -->
+    <div class="section" id="producao">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(217,119,6,0.12); color: var(--accent-light);">📦</div>
+            <div>
+                <div class="section-title">Componentes de Producao do Livro</div>
+                <div class="section-subtitle">Checklist completo: conteudo, editorial, fisico e legal</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">A. Componentes de Conteudo</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Componente</th><th>Status</th><th>Acao necessaria</th></tr>
+                    <tr><td>Titulo e subtitulo</td><td><span class="tag tag-yellow">Parcial</span></td><td>Definir titulo comercial + subtitulo explicativo. Sugestao: "Renovacao da Mente: Como o Trauma Molda Quem Voce E — e Como a Fe Pode Restaurar"</td></tr>
+                    <tr><td>Dedicatoria</td><td><span class="tag tag-red">Faltando</span></td><td>Escrever (geralmente 1-3 linhas)</td></tr>
+                    <tr><td>Epigrafe</td><td><span class="tag tag-red">Faltando</span></td><td>Sugestao: Romanos 12:2 como epigrafe formal</td></tr>
+                    <tr><td>Prefacio/Apresentacao</td><td><span class="tag tag-red">Faltando</span></td><td>Convidar teologo ou psicologo reconhecido para prefaciar</td></tr>
+                    <tr><td>Introducao do autor</td><td><span class="tag tag-red">Faltando</span></td><td>Quem sou, por que escrevi, para quem, o que esperar</td></tr>
+                    <tr><td>Corpo do texto (12 capitulos)</td><td><span class="tag tag-yellow">80%</span></td><td>Reorganizar + escrever caps 11 e 12 + completar feridas</td></tr>
+                    <tr><td>Conclusao</td><td><span class="tag tag-red">Faltando</span></td><td>Escrever capitulo 12 completo</td></tr>
+                    <tr><td>Posfacio</td><td><span class="tag tag-yellow">Opcional</span></td><td>Pode incluir nota do autor sobre o processo de escrita</td></tr>
+                    <tr><td>Glossario</td><td><span class="tag tag-red">Faltando</span></td><td>Termos tecnicos: recalque, clivagem, dissociacao, falso self, etc.</td></tr>
+                    <tr><td>Referencias bibliograficas</td><td><span class="tag tag-red">Faltando</span></td><td>Compilar todas as citacoes em formato ABNT ou APA</td></tr>
+                    <tr><td>Sobre o autor</td><td><span class="tag tag-red">Faltando</span></td><td>Mini-biografia + foto profissional</td></tr>
+                    <tr><td>Perguntas reflexivas</td><td><span class="tag tag-red">Faltando</span></td><td>3-5 perguntas ao final de cada capitulo</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">B. Componentes Editoriais</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Componente</th><th>Descricao</th><th>Responsavel</th></tr>
+                    <tr><td>Revisao gramatical</td><td>Correcao de todos os erros de concordancia, grafia, pontuacao</td><td>Revisor profissional</td></tr>
+                    <tr><td>Revisao de conteudo</td><td>Verificacao de citacoes, referencias, coerencia argumentativa</td><td>Editor de conteudo</td></tr>
+                    <tr><td>Copidesque</td><td>Padronizacao de estilo, registro linguistico, tom</td><td>Copidesque profissional</td></tr>
+                    <tr><td>Revisao teologica</td><td>Validacao das interpretacoes biblicas e doutrinarias</td><td>Teologo/Pastor academico</td></tr>
+                    <tr><td>Revisao psicologica</td><td>Validacao das citacoes e conceitos psicanaliticos</td><td>Psicologo/Psicanalista</td></tr>
+                    <tr><td>Preparacao de originais</td><td>Formatacao do texto para diagramacao</td><td>Preparador de originais</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">C. Componentes Fisicos (para impressao)</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Componente</th><th>Especificacao recomendada</th></tr>
+                    <tr><td>Formato</td><td><strong>14 x 21 cm</strong> (padrao brasileiro para nao-ficcao)</td></tr>
+                    <tr><td>Papel miolo</td><td>Polen Soft 80g/m2 (leitura confortavel, tom creme)</td></tr>
+                    <tr><td>Papel capa</td><td>Cartao 250g/m2 com laminacao fosca</td></tr>
+                    <tr><td>Encadernacao</td><td>Brochura com lombada quadrada (colada ou costurada)</td></tr>
+                    <tr><td>Paginas estimadas</td><td>180-220 (com diagramacao profissional)</td></tr>
+                    <tr><td>Fonte texto</td><td>Garamond, Minion Pro ou Crimson Text — 11-12pt</td></tr>
+                    <tr><td>Fonte titulos</td><td>Playfair Display, Cormorant ou EB Garamond — 16-20pt</td></tr>
+                    <tr><td>Entrelinhas</td><td>1.4-1.5x o tamanho da fonte</td></tr>
+                    <tr><td>Margens</td><td>Superior: 2.5cm | Inferior: 2cm | Interna: 2.5cm | Externa: 2cm</td></tr>
+                    <tr><td>Capa</td><td>Design profissional (ilustracao ou fotografia + tipografia)</td></tr>
+                    <tr><td>Orelhas</td><td>Sinopse + sobre o autor + citacoes</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">D. Componentes Legais</div>
+            <ul>
+                <li><strong>ISBN:</strong> solicitar na Biblioteca Nacional (gratuito para autores brasileiros via CBL)</li>
+                <li><strong>Ficha catalografica (CIP):</strong> obrigatoria — solicitar a bibliotecario registrado</li>
+                <li><strong>Codigo de barras:</strong> gerado a partir do ISBN</li>
+                <li><strong>Numero de edicao:</strong> "1a edicao, 2026"</li>
+                <li><strong>Copyright:</strong> "© Ricardo [Sobrenome], 2026. Todos os direitos reservados."</li>
+                <li><strong>Direitos autorais das citacoes:</strong> verificar se citacoes excedem "fair use" (geralmente ate 3% da obra original)</li>
+                <li><strong>Deposito legal:</strong> enviar 1 exemplar a Biblioteca Nacional apos publicacao</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== 12. DIAGRAMACAO ==================== -->
+    <div class="section" id="diagramacao">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(59,130,246,0.12); color: var(--blue);">📐</div>
+            <div>
+                <div class="section-title">Guia de Diagramacao para Impressao</div>
+                <div class="section-subtitle">Como transformar o manuscrito em um livro pronto para grafica</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Fluxo de Producao: Manuscrito → Livro Impresso</div>
+            <div class="step-grid">
+                <div class="step-card">
+                    <div class="step-num">Etapa 1</div>
+                    <div class="step-title">Preparacao do Texto</div>
+                    <div class="step-desc">Converter RTF → Markdown ou DOCX limpo. Aplicar todas as correcoes da errata. Reorganizar em 12 capitulos. Padronizar formatacao (titulos, subtitulos, citacoes, notas).</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">Etapa 2</div>
+                    <div class="step-title">Revisao Editorial</div>
+                    <div class="step-desc">Revisao gramatical profissional. Copidesque. Revisao teologica + psicologica. Leitura de prova por beta-readers.</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">Etapa 3</div>
+                    <div class="step-title">Design de Capa</div>
+                    <div class="step-desc">Contratar designer ou usar Canva Pro / Adobe Express. Capa frontal + lombada + contracapa. Formato: 14x21cm + sangria 3mm. Exportar em PDF/X-1a (CMYK, 300dpi).</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">Etapa 4</div>
+                    <div class="step-title">Diagramacao do Miolo</div>
+                    <div class="step-desc">Aplicar template profissional. Tipografia, margens, cabecalhos, numeracao, capitulares, ornamentos. Gerar PDF/X-1a para grafica.</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">Etapa 5</div>
+                    <div class="step-title">Prova de Impressao</div>
+                    <div class="step-desc">Solicitar prova fisica da grafica. Verificar cores, alinhamento, margens, lombada. Corrigir se necessario. Aprovar para tiragem.</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">Etapa 6</div>
+                    <div class="step-title">Publicacao</div>
+                    <div class="step-desc">Impressao na grafica escolhida OU upload para plataforma de self-publishing (KDP, Uiclap, Clube de Autores). Distribuicao.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Opcoes de Diagramacao</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Opcao</th><th>Ferramenta</th><th>Custo</th><th>Qualidade</th><th>Para quem</th></tr>
+                    <tr><td><strong>Profissional</strong></td><td>Adobe InDesign</td><td>R$ 2.000-5.000 (diagramador)</td><td><span class="tag tag-green">Maxima</span></td><td>Quem quer resultado de editora</td></tr>
+                    <tr><td><strong>Semi-pro</strong></td><td>Canva Pro + templates</td><td>R$ 55/mes</td><td><span class="tag tag-yellow">Boa</span></td><td>Quem quer fazer sozinho com visual ok</td></tr>
+                    <tr><td><strong>Tecnico</strong></td><td>LaTeX (memoir class)</td><td>Gratuito</td><td><span class="tag tag-green">Excelente</span></td><td>Quem tem conhecimento tecnico</td></tr>
+                    <tr><td><strong>Automatizado</strong></td><td>Pandoc (MD → PDF/DOCX)</td><td>Gratuito</td><td><span class="tag tag-yellow">Boa</span></td><td>Quem quer gerar rapidamente</td></tr>
+                    <tr><td><strong>Self-publish</strong></td><td>KDP / Uiclap templates</td><td>Gratuito</td><td><span class="tag tag-yellow">Basica-Boa</span></td><td>Quem vai publicar via plataforma</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Plataformas de Self-Publishing no Brasil</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Plataforma</th><th>Tipo</th><th>Royalties</th><th>Custo</th><th>Observacao</th></tr>
+                    <tr><td><strong>Amazon KDP</strong></td><td>Impressao sob demanda + eBook</td><td>35-70%</td><td>Gratuito</td><td>Maior alcance. eBook Kindle + paperback. Distribuicao global.</td></tr>
+                    <tr><td><strong>Uiclap</strong></td><td>Impressao sob demanda</td><td>~100% (voce define preco)</td><td>Gratuito</td><td>Brasileira. Boa para livro fisico. ISBN gratuito.</td></tr>
+                    <tr><td><strong>Clube de Autores</strong></td><td>Impressao sob demanda</td><td>~100%</td><td>Gratuito</td><td>Brasileira. Facil de usar. ISBN incluso.</td></tr>
+                    <tr><td><strong>Hotmart</strong></td><td>eBook digital</td><td>80-90%</td><td>Comissao por venda</td><td>Bom para vender eBook com marketing digital.</td></tr>
+                    <tr><td><strong>Grafica propria</strong></td><td>Tiragem fixa</td><td>100%</td><td>R$ 5-15/unidade (500+ copias)</td><td>Melhor custo unitario para eventos/igrejas.</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Especificacoes Tecnicas para PDF de Impressao</div>
+            <ul>
+                <li><strong>Formato:</strong> PDF/X-1a (padrao grafico)</li>
+                <li><strong>Cores:</strong> CMYK (nao RGB) para impressao offset</li>
+                <li><strong>Resolucao:</strong> 300 DPI minimo para imagens</li>
+                <li><strong>Sangria (bleed):</strong> 3mm em todos os lados</li>
+                <li><strong>Marcas de corte:</strong> incluir no PDF</li>
+                <li><strong>Fontes:</strong> incorporadas (embedded) no PDF</li>
+                <li><strong>Preto texto:</strong> K100 (nao preto rico/registration)</li>
+                <li><strong>Paginas:</strong> multiplo de 4 (para impressao em cadernos)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== 13. FERRAMENTAS ==================== -->
+    <div class="section" id="ferramentas">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(34,197,94,0.12); color: var(--green);">🛠️</div>
+            <div>
+                <div class="section-title">Ferramentas, APIs e Automacoes</div>
+                <div class="section-subtitle">Plugins, MCPs e servicos para acelerar a producao do livro</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Conversao e Formatacao</div>
+
+            <div class="tool-card">
+                <div class="tool-icon" style="background: rgba(168,85,247,0.12);">📄</div>
+                <div class="tool-info">
+                    <div class="tool-name">Pandoc</div>
+                    <div class="tool-desc">Conversor universal de documentos. Converte Markdown → DOCX, PDF, EPUB, LaTeX. Pode aplicar templates customizados. Ideal para gerar o manuscrito em multiplos formatos a partir de um unico fonte Markdown.</div>
+                    <div class="tool-tags">
+                        <span class="tag tag-green">Gratuito</span>
+                        <span class="tag tag-blue">CLI</span>
+                        <span class="tag tag-purple">Essencial</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon" style="background: rgba(59,130,246,0.12);">📝</div>
+                <div class="tool-info">
+                    <div class="tool-name">textutil (macOS)</div>
+                    <div class="tool-desc">Ja usado nesta analise. Converte RTF → TXT, DOCX, HTML. Nativo do macOS, sem instalacao. Comando: <code>textutil -convert docx "livro.rtf"</code></div>
+                    <div class="tool-tags">
+                        <span class="tag tag-green">Nativo macOS</span>
+                        <span class="tag tag-blue">CLI</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon" style="background: rgba(234,179,8,0.12);">🔤</div>
+                <div class="tool-info">
+                    <div class="tool-name">LibreOffice Writer</div>
+                    <div class="tool-desc">Alternativa gratuita ao Word. Pode abrir RTF, editar e exportar como DOCX ou PDF. Bom para revisao manual e formatacao basica antes da diagramacao profissional.</div>
+                    <div class="tool-tags">
+                        <span class="tag tag-green">Gratuito</span>
+                        <span class="tag tag-yellow">GUI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Diagramacao e Layout</div>
+
+            <div class="tool-card">
+                <div class="tool-icon" style="background: rgba(236,72,153,0.12);">📐</div>
+                <div class="tool-info">
+                    <div class="tool-name">Adobe InDesign</div>
+                    <div class="tool-desc">Padrao da industria editorial para diagramacao. Templates de livro disponiveis. Exporta PDF/X-1a para grafica. Requer assinatura Adobe CC ou contratar diagramador freelancer.</div>
+                    <div class="tool-tags">
+                        <span class="tag tag-red">Pago (R$110/mes)</span>
+                        <span class="tag tag-green">Profissional</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon" style="background: rgba(6,182,212,0.12);">🎨</div>
+                <div class="tool-info">
+                    <div class="tool-name">Canva Pro</div>
+                    <div class="tool-desc">Templates de livro prontos. Facil de usar. Bom para capa + miolo simples. Exporta PDF para impressao. Limitado para diagramacao complexa mas suficiente para um primeiro livro.</div>
+                    <div class="tool-tags">
+                        <span class="tag tag-yellow">R$55/mes</span>
+                        <span class="tag tag-yellow">Semi-pro</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon" style="background: rgba(34,197,94,0.12);">📚</div>
+                <div class="tool-info">
+                    <div class="tool-name">LaTeX + memoir class</div>
+                    <div class="tool-desc">Tipografia de qualidade academica/editorial. A classe "memoir" e projetada especificamente para livros. Resultado visual superior ao Word/Canva. Curva de aprendizado alta, mas resultado profissional. Pandoc pode converter Markdown → LaTeX automaticamente.</div>
+                    <div class="tool-tags">
+                        <span class="tag tag-green">Gratuito</span>
+                        <span class="tag tag-green">Qualidade maxima</span>
+                        <span class="tag tag-red">Curva alta</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon" style="background: rgba(217,119,6,0.12);">📖</div>
+                <div class="tool-info">
+                    <div class="tool-name">Reedsy Book Editor</div>
+                    <div class="tool-desc">Editor online gratuito especifico para livros. Gera EPUB e PDF formatados profissionalmente. Interface simples, ideal para autores sem conhecimento tecnico. Exporta pronto para KDP/Uiclap.</div>
+                    <div class="tool-tags">
+                        <span class="tag tag-green">Gratuito</span>
+                        <span class="tag tag-green">Facil</span>
+                        <span class="tag tag-blue">Web</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">IA e Automacao para Revisao</div>
+
+            <div class="tool-card">
+                <div class="tool-icon" style="background: rgba(168,85,247,0.12);">🤖</div>
+                <div class="tool-info">
+                    <div class="tool-name">Claude (Anthropic)</div>
+                    <div class="tool-desc">Pode revisar capitulos individualmente, sugerir reescritas, corrigir gramatica, gerar perguntas reflexivas, expandir secoes e manter consistencia de tom. Use com prompts especificos por capitulo.</div>
+                    <div class="tool-tags">
+                        <span class="tag tag-purple">IA</span>
+                        <span class="tag tag-green">Ja disponivel</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon" style="background: rgba(59,130,246,0.12);">📝</div>
+                <div class="tool-info">
+                    <div class="tool-name">LanguageTool</div>
+                    <div class="tool-desc">Corretor gramatical avancado para portugues. Detecta erros que o Word nao pega. Versao gratuita + premium. Plugin para LibreOffice e Google Docs. API disponivel para automacao.</div>
+                    <div class="tool-tags">
+                        <span class="tag tag-green">Freemium</span>
+                        <span class="tag tag-blue">API disponivel</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon" style="background: rgba(234,179,8,0.12);">✏️</div>
+                <div class="tool-info">
+                    <div class="tool-name">Grammarly / ProWritingAid</div>
+                    <div class="tool-desc">Corretores de estilo e gramtica. Mais limitados para portugues, mas uteis se houver traducao para ingles planejada. ProWritingAid tem analise de repeticao de palavras.</div>
+                    <div class="tool-tags">
+                        <span class="tag tag-yellow">Pago</span>
+                        <span class="tag tag-yellow">Limitado PT-BR</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Pipeline Recomendado (Passo a Passo)</div>
+            <ol>
+                <li><strong>RTF → Markdown:</strong> <code>textutil -convert txt "livro.rtf"</code> + formatacao manual em Markdown (ou usar Pandoc: <code>pandoc livro.rtf -o livro.md</code>)</li>
+                <li><strong>Edicao em Markdown:</strong> usar VS Code ou Obsidian para editar. Estruturar com headers (#, ##, ###) para capitulos e secoes.</li>
+                <li><strong>Revisao com IA:</strong> enviar capitulo por capitulo para Claude com prompt especifico de revisao editorial.</li>
+                <li><strong>Revisao gramatical:</strong> passar por LanguageTool (API ou plugin).</li>
+                <li><strong>Gerar DOCX:</strong> <code>pandoc livro.md -o livro.docx --reference-doc=template.docx</code> (com template de estilos pre-configurado).</li>
+                <li><strong>Gerar PDF para impressao:</strong> Opcao A: <code>pandoc livro.md -o livro.pdf --template=book.latex</code> | Opcao B: importar DOCX no InDesign | Opcao C: usar Reedsy Book Editor.</li>
+                <li><strong>Gerar eBook:</strong> <code>pandoc livro.md -o livro.epub --metadata title="Renovacao da Mente"</code></li>
+                <li><strong>Upload:</strong> PDF → Uiclap/grafica | EPUB → KDP/Hotmart</li>
+            </ol>
+        </div>
+
+        <div class="verdict">
+            <div class="verdict-title">Recomendacao Final de Ferramentas</div>
+            <p>
+                Para o caso especifico do Ricardo, a rota mais pratica e:
+                <br><br>
+                <strong>1.</strong> Converter RTF → Markdown (Pandoc)<br>
+                <strong>2.</strong> Editar/reorganizar em Markdown (VS Code ou Obsidian)<br>
+                <strong>3.</strong> Revisar com Claude (capitulo por capitulo)<br>
+                <strong>4.</strong> Gerar DOCX final (Pandoc + template)<br>
+                <strong>5.</strong> Diagramar no <strong>Reedsy Book Editor</strong> (gratuito, facil, exporta para KDP)<br>
+                <strong>6.</strong> Publicar via <strong>Amazon KDP</strong> (maior alcance) + <strong>Uiclap</strong> (mercado brasileiro)<br>
+                <br>
+                Se quiser investir em diagramacao profissional: contratar diagramador freelancer no <strong>99freelas</strong> ou <strong>Workana</strong> (R$ 1.500-3.000 para livro completo com capa).
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 40px; text-align: center; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 12px;">
+    Analise editorial v2.0 produzida em 21/02/2026 — Juan Hub Reports<br>
+    Baseada no manuscrito pre-revisado (sumario livro.rtf + livro pre-revisado ok.rtf)<br>
+    Este documento e confidencial e destinado exclusivamente ao autor e seus colaboradores.
+</div>
+
+<!-- Active nav highlighting -->
+<script>
+    const tabs = document.querySelectorAll('.nav-tab');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tabs.forEach(t => t.classList.remove('active'));
+                const tab = document.querySelector(`.nav-tab[href="#${entry.target.id}"]`);
+                if (tab) tab.classList.add('active');
+            }
+        });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
