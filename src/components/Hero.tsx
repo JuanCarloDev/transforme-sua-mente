@@ -58,11 +58,11 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
             >
               <span className="relative z-1">Garantir Meu Exemplar</span>
               <svg className="relative z-1 w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12l7-7 7 7M12 5v14" />
+                <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </button>
             <span className="block mt-3 text-[11px] text-text-muted tracking-wide">
-              Seja o primeiro a receber &middot; sem spam
+              Vagas limitadas &middot; Seja o primeiro a receber
             </span>
           </div>
         </div>

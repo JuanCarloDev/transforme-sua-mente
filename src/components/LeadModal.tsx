@@ -108,7 +108,7 @@ export default function LeadModal({ open, onClose }: LeadModalProps) {
         {!success ? (
           <div>
             <div className="w-14 h-14 rounded-[14px] bg-gradient-to-br from-[rgba(200,164,78,0.15)] to-[rgba(200,164,78,0.05)] border border-[rgba(200,164,78,0.2)] flex items-center justify-center text-2xl mb-6">
-              📖
+              🔔
             </div>
             <h2 className="font-serif text-[28px] font-semibold mb-2">Entrar na Fila de Espera</h2>
             <p className="text-sm text-text-muted mb-7">
@@ -166,7 +166,7 @@ export default function LeadModal({ open, onClose }: LeadModalProps) {
               >
                 <span className="relative z-1">{loading ? "Enviando..." : "Garantir Minha Vaga"}</span>
                 <svg className="relative z-1 w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12l7-7 7 7M12 5v14" />
+                  <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </button>
             </form>
@@ -178,9 +178,9 @@ export default function LeadModal({ open, onClose }: LeadModalProps) {
             </div>
             <h3 className="font-serif text-2xl mb-2">Você está na fila!</h3>
             <p className="text-sm text-text-muted leading-[1.7]">
-              Você será notificado assim que o livro estiver pronto.
+              Assim que o livro estiver pronto, você será um dos
               <br />
-              Fique atento!
+              primeiros a receber. Fique atento ao seu e-mail!
             </p>
           </div>
         )}

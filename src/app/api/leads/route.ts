@@ -78,11 +78,12 @@ export async function POST(req: NextRequest) {
     saveLeads(leads);
 
     const telegramMsg =
-      `<b>📥 Novo Lead - Transforme Sua Mente</b>\n\n` +
+      `<b>🔔 Nova inscrição - Fila de Espera</b>\n` +
+      `<b>📖 Transforme Sua Mente</b>\n\n` +
       `👤 <b>Nome:</b> ${name.trim()}\n` +
       `📧 <b>Email:</b> ${email.trim().toLowerCase()}\n` +
       `📱 <b>Telefone:</b> ${phoneClean}\n` +
-      `📊 <b>Total de Leads:</b> ${leads.length}\n` +
+      `📊 <b>Total na fila:</b> ${leads.length}\n` +
       `⏰ <b>Horário:</b> ${new Date().toLocaleString("pt-BR")}`;
 
     sendTelegramMessage(telegramMsg).catch(() => {});

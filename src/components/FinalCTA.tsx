@@ -29,7 +29,7 @@ export default function FinalCTA({ onOpenModal }: { onOpenModal: () => void }) {
         </h2>
 
         <p className="text-[15px] sm:text-base text-text-dim max-w-[480px] leading-[1.85] mb-10 sm:mb-12 mx-auto">
-          E ele começa com um único passo: o de encarar a verdade e permitir que ela nos liberte.
+          O livro está em fase final de preparação. Entre na fila e seja notificado assim que estiver disponível.
         </p>
 
         <button
@@ -38,7 +38,7 @@ export default function FinalCTA({ onOpenModal }: { onOpenModal: () => void }) {
         >
           <span className="relative z-1">Entrar na Fila de Espera</span>
           <svg className="relative z-1 w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12l7-7 7 7M12 5v14" />
+            <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>
         </button>
         <span className="block mt-4 text-[11px] text-text-muted tracking-wide">

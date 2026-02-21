@@ -25,7 +25,7 @@ export default function FloatingNav({ onOpenModal }: { onOpenModal: () => void }
         >
           <span className="relative z-1">Entrar na Fila</span>
           <svg className="relative z-1 w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12l7-7 7 7M12 5v14" />
+            <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>
         </button>
       </div>
