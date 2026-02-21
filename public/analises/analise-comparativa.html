@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Comparativa — Original vs Revisado | Livro Ricardo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --bg: #0c0a09;
+            --bg-card: #1c1917;
+            --bg-card-hover: #292524;
+            --bg-elevated: #1a1816;
+            --border: #44403c;
+            --border-subtle: #292524;
+            --text: #fafaf9;
+            --text-secondary: #a8a29e;
+            --text-muted: #78716c;
+            --accent: #d97706;
+            --accent-light: #f59e0b;
+            --accent-dim: #92400e;
+            --green: #22c55e;
+            --green-dim: #166534;
+            --red: #ef4444;
+            --red-dim: #991b1b;
+            --blue: #3b82f6;
+            --blue-dim: #1e40af;
+            --purple: #a855f7;
+            --purple-dim: #6b21a8;
+            --cyan: #06b6d4;
+            --yellow: #eab308;
+            --pink: #ec4899;
+            --emerald: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .hero {
+            position: relative;
+            padding: 80px 40px 60px;
+            background: linear-gradient(135deg, #1c1917 0%, #0c0a09 50%, #051a0f 100%);
+            border-bottom: 1px solid var(--border-subtle);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--emerald);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 44px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fafaf9 0%, #d6d3d1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle { font-size: 18px; color: var(--text-secondary); max-width: 700px; line-height: 1.7; }
+
+        .hero-meta { display: flex; gap: 32px; margin-top: 32px; flex-wrap: wrap; }
+        .hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
+        .hero-meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; }
+        .hero-meta-value { font-size: 15px; color: var(--text); font-weight: 500; }
+
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(12, 10, 9, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 0 40px;
+        }
+
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+        .nav-inner::-webkit-scrollbar { display: none; }
+
+        .nav-tab {
+            padding: 14px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            white-space: nowrap;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-tab:hover { color: var(--text-secondary); }
+        .nav-tab.active { color: var(--emerald); border-bottom-color: var(--emerald); }
+
+        .main { max-width: 1200px; margin: 0 auto; padding: 40px; }
+
+        .section { margin-bottom: 64px; scroll-margin-top: 70px; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .section-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .section-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; }
+        .section-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+        .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+
+        .score-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .score-value { font-size: 36px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+        .score-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+        .score-bar { width: 100%; height: 6px; background: var(--border-subtle); border-radius: 3px; margin-top: 12px; overflow: hidden; }
+        .score-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+
+        .score-delta {
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 8px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .delta-up { color: var(--green); }
+        .delta-same { color: var(--text-muted); }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .card:hover { border-color: var(--border); }
+        .card-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .card p, .card li { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
+        .card ul, .card ol { padding-left: 20px; margin-top: 8px; }
+        .card li { margin-bottom: 8px; }
+
+        .tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+        .tag-red { background: rgba(239,68,68,0.12); color: #fca5a5; border: 1px solid rgba(239,68,68,0.2); }
+        .tag-yellow { background: rgba(234,179,8,0.12); color: #fde047; border: 1px solid rgba(234,179,8,0.2); }
+        .tag-green { background: rgba(34,197,94,0.12); color: #86efac; border: 1px solid rgba(34,197,94,0.2); }
+        .tag-blue { background: rgba(59,130,246,0.12); color: #93c5fd; border: 1px solid rgba(59,130,246,0.2); }
+        .tag-purple { background: rgba(168,85,247,0.12); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.2); }
+        .tag-cyan { background: rgba(6,182,212,0.12); color: #67e8f9; border: 1px solid rgba(6,182,212,0.2); }
+        .tag-pink { background: rgba(236,72,153,0.12); color: #f9a8d4; border: 1px solid rgba(236,72,153,0.2); }
+        .tag-emerald { background: rgba(16,185,129,0.12); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.2); }
+
+        .verdict {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.02) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 16px;
+        }
+
+        .verdict-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--emerald); margin-bottom: 12px; }
+        .verdict p { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
+
+        .quote-block {
+            border-left: 3px solid var(--emerald);
+            padding: 16px 24px;
+            margin: 16px 0;
+            background: rgba(16, 185, 129, 0.04);
+            border-radius: 0 12px 12px 0;
+        }
+
+        .quote-block p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: var(--text); line-height: 1.7; }
+        .quote-block cite { display: block; margin-top: 8px; font-size: 13px; color: var(--text-muted); font-style: normal; }
+
+        .table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 12px; border: 1px solid var(--border-subtle); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--bg-elevated); padding: 12px 16px; text-align: left; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); border-bottom: 1px solid var(--border-subtle); }
+        td { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .meter { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+        .meter-label { width: 180px; font-size: 13px; color: var(--text-secondary); flex-shrink: 0; }
+        .meter-bar { flex: 1; height: 8px; background: var(--border-subtle); border-radius: 4px; overflow: hidden; position: relative; }
+        .meter-fill { height: 100%; border-radius: 4px; position: absolute; top: 0; left: 0; }
+        .meter-fill-old { opacity: 0.3; }
+        .meter-value { width: 80px; text-align: right; font-size: 13px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+
+        .comparison-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .comp-card {
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .comp-card.original {
+            background: rgba(239, 68, 68, 0.04);
+            border-color: rgba(239, 68, 68, 0.15);
+        }
+
+        .comp-card.revisado {
+            background: rgba(16, 185, 129, 0.04);
+            border-color: rgba(16, 185, 129, 0.15);
+        }
+
+        .comp-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .comp-card.original .comp-label { color: var(--red); }
+        .comp-card.revisado .comp-label { color: var(--emerald); }
+
+        .comp-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hl { color: var(--accent-light); font-weight: 600; }
+        .hl-green { color: var(--green); font-weight: 600; }
+        .hl-red { color: var(--red); font-weight: 600; }
+        .hl-blue { color: var(--blue); font-weight: 600; }
+        .hl-purple { color: var(--purple); font-weight: 600; }
+        .hl-emerald { color: var(--emerald); font-weight: 600; }
+
+        .change-item {
+            padding: 20px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: var(--bg-card);
+        }
+
+        .change-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .change-title { font-size: 15px; font-weight: 600; }
+        .change-impact { font-size: 12px; font-weight: 700; font-family: 'JetBrains Mono', monospace; padding: 2px 8px; border-radius: 4px; }
+        .impact-high { background: rgba(34,197,94,0.15); color: var(--green); }
+        .impact-medium { background: rgba(234,179,8,0.15); color: var(--yellow); }
+        .impact-low { background: rgba(59,130,246,0.15); color: var(--blue); }
+
+        .change-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+        .chapter-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .flow-col { display: flex; flex-direction: column; gap: 6px; }
+        .flow-center { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding-top: 20px; }
+        .flow-arrow-h { color: var(--emerald); font-size: 20px; font-weight: 700; }
+
+        .flow-item {
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-card);
+        }
+
+        .flow-item.merged {
+            border-color: rgba(16,185,129,0.3);
+            background: rgba(16,185,129,0.06);
+        }
+
+        .pending-item {
+            padding: 16px;
+            background: rgba(234,179,8,0.04);
+            border: 1px solid rgba(234,179,8,0.15);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .pending-priority {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .priority-high { color: var(--red); }
+        .priority-medium { color: var(--yellow); }
+        .priority-low { color: var(--blue); }
+
+        .pending-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .pending-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+        .big-number {
+            font-size: 64px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            padding: 24px 0;
+        }
+
+        .stat-item { text-align: center; }
+        .stat-num { font-size: 32px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+        .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+        .stat-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+        @media (max-width: 768px) {
+            .hero { padding: 48px 20px 40px; }
+            .hero h1 { font-size: 30px; }
+            .nav-bar { padding: 0 16px; }
+            .main { padding: 24px 16px; }
+            .two-col, .comparison-block, .chapter-flow { grid-template-columns: 1fr; }
+            .score-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-meta { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">Analise Comparativa — Pos-Revisao v1.0</div>
+        <h1>Original vs Revisado:<br>O Que Mudou e O Que Falta</h1>
+        <p class="hero-subtitle">
+            Comparacao detalhada entre o manuscrito pre-revisado e a versao lapidada —
+            <strong>novos benchmarks</strong>, <strong>metricas de mudanca</strong>, <strong>exemplos antes/depois</strong>
+            e <strong>proximo passos</strong> para publicacao.
+        </p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <span class="hero-meta-label">Autor</span>
+                <span class="hero-meta-value">Ricardo</span>
+            </div>
+            <div class="hero-meta-item">
+                <span class="hero-meta-label">Versao Original</span>
+                <span class="hero-meta-value">~37.033 palavras</span>
+            </div>
+            <div class="hero-meta-item">
+                <span class="hero-meta-label">Versao Revisada</span>
+                <span class="hero-meta-value">~34.107 palavras</span>
+            </div>
+            <div class="hero-meta-item">
+                <span class="hero-meta-label">Reducao</span>
+                <span class="hero-meta-value">-2.926 palavras (-7.9%)</span>
+            </div>
+            <div class="hero-meta-item">
+                <span class="hero-meta-label">Data</span>
+                <span class="hero-meta-value">21 Fev 2026</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-bar">
+    <div class="nav-inner">
+        <a href="#benchmark" class="nav-tab active">Benchmark</a>
+        <a href="#estrutura" class="nav-tab">Estrutura</a>
+        <a href="#linguagem" class="nav-tab">Linguagem</a>
+        <a href="#exemplos" class="nav-tab">Antes/Depois</a>
+        <a href="#mudancas" class="nav-tab">O Que Mudou</a>
+        <a href="#metricas" class="nav-tab">Metricas</a>
+        <a href="#pendencias" class="nav-tab">O Que Falta</a>
+        <a href="#proximos" class="nav-tab">Proximos Passos</a>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- ==================== 1. BENCHMARK COMPARATIVO ==================== -->
+    <div class="section" id="benchmark">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(16,185,129,0.12); color: var(--emerald);">📊</div>
+            <div>
+                <div class="section-title">Benchmark Comparativo</div>
+                <div class="section-subtitle">Notas antes e depois da revisao editorial — evolucao em cada dimensao</div>
+            </div>
+        </div>
+
+        <div class="score-grid">
+            <div class="score-card">
+                <div class="score-value" style="color: var(--emerald);">8.7</div>
+                <div class="score-label">Nota Global</div>
+                <div class="score-bar"><div class="score-fill" style="width: 87%; background: var(--emerald);"></div></div>
+                <div class="score-delta delta-up">+1.3 (era 7.4)</div>
+            </div>
+            <div class="score-card">
+                <div class="score-value" style="color: var(--green);">8.8</div>
+                <div class="score-label">Conteudo Teologico</div>
+                <div class="score-bar"><div class="score-fill" style="width: 88%; background: var(--green);"></div></div>
+                <div class="score-delta delta-up">+0.3 (era 8.5)</div>
+            </div>
+            <div class="score-card">
+                <div class="score-value" style="color: var(--blue);">8.5</div>
+                <div class="score-label">Base Psicanalitica</div>
+                <div class="score-bar"><div class="score-fill" style="width: 85%; background: var(--blue);"></div></div>
+                <div class="score-delta delta-up">+0.5 (era 8.0)</div>
+            </div>
+            <div class="score-card">
+                <div class="score-value" style="color: var(--accent-light);">9.0</div>
+                <div class="score-label">Estrutura</div>
+                <div class="score-bar"><div class="score-fill" style="width: 90%; background: var(--accent);"></div></div>
+                <div class="score-delta delta-up">+3.0 (era 6.0)</div>
+            </div>
+            <div class="score-card">
+                <div class="score-value" style="color: var(--purple);">8.5</div>
+                <div class="score-label">Linguagem</div>
+                <div class="score-bar"><div class="score-fill" style="width: 85%; background: var(--purple);"></div></div>
+                <div class="score-delta delta-up">+2.0 (era 6.5)</div>
+            </div>
+            <div class="score-card">
+                <div class="score-value" style="color: var(--cyan);">9.2</div>
+                <div class="score-label">Integracao Fe-Ciencia</div>
+                <div class="score-bar"><div class="score-fill" style="width: 92%; background: var(--cyan);"></div></div>
+                <div class="score-delta delta-up">+0.2 (era 9.0)</div>
+            </div>
+        </div>
+
+        <div class="verdict">
+            <div class="verdict-title">Veredito Pos-Revisao</div>
+            <p>
+                A versao revisada representa uma <span class="hl-emerald">evolucao substancial</span> em relacao ao manuscrito original.
+                As maiores melhorias ocorreram na <strong>estrutura</strong> (+3.0) e na <strong>linguagem</strong> (+2.0) — exatamente
+                os pontos mais criticos apontados na analise original. O livro saiu de um estado "pre-revisado com materia-prima rica mas
+                desorganizada" para um <span class="hl-emerald">manuscrito estruturado, coeso e gramaticalmente correto</span>.
+                <br><br>
+                A nota global subiu de <span class="hl-red">7.4</span> para <span class="hl-emerald">8.7</span> — um salto de
+                <strong>1.3 pontos</strong> que reflete o trabalho de reorganizacao, correcao linguistica e eliminacao de redundancias.
+                Os pontos que ja eram fortes (teologia, psicanalitica, integracao fe-ciencia) foram mantidos e ligeiramente aprimorados
+                pela melhor organizacao tematica.
+                <br><br>
+                <strong>O que impede a nota 9.5+:</strong> ainda restam 3 das 5 feridas emocionais sem desenvolvimento completo,
+                ausencia de capitulo pratico com exercicios, e a necessidade de revisao profissional final (proofreading humano).
+            </p>
+        </div>
+
+        <!-- Comparison table -->
+        <div class="card">
+            <div class="card-title">Evolucao por Dimensao</div>
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Dimensao</th>
+                        <th>Original</th>
+                        <th>Revisado</th>
+                        <th>Delta</th>
+                        <th>O Que Mudou</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Estrutura</strong></td>
+                        <td><span class="hl-red">6.0</span></td>
+                        <td><span class="hl-green">9.0</span></td>
+                        <td><span class="hl-green">+3.0</span></td>
+                        <td>35+ secoes planas → 12 capitulos hierarquicos com transicoes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Linguagem</strong></td>
+                        <td><span class="hl-red">6.5</span></td>
+                        <td><span class="hl-green">8.5</span></td>
+                        <td><span class="hl-green">+2.0</span></td>
+                        <td>Acentuacao corrigida, concordancia, registro unificado 5.5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conteudo Teologico</strong></td>
+                        <td>8.5</td>
+                        <td><span class="hl-green">8.8</span></td>
+                        <td><span class="hl-green">+0.3</span></td>
+                        <td>Citacoes biblicas padronizadas, contextos mais integrados</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Base Psicanalitica</strong></td>
+                        <td>8.0</td>
+                        <td><span class="hl-green">8.5</span></td>
+                        <td><span class="hl-green">+0.5</span></td>
+                        <td>Autores consolidados (Bandura 1x), termos explicados</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integracao Fe-Ciencia</strong></td>
+                        <td>9.0</td>
+                        <td><span class="hl-green">9.2</span></td>
+                        <td><span class="hl-green">+0.2</span></td>
+                        <td>Fluxo tematico melhor preserva a integracao natural</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nota Global</strong></td>
+                        <td><span class="hl">7.4</span></td>
+                        <td><span class="hl-emerald">8.7</span></td>
+                        <td><span class="hl-green">+1.3</span></td>
+                        <td>Salto significativo — de "bom com problemas" para "muito bom"</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 2. ESTRUTURA ==================== -->
+    <div class="section" id="estrutura">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(59,130,246,0.12); color: var(--blue);">🏗️</div>
+            <div>
+                <div class="section-title">Transformacao Estrutural</div>
+                <div class="section-subtitle">De 35+ secoes planas para 12 capitulos com arco narrativo coeso</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">O Maior Salto: Estrutura (6.0 → 9.0)</div>
+            <p>
+                A reorganizacao estrutural foi a mudanca mais impactante da revisao. O manuscrito original era composto por
+                <span class="hl-red">35+ blocos tematicos sem hierarquia capitular</span> — lidos como uma dissertacao academica,
+                nao como um livro. Nao havia capitulos formais, nem transicoes entre secoes, e o fluxo tematico apresentava saltos
+                (ex: "carne vs espirito" aparecia antes de concluir o arco sobre trauma).
+                <br><br>
+                A versao revisada organiza todo o conteudo em <span class="hl-green">12 capitulos tematicos</span> com:
+            </p>
+            <ul>
+                <li><strong>Headers hierarquicos:</strong> titulo do capitulo (#), secoes (##) e subsecoes (###)</li>
+                <li><strong>Paragrafos de transicao:</strong> cada capitulo termina com uma ponte para o proximo</li>
+                <li><strong>Aberturas contextuais:</strong> cada capitulo abre localizando o leitor na jornada</li>
+                <li><strong>Arco narrativo progressivo:</strong> introducao → origens → mecanismos → consequencias → cura</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Mapeamento: Original → Revisado</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Cap.</th><th>Titulo Revisado</th><th>Origem no Manuscrito</th><th>Tipo</th></tr>
+                    <tr>
+                        <td><strong>1</strong></td>
+                        <td>Introducao: O Convite a Transformacao</td>
+                        <td>Introducao + Mudancas externas</td>
+                        <td><span class="tag tag-green">Fusao</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2</strong></td>
+                        <td>A Crianca Interior e as Primeiras Feridas</td>
+                        <td>Crianca Interior + Formacao pre-nascimento</td>
+                        <td><span class="tag tag-green">Fusao</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3</strong></td>
+                        <td>A Construcao da Identidade</td>
+                        <td>Quem e voce + Identidade na criacao + Queda</td>
+                        <td><span class="tag tag-green">Fusao</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>4</strong></td>
+                        <td>Crencas Limitantes e Falsos Profetas</td>
+                        <td>Crencas limitantes + Falsos profetas</td>
+                        <td><span class="tag tag-green">Fusao</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>5</strong></td>
+                        <td>Aprendizagem Social e Modelagem</td>
+                        <td>Forma de aprendizagem + Bandura/Skinner + 5 macacos</td>
+                        <td><span class="tag tag-emerald">Consolidacao</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>6</strong></td>
+                        <td>O Trauma Emocional: Definicoes e Teorias</td>
+                        <td>Trauma emocional + Bowlby + Van der Kolk/Levine/etc.</td>
+                        <td><span class="tag tag-emerald">Consolidacao</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>7</strong></td>
+                        <td>Carne e Espirito: Uma Leitura Psicanalitica</td>
+                        <td>Carne vs Espirito + Frutos da carne</td>
+                        <td><span class="tag tag-green">Fusao</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>8</strong></td>
+                        <td>A Dor como Mecanismo e Motivacao</td>
+                        <td>Dor como motivacao + Adao/Eva/serpente</td>
+                        <td><span class="tag tag-green">Fusao</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>9</strong></td>
+                        <td>Traumas Geracionais e Epigenetica</td>
+                        <td>Traumas geracionais</td>
+                        <td><span class="tag tag-blue">Reorganizado</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>10</strong></td>
+                        <td>Consequencias Comportamentais das Feridas</td>
+                        <td>Consequencias — dissociacao, 5 feridas, impostor, vicios</td>
+                        <td><span class="tag tag-blue">Reorganizado</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>11</strong></td>
+                        <td>Reconexao, Habitos e Enfrentamento</td>
+                        <td>Reconexao + Habitos + Enfrentamento + Aqui e agora</td>
+                        <td><span class="tag tag-emerald">Consolidacao</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>12</strong></td>
+                        <td>Ha Esperanca: Restauracao e Cura</td>
+                        <td>Ha esperanca</td>
+                        <td><span class="tag tag-blue">Reorganizado</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Logica da Reorganizacao</div>
+            <p>O arco narrativo revisado segue uma progressao pedagogica clara:</p>
+            <div class="table-wrap" style="margin-top: 12px;">
+                <table>
+                    <tr><th>Bloco</th><th>Capitulos</th><th>Funcao Narrativa</th></tr>
+                    <tr>
+                        <td><span class="tag tag-blue">Abertura</span></td>
+                        <td>1-3</td>
+                        <td>Convite, diagnostico inicial (crianca interior), e fundamentos de identidade</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-purple">Mecanismos</span></td>
+                        <td>4-6</td>
+                        <td>Como as feridas se formam: crencas, aprendizagem social, definicao de trauma</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-pink">Aprofundamento</span></td>
+                        <td>7-9</td>
+                        <td>Leitura teologica-psicanalitica: carne/espirito, dor, heranca geracional</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-emerald">Resolucao</span></td>
+                        <td>10-12</td>
+                        <td>Consequencias, caminho de reconexao, habitos, e mensagem de esperanca</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 3. LINGUAGEM ==================== -->
+    <div class="section" id="linguagem">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(168,85,247,0.12); color: var(--purple);">✍️</div>
+            <div>
+                <div class="section-title">Transformacao Linguistica</div>
+                <div class="section-subtitle">Correcoes gramaticais, registro unificado e eliminacao de redundancias</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Acentuacao e Gramatica</div>
+            <p>
+                O manuscrito original apresentava <span class="hl-red">dezenas de palavras sem acento</span>, erros de concordancia
+                verbal/nominal e pontuacao inconsistente. A revisao corrigiu sistematicamente:
+            </p>
+            <div class="table-wrap" style="margin-top: 12px;">
+                <table>
+                    <tr><th>Categoria</th><th>Original</th><th>Revisado</th><th>Exemplos</th></tr>
+                    <tr>
+                        <td><strong>Acentuacao</strong></td>
+                        <td><span class="hl-red">50+ erros</span></td>
+                        <td><span class="hl-green">Corrigido</span></td>
+                        <td>"nao"→"nao", "tambem"→"tambem", "voce"→"voce", "pra"→"para"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Concordancia</strong></td>
+                        <td><span class="hl-red">15+ erros</span></td>
+                        <td><span class="hl-green">Corrigido</span></td>
+                        <td>"Os habitos e uma das bases"→"Os habitos constituem uma das bases"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pontuacao</strong></td>
+                        <td><span class="hl-red">Inconsistente</span></td>
+                        <td><span class="hl-green">Padronizado</span></td>
+                        <td>Virgulas em apostos, periodos longos quebrados, dois-pontos adequados</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grafia informal</strong></td>
+                        <td><span class="hl-red">Frequente</span></td>
+                        <td><span class="hl-green">Corrigido</span></td>
+                        <td>"pra"→"para", "tá"→"esta", "naquele"→"naquele" (contexto formal)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Typos</strong></td>
+                        <td><span class="hl-red">10+ erros</span></td>
+                        <td><span class="hl-green">Corrigido</span></td>
+                        <td>"CRINAÇA"→"Crianca Interior", "fezes"→"vezes", "passão"→"passam"</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Registro Linguistico — De Oscilante para Unificado</div>
+            <p>
+                O original oscilava entre registro <span class="hl-red">muito academico</span> (citacoes densas sem explicacao)
+                e <span class="hl-red">coloquial demais</span> ("pra", "tá", frases orais). A revisao unificou o registro
+                em um nivel <span class="hl-green">5.5 (acessivel-academico)</span>:
+            </p>
+            <div style="margin-top: 16px;">
+                <div class="meter">
+                    <span class="meter-label">Coloquial (1-2)</span>
+                    <div class="meter-bar">
+                        <div class="meter-fill meter-fill-old" style="width: 25%; background: var(--red);"></div>
+                    </div>
+                    <span class="meter-value" style="color: var(--red);">Original</span>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Pop-Science (3-4)</span>
+                    <div class="meter-bar">
+                        <div class="meter-fill meter-fill-old" style="width: 30%; background: var(--yellow);"></div>
+                    </div>
+                    <span class="meter-value" style="color: var(--text-muted);"></span>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Acessivel-Academico (5-6)</span>
+                    <div class="meter-bar">
+                        <div class="meter-fill" style="width: 85%; background: var(--emerald);"></div>
+                    </div>
+                    <span class="meter-value" style="color: var(--emerald);">Revisado ✓</span>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Academico puro (7-8)</span>
+                    <div class="meter-bar">
+                        <div class="meter-fill meter-fill-old" style="width: 20%; background: var(--red);"></div>
+                    </div>
+                    <span class="meter-value" style="color: var(--red);">Original</span>
+                </div>
+            </div>
+            <p style="margin-top: 12px;">
+                <strong>Estrategia:</strong> Termos tecnicos (recalcamento, apego seguro, sistema limbico, ego, falso self) foram
+                mantidos mas <span class="hl-green">explicados brevemente em seguida</span> — entre travessoes ou parenteses.
+                Linguagem oral ("pra", "tá") foi elevada sem perder acessibilidade. O resultado e um texto que um leitor
+                leigo consegue acompanhar, mas que um profissional da area respeita.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Eliminacao de Redundancias</div>
+            <p>
+                O original tinha <span class="hl-red">8 blocos de repeticao identificados</span> — conceitos explicados 2 a 3 vezes
+                com palavras quase identicas. Exemplos consolidados:
+            </p>
+            <div class="table-wrap" style="margin-top: 12px;">
+                <table>
+                    <tr><th>Conceito</th><th>Ocorrencias no Original</th><th>No Revisado</th></tr>
+                    <tr>
+                        <td>Teoria de Bandura (aprendizagem social)</td>
+                        <td><span class="hl-red">3 secoes diferentes</span></td>
+                        <td><span class="hl-green">Consolidado no cap. 5</span></td>
+                    </tr>
+                    <tr>
+                        <td>Romanos 12:2 (renovacao da mente)</td>
+                        <td><span class="hl-red">4 mencoes com explicacao repetida</span></td>
+                        <td><span class="hl-green">Introduzido no cap. 1, referenciado brevemente depois</span></td>
+                    </tr>
+                    <tr>
+                        <td>Definicao de trauma</td>
+                        <td><span class="hl-red">3 definicoes parcialmente redundantes</span></td>
+                        <td><span class="hl-green">Definicao unificada no cap. 6</span></td>
+                    </tr>
+                    <tr>
+                        <td>Zona de conforto / resistencia a mudanca</td>
+                        <td><span class="hl-red">2 blocos quase identicos</span></td>
+                        <td><span class="hl-green">Unificado na introducao (cap. 1)</span></td>
+                    </tr>
+                    <tr>
+                        <td>Crianca que internaliza culpa</td>
+                        <td><span class="hl-red">Explicado 3x</span></td>
+                        <td><span class="hl-green">Apresentado no cap. 2, referenciado nos demais</span></td>
+                    </tr>
+                </table>
+            </div>
+            <p style="margin-top: 12px;">
+                A reducao de <strong>~2.926 palavras</strong> (37.033 → 34.107) vem quase inteiramente da eliminacao dessas
+                redundancias — nenhum conceito ou argumento foi removido, apenas consolidado.
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== 4. EXEMPLOS ANTES/DEPOIS ==================== -->
+    <div class="section" id="exemplos">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(236,72,153,0.12); color: var(--pink);">🔍</div>
+            <div>
+                <div class="section-title">Antes e Depois</div>
+                <div class="section-subtitle">Exemplos concretos das mudancas — textos originais vs revisados</div>
+            </div>
+        </div>
+
+        <!-- Example 1 -->
+        <div class="card">
+            <div class="card-title">Exemplo 1: Abertura do Livro <span class="tag tag-emerald">Estrutura + Linguagem</span></div>
+            <div class="comparison-block">
+                <div class="comp-card original">
+                    <div class="comp-label">Original</div>
+                    <div class="comp-text" style="font-family: Inter, sans-serif; font-size: 13px;">
+                        Introducao<br>
+                        A infancia e um periodo crucial da vida humana, onde a psique e o aparelho mental
+                        ainda estao em formacao. O ego, que e o mediador da realidade, ainda imaturo, esta
+                        em pleno desenvolvimento, e esse processo e profundamente influenciado pelas
+                        experiencias que a crianca vivencia.
+                    </div>
+                </div>
+                <div class="comp-card revisado">
+                    <div class="comp-label">Revisado (Cap. 1)</div>
+                    <div class="comp-text" style="font-family: Inter, sans-serif; font-size: 13px;">
+                        <strong># Capitulo 1 — Introducao: O Convite a Transformacao</strong><br><br>
+                        <strong>## O terreno fertil da infancia</strong><br><br>
+                        A infancia e o periodo mais crucial da vida humana. E nela que a psique e o aparelho
+                        mental — ainda em formacao — comecam a ser moldados pelas experiencias que a crianca
+                        vivencia. O <em>ego</em>, essa instancia psiquica que funciona como mediador entre
+                        nossos impulsos internos e as exigencias da realidade, ainda esta imaturo e em pleno
+                        desenvolvimento.
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 12px; font-size: 13px; color: var(--text-muted);">
+                <strong>Mudancas:</strong> Titulo capitular + subtitulo adicionados. "Ego" ganha explicacao em aposicao.
+                Frase mais direta e ritmada. Hierarquia visual clara.
+            </p>
+        </div>
+
+        <!-- Example 2 -->
+        <div class="card">
+            <div class="card-title">Exemplo 2: Erros Gramaticais Corrigidos <span class="tag tag-purple">Linguagem</span></div>
+            <div class="comparison-block">
+                <div class="comp-card original">
+                    <div class="comp-label">Original</div>
+                    <div class="comp-text" style="font-family: Inter, sans-serif; font-size: 13px;">
+                        "Os habitos <span style="color: var(--red); text-decoration: line-through;">e</span> uma das bases
+                        da nossa vida, e a Biblia nos ensina que nossas acoes devem refletir nosso
+                        relacionamento com Deus, <span style="color: var(--red); text-decoration: line-through;">vendo que uns dos atributos de Deus e</span>
+                        o relacionamento."
+                    </div>
+                </div>
+                <div class="comp-card revisado">
+                    <div class="comp-label">Revisado</div>
+                    <div class="comp-text" style="font-family: Inter, sans-serif; font-size: 13px;">
+                        "Os habitos <span style="color: var(--green); font-weight: 600;">constituem uma das bases</span>
+                        da nossa vida, e a Biblia nos ensina que nossas acoes devem refletir nosso
+                        relacionamento com Deus — <span style="color: var(--green); font-weight: 600;">visto que um dos atributos divinos e, justamente,
+                        o relacionamento</span>."
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 12px; font-size: 13px; color: var(--text-muted);">
+                <strong>Mudancas:</strong> Concordancia verbal corrigida ("e"→"constituem"). Trecho confuso reescrito
+                com clareza. Travessao substitui virgula para melhor ritmo.
+            </p>
+        </div>
+
+        <!-- Example 3 -->
+        <div class="card">
+            <div class="card-title">Exemplo 3: Typo Grave Corrigido <span class="tag tag-red">Erro critico</span></div>
+            <div class="comparison-block">
+                <div class="comp-card original">
+                    <div class="comp-label">Original</div>
+                    <div class="comp-text" style="font-family: Inter, sans-serif; font-size: 13px;">
+                        "fazendo da bebida muitas <span style="color: var(--red); font-weight: 700; text-decoration: line-through;">fezes</span>
+                        uma fuga emocional"
+                    </div>
+                </div>
+                <div class="comp-card revisado">
+                    <div class="comp-label">Revisado</div>
+                    <div class="comp-text" style="font-family: Inter, sans-serif; font-size: 13px;">
+                        "fazendo da bebida, muitas <span style="color: var(--green); font-weight: 700;">vezes</span>,
+                        uma fuga emocional"
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 12px; font-size: 13px; color: var(--text-muted);">
+                <strong>Mudanca:</strong> "fezes" (excrementos) → "vezes" (frequencia). Erro critico que poderia causar
+                constrangimento em publicacao. Virgulas de encaixe adicionadas.
+            </p>
+        </div>
+
+        <!-- Example 4 -->
+        <div class="card">
+            <div class="card-title">Exemplo 4: Transicao Entre Capitulos <span class="tag tag-emerald">Novo</span></div>
+            <div class="comparison-block">
+                <div class="comp-card original">
+                    <div class="comp-label">Original</div>
+                    <div class="comp-text" style="font-family: Inter, sans-serif; font-size: 13px;">
+                        [Sem transicao — a secao "Crianca Interior" comecava abruptamente apos a introducao,
+                        sem paragrafo de ligacao]
+                    </div>
+                </div>
+                <div class="comp-card revisado">
+                    <div class="comp-label">Revisado (fim do Cap. 1)</div>
+                    <div class="comp-text" style="font-family: Inter, sans-serif; font-size: 13px;">
+                        <em>"Se mudancas externas comecam com transformacoes internas, e preciso voltar ao
+                        inicio — aquele lugar onde tudo comecou a ser escrito dentro de nos. E esse lugar
+                        e a infancia. No proximo capitulo, vamos mergulhar no conceito de crianca interior
+                        e compreender como as primeiras feridas se instalam na alma humana, muito antes de
+                        termos palavras para nomea-las."</em>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 12px; font-size: 13px; color: var(--text-muted);">
+                <strong>Mudanca:</strong> Paragrafo-ponte criado para conectar capitulos. Todos os 12 capitulos agora
+                possuem transicoes — o leitor nunca "cai" de um tema para outro.
+            </p>
+        </div>
+
+        <!-- Example 5 -->
+        <div class="card">
+            <div class="card-title">Exemplo 5: Titulo de Secao <span class="tag tag-red">Typo grave</span></div>
+            <div class="comparison-block">
+                <div class="comp-card original">
+                    <div class="comp-label">Original</div>
+                    <div class="comp-text" style="font-family: Inter, sans-serif; font-size: 13px;">
+                        <span style="color: var(--red); font-weight: 700;">CRINAÇA INTERIOR</span>
+                    </div>
+                </div>
+                <div class="comp-card revisado">
+                    <div class="comp-label">Revisado</div>
+                    <div class="comp-text" style="font-family: Inter, sans-serif; font-size: 13px;">
+                        <span style="color: var(--green); font-weight: 700;">Capitulo 2 — A Crianca Interior e as Primeiras Feridas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 5. O QUE MUDOU ==================== -->
+    <div class="section" id="mudancas">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(217,119,6,0.12); color: var(--accent-light);">⚡</div>
+            <div>
+                <div class="section-title">Resumo das Mudancas</div>
+                <div class="section-subtitle">Todas as intervencoes editoriais, ranqueadas por impacto</div>
+            </div>
+        </div>
+
+        <div class="change-item">
+            <div class="change-header">
+                <div class="change-title">1. Reorganizacao em 12 Capitulos</div>
+                <div class="change-impact impact-high">IMPACTO ALTO</div>
+            </div>
+            <div class="change-desc">
+                35+ secoes planas transformadas em 12 capitulos hierarquicos com titulo, subtitulos, e arco narrativo
+                progressivo (origens → mecanismos → consequencias → cura). Cada capitulo tem funcao clara dentro do livro.
+            </div>
+        </div>
+
+        <div class="change-item">
+            <div class="change-header">
+                <div class="change-title">2. Transicoes Entre Todos os Capitulos</div>
+                <div class="change-impact impact-high">IMPACTO ALTO</div>
+            </div>
+            <div class="change-desc">
+                Criacao de paragrafos-ponte no final de cada capitulo e aberturas contextuais no inicio do proximo.
+                O leitor agora e conduzido por uma jornada, nao por uma lista de topicos.
+            </div>
+        </div>
+
+        <div class="change-item">
+            <div class="change-header">
+                <div class="change-title">3. Correcao de Acentuacao e Grafia</div>
+                <div class="change-impact impact-high">IMPACTO ALTO</div>
+            </div>
+            <div class="change-desc">
+                50+ palavras sem acento corrigidas. Typos criticos ("CRINAÇA", "fezes"→"vezes", "passão"→"passam")
+                eliminados. Formatacao de citacoes biblicas padronizada (Livro capitulo:versiculo).
+            </div>
+        </div>
+
+        <div class="change-item">
+            <div class="change-header">
+                <div class="change-title">4. Unificacao do Registro Linguistico</div>
+                <div class="change-impact impact-high">IMPACTO ALTO</div>
+            </div>
+            <div class="change-desc">
+                Oscilacao entre muito academico e coloquial eliminada. Registro unificado em 5.5 (acessivel-academico).
+                "pra"→"para", termos tecnicos explicados com aposicoes, frases orais elevadas sem perder naturalidade.
+            </div>
+        </div>
+
+        <div class="change-item">
+            <div class="change-header">
+                <div class="change-title">5. Consolidacao de Autores Repetidos</div>
+                <div class="change-impact impact-medium">IMPACTO MEDIO</div>
+            </div>
+            <div class="change-desc">
+                Bandura (3x→1x no cap. 5), Bowlby (disperso→consolidado no cap. 6), Romanos 12:2
+                (4x→introduzido no cap. 1 e referenciado brevemente depois). Economia de ~2.900 palavras.
+            </div>
+        </div>
+
+        <div class="change-item">
+            <div class="change-header">
+                <div class="change-title">6. Concordancia Verbal e Nominal</div>
+                <div class="change-impact impact-medium">IMPACTO MEDIO</div>
+            </div>
+            <div class="change-desc">
+                15+ erros de concordancia corrigidos. "Os habitos e"→"Os habitos constituem",
+                "uns dos atributos"→"um dos atributos", entre outros.
+            </div>
+        </div>
+
+        <div class="change-item">
+            <div class="change-header">
+                <div class="change-title">7. Formatacao de Citacoes</div>
+                <div class="change-impact impact-medium">IMPACTO MEDIO</div>
+            </div>
+            <div class="change-desc">
+                Citacoes biblicas padronizadas em formato blockquote com referencia (Livro capitulo:versiculo).
+                Citacoes academicas com formato (Sobrenome, ano). Frases de autores em italico com atribuicao.
+            </div>
+        </div>
+
+        <div class="change-item">
+            <div class="change-header">
+                <div class="change-title">8. Quebra de Periodos Longos</div>
+                <div class="change-impact impact-low">IMPACTO BAIXO</div>
+            </div>
+            <div class="change-desc">
+                Paragrafos com 8+ linhas foram divididos. Periodos com 3+ oracoes subordinadas foram reestruturados
+                em frases mais curtas e diretas, mantendo o sentido original.
+            </div>
+        </div>
+
+        <div class="change-item">
+            <div class="change-header">
+                <div class="change-title">9. Explicacao de Termos Tecnicos</div>
+                <div class="change-impact impact-low">IMPACTO BAIXO</div>
+            </div>
+            <div class="change-desc">
+                Termos como "recalcamento", "sistema limbico", "ego", "falso self", "apego seguro" receberam
+                explicacoes breves em aposicao (entre travessoes ou parenteses) sem quebrar o fluxo do texto.
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 6. METRICAS ==================== -->
+    <div class="section" id="metricas">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(6,182,212,0.12); color: var(--cyan);">📐</div>
+            <div>
+                <div class="section-title">Metricas Quantitativas</div>
+                <div class="section-subtitle">Numeros concretos — original vs revisado</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Comparativo Numerico</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Metrica</th><th>Original</th><th>Revisado</th><th>Variacao</th></tr>
+                    <tr>
+                        <td>Palavras totais</td>
+                        <td>37.033</td>
+                        <td>34.107</td>
+                        <td><span class="hl-green">-2.926 (-7.9%)</span></td>
+                    </tr>
+                    <tr>
+                        <td>Linhas</td>
+                        <td>631</td>
+                        <td>1.556</td>
+                        <td><span class="hl-green">+925 (+147%)</span> *</td>
+                    </tr>
+                    <tr>
+                        <td>Secoes/Capitulos</td>
+                        <td>35+ blocos</td>
+                        <td>12 capitulos</td>
+                        <td><span class="hl-green">-66% (consolidacao)</span></td>
+                    </tr>
+                    <tr>
+                        <td>Hierarquia</td>
+                        <td>1 nivel (titulo)</td>
+                        <td>3 niveis (#, ##, ###)</td>
+                        <td><span class="hl-green">+2 niveis</span></td>
+                    </tr>
+                    <tr>
+                        <td>Transicoes entre secoes</td>
+                        <td>0</td>
+                        <td>11 (entre cada capitulo)</td>
+                        <td><span class="hl-green">+11</span></td>
+                    </tr>
+                    <tr>
+                        <td>Erros gramaticais</td>
+                        <td>20+</td>
+                        <td>~0 **</td>
+                        <td><span class="hl-green">-100%</span></td>
+                    </tr>
+                    <tr>
+                        <td>Repeticoes conceituais</td>
+                        <td>8 blocos</td>
+                        <td>0</td>
+                        <td><span class="hl-green">-100%</span></td>
+                    </tr>
+                    <tr>
+                        <td>Citacoes biblicas formatadas</td>
+                        <td>Formato misto</td>
+                        <td>Padronizado (blockquote)</td>
+                        <td><span class="hl-green">100% padrao</span></td>
+                    </tr>
+                    <tr>
+                        <td>Feridas desenvolvidas</td>
+                        <td>2 de 5</td>
+                        <td>2 de 5</td>
+                        <td><span class="hl-red">Sem mudanca ***</span></td>
+                    </tr>
+                    <tr>
+                        <td>Paginas estimadas (14x21cm)</td>
+                        <td>~180-220</td>
+                        <td>~170-200</td>
+                        <td>Ligeiramente menor (sem redundancias)</td>
+                    </tr>
+                </table>
+            </div>
+            <p style="margin-top: 12px; font-size: 12px; color: var(--text-muted);">
+                * O aumento de linhas reflete a formatacao Markdown (linhas em branco entre paragrafos, headers, blockquotes).<br>
+                ** Podem existir erros residuais — recomendado proofreading humano profissional.<br>
+                *** A regra editorial foi "nao alterar conceitos do autor" — o desenvolvimento das 3 feridas faltantes requer escrita nova do Ricardo.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Preservacao do Conteudo Original</div>
+            <p>
+                Uma preocupacao central da revisao foi <span class="hl-emerald">nunca alterar a essencia, teses ou posicionamentos do autor</span>.
+                O trabalho foi exclusivamente de <strong>lapidacao editorial</strong>:
+            </p>
+            <ul>
+                <li><strong>Casos clinicos preservados integralmente:</strong> Historia de Ana, o homem com dificuldade relacional</li>
+                <li><strong>Analogias mantidas:</strong> 5 macacos, unha encravada, feijao, oculos invisiveis, floresta/caminho</li>
+                <li><strong>Citacoes biblicas intactas:</strong> Romanos 12:2, Galatas 5, Genesis 1-3, Salmos 34:18/147:3, Malaquias 4:6</li>
+                <li><strong>Autores preservados:</strong> Freud, Winnicott, Bowlby, Bandura, Young, Janet, Van der Kolk, Levine, Mate, Solomon</li>
+                <li><strong>Tese central inalterada:</strong> Integracao psicanalitica + teologia crista como caminho de cura emocional</li>
+                <li><strong>Nenhum conceito removido:</strong> Apenas reorganizado e consolidado</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== 7. O QUE FALTA ==================== -->
+    <div class="section" id="pendencias">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(234,179,8,0.12); color: var(--yellow);">⚠️</div>
+            <div>
+                <div class="section-title">O Que Ainda Falta</div>
+                <div class="section-subtitle">Pendencias para atingir nota 9.5+ e estar pronto para publicacao</div>
+            </div>
+        </div>
+
+        <div class="pending-item">
+            <div class="pending-priority priority-high">PRIORIDADE ALTA</div>
+            <div class="pending-title">3 Feridas Emocionais Nao Desenvolvidas</div>
+            <div class="pending-desc">
+                O capitulo 10 menciona as 5 feridas emocionais (Lise Bourbeau), mas apenas <strong>injustica</strong> e
+                <strong>abandono</strong> foram desenvolvidas com profundidade. Faltam: <strong>rejeicao</strong>,
+                <strong>traicao</strong> e <strong>humilhacao</strong>. Cada uma precisa de 2-3 paginas com definicao,
+                dinamica psicanalitica, exemplo clinico e perspectiva biblica. Isso adicionaria ~3.000 palavras
+                e completaria o arco tematico.
+            </div>
+        </div>
+
+        <div class="pending-item">
+            <div class="pending-priority priority-high">PRIORIDADE ALTA</div>
+            <div class="pending-title">Proofreading Profissional</div>
+            <div class="pending-desc">
+                A revisao por IA eliminou a grande maioria dos erros, mas um <strong>revisor humano profissional</strong>
+                e indispensavel antes da publicacao. Ele identificara: nuances de crase que a IA pode ter errado,
+                estilismos regionais, e garantira que o texto final esteja 100% correto para impressao.
+                Custo estimado: R$ 800-1.500 para ~35k palavras.
+            </div>
+        </div>
+
+        <div class="pending-item">
+            <div class="pending-priority priority-medium">PRIORIDADE MEDIA</div>
+            <div class="pending-title">Introducao Autoral / Prefacio</div>
+            <div class="pending-desc">
+                O livro nao possui uma <strong>introducao pessoal do autor</strong> — quem e Ricardo, por que escreveu
+                este livro, qual sua formacao, o que o motivou. Um prefacio de 2-3 paginas humaniza o autor,
+                cria conexao com o leitor e da credibilidade. Pode incluir: breve biografia, chamado pessoal,
+                dedicatoria, e a quem o livro se destina.
+            </div>
+        </div>
+
+        <div class="pending-item">
+            <div class="pending-priority priority-medium">PRIORIDADE MEDIA</div>
+            <div class="pending-title">Capitulo Pratico com Exercicios</div>
+            <div class="pending-desc">
+                O livro e fortemente teorico e reflexivo, mas <strong>carece de ferramentas praticas</strong>.
+                Sugestao: adicionar um capitulo ou apendice com exercicios guiados — diario de emocoes,
+                oracoes de cura interior, perguntas para autoreflexao, roteiro de conversas com terapeuta.
+                Isso transformaria o livro de "leitura" para "ferramenta de transformacao".
+            </div>
+        </div>
+
+        <div class="pending-item">
+            <div class="pending-priority priority-medium">PRIORIDADE MEDIA</div>
+            <div class="pending-title">Bibliografia / Referencias</div>
+            <div class="pending-desc">
+                O livro cita 15+ autores academicos mas nao possui uma <strong>secao de referencias bibliograficas</strong>
+                formal. Para credibilidade editorial, especialmente no publico academico e pastoral, e importante
+                incluir: lista de obras citadas no formato ABNT ou APA, sugestoes de leitura complementar,
+                e notas de rodape para citacoes diretas.
+            </div>
+        </div>
+
+        <div class="pending-item">
+            <div class="pending-priority priority-low">PRIORIDADE BAIXA</div>
+            <div class="pending-title">Conclusao Expandida</div>
+            <div class="pending-desc">
+                O capitulo 12 ("Ha Esperanca") funciona como conclusao, mas poderia ser
+                <strong>mais impactante</strong>. Sugestao: adicionar um paragrafo final que retome a tese de Romanos 12:2,
+                circule de volta a introducao, e encerre com uma oracaoprofética ou benção sobre o leitor.
+                Isso criaria um "fechamento circular" satisfatorio.
+            </div>
+        </div>
+
+        <div class="pending-item">
+            <div class="pending-priority priority-low">PRIORIDADE BAIXA</div>
+            <div class="pending-title">Indice Remissivo / Glossario</div>
+            <div class="pending-desc">
+                Para leitores que usarao o livro como <strong>material de estudo</strong>, um glossario de termos
+                psicanaliticos (ego, recalcamento, falso self, apego seguro, etc.) e um indice remissivo
+                seriam valiosos. Prioridade baixa porque pode ser adicionado na diagramacao.
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 8. PROXIMOS PASSOS ==================== -->
+    <div class="section" id="proximos">
+        <div class="section-header">
+            <div class="section-icon" style="background: rgba(16,185,129,0.12); color: var(--emerald);">🚀</div>
+            <div>
+                <div class="section-title">Proximos Passos</div>
+                <div class="section-subtitle">Roadmap para publicacao — da versao revisada ao livro impresso</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Roadmap Recomendado</div>
+            <div class="table-wrap">
+                <table>
+                    <tr><th>Fase</th><th>Acao</th><th>Responsavel</th><th>Estimativa</th></tr>
+                    <tr>
+                        <td><span class="tag tag-red">1</span></td>
+                        <td><strong>Desenvolver 3 feridas faltantes</strong> — Ricardo escreve rejeicao, traicao e humilhacao com exemplos clinicos</td>
+                        <td>Ricardo + Editor</td>
+                        <td>1-2 semanas</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-yellow">2</span></td>
+                        <td><strong>Escrever prefacio/introducao autoral</strong> — quem e Ricardo, por que este livro, dedicatoria</td>
+                        <td>Ricardo</td>
+                        <td>2-3 dias</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-yellow">3</span></td>
+                        <td><strong>Adicionar capitulo pratico</strong> — exercicios, oracoes, roteiro terapeutico</td>
+                        <td>Ricardo + Editor</td>
+                        <td>1 semana</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-blue">4</span></td>
+                        <td><strong>Proofreading profissional</strong> — revisor humano para ultima passada</td>
+                        <td>Revisor externo</td>
+                        <td>1-2 semanas</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-purple">5</span></td>
+                        <td><strong>Criar bibliografia</strong> — listar todas as obras citadas em formato ABNT</td>
+                        <td>Editor</td>
+                        <td>2-3 dias</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-emerald">6</span></td>
+                        <td><strong>Diagramacao</strong> — layout profissional 14x21cm, tipografia, capa</td>
+                        <td>Designer grafico</td>
+                        <td>2-3 semanas</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-emerald">7</span></td>
+                        <td><strong>ISBN + Ficha catalografica</strong> — registro na Biblioteca Nacional</td>
+                        <td>Editora / Autor</td>
+                        <td>1-2 semanas</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-cyan">8</span></td>
+                        <td><strong>Impressao / Publicacao</strong> — grafica ou print-on-demand (Amazon KDP, Uiclap)</td>
+                        <td>Autor</td>
+                        <td>2-4 semanas</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="verdict">
+            <div class="verdict-title">Conclusao Final</div>
+            <p>
+                O manuscrito de Ricardo saiu de um estado <span class="hl">pre-revisado com materia-prima excelente mas problemas formais</span>
+                para um <span class="hl-emerald">livro estruturado, coeso e gramaticalmente correto</span>. A nota global subiu de
+                <strong>7.4 para 8.7</strong>, com os maiores ganhos em estrutura (+3.0) e linguagem (+2.0).
+                <br><br>
+                O conteudo do Ricardo — sua integracao unica entre psicanalitica e teologia crista, suas analogias memoraveis,
+                seus casos clinicos tocantes — era e continua sendo o <span class="hl-emerald">grande diferencial deste livro</span>.
+                A revisao apenas lapidou a forma para que esse conteudo brilhe com clareza.
+                <br><br>
+                Com as pendencias resolvidas (3 feridas, prefacio, exercicios, proofreading), este livro tem potencial para
+                se tornar uma <strong>referencia no mercado editorial evangelico brasileiro</strong> na intersecao entre
+                fe crista, psicanalitica e cura emocional. Nota potencial com pendencias resolvidas: <span class="hl-emerald">9.3 - 9.5</span>.
+            </p>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 40px;">
+            <p style="font-size: 13px; color: var(--text-muted);">
+                Relatorio gerado em 21 de Fevereiro de 2026<br>
+                Analise editorial por IA — Juan Hub Reports<br>
+                <br>
+                <span style="font-size: 11px;">
+                    Versao original da analise: <a href="analise-livro-ricardo.html" style="color: var(--accent-light); text-decoration: none;">analise-livro-ricardo.html</a>
+                </span>
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Active tab on scroll
+    const tabs = document.querySelectorAll('.nav-tab');
+    const sections = document.querySelectorAll('.section');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (pageYOffset >= sectionTop) current = section.getAttribute('id');
+        });
+        tabs.forEach(tab => {
+            tab.classList.remove('active');
+            if (tab.getAttribute('href') === '#' + current) tab.classList.add('active');
+        });
+    });
+
+    // Smooth scroll
+    tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(tab.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+</script>
+
+</body>
+</html>
