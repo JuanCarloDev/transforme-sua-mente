@@ -34,12 +34,11 @@ export async function POST(req: NextRequest) {
       `🏷 <b>Fonte:</b> ${source || "landing-page"}\n` +
       `⏰ <b>Horário:</b> ${new Date().toLocaleString("pt-BR")}`;
 
-    sendTelegramMessage(telegramMsg).catch(() => {});
+    await sendTelegramMessage(telegramMsg);
 
     return NextResponse.json({
       success: true,
-      message: "E-book liberado!",
-      downloadUrl: "/ebook.pdf",
+      message: "Você está na fila de espera!",
     });
   } catch {
     return NextResponse.json({ error: "Erro interno" }, { status: 500 });
