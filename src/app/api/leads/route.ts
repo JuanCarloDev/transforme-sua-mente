@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { sendTelegramMessage } from "@/lib/telegram";
 
 const LEADS_FILE = path.join(process.cwd(), "data", "leads.json");
 
@@ -76,6 +77,16 @@ export async function POST(req: NextRequest) {
     });
 
     saveLeads(leads);
+
+    const telegramMsg =
+      `<b>📥 Novo Download - Transforme Sua Mente</b>\n\n` +
+      `👤 <b>Nome:</b> ${name.trim()}\n` +
+      `📧 <b>Email:</b> ${email.trim().toLowerCase()}\n` +
+      `📱 <b>Telefone:</b> ${phoneClean}\n` +
+      `📊 <b>Total de Leads:</b> ${leads.length}\n` +
+      `⏰ <b>Horário:</b> ${new Date().toLocaleString("pt-BR")}`;
+
+    sendTelegramMessage(telegramMsg).catch(() => {});
 
     return NextResponse.json({
       success: true,
