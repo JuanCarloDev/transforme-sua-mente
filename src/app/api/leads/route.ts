@@ -1,34 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
 import { sendTelegramMessage } from "@/lib/telegram";
-
-const LEADS_FILE = path.join(process.cwd(), "data", "leads.json");
-
-interface Lead {
-  name: string;
-  email: string;
-  phone: string;
-  createdAt: string;
-  source: string;
-}
-
-function getLeads(): Lead[] {
-  try {
-    if (fs.existsSync(LEADS_FILE)) {
-      return JSON.parse(fs.readFileSync(LEADS_FILE, "utf-8"));
-    }
-  } catch {
-    // ignore parse errors
-  }
-  return [];
-}
-
-function saveLeads(leads: Lead[]) {
-  const dir = path.dirname(LEADS_FILE);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2), "utf-8");
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -55,57 +26,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const leads = getLeads();
-
-    const duplicate = leads.find(
-      (l) => l.email.toLowerCase() === email.toLowerCase()
-    );
-    if (duplicate) {
-      return NextResponse.json({
-        success: true,
-        message: "Você já está na fila de espera!",
-      });
-    }
-
-    leads.push({
-      name: name.trim(),
-      email: email.trim().toLowerCase(),
-      phone: phoneClean,
-      createdAt: new Date().toISOString(),
-      source: source || "landing-page",
-    });
-
-    saveLeads(leads);
-
     const telegramMsg =
-      `<b>🔔 Nova inscrição - Fila de Espera</b>\n` +
-      `<b>📖 Transforme Sua Mente</b>\n\n` +
+      `<b>📖 Novo lead - Transforme Sua Mente</b>\n\n` +
       `👤 <b>Nome:</b> ${name.trim()}\n` +
       `📧 <b>Email:</b> ${email.trim().toLowerCase()}\n` +
       `📱 <b>Telefone:</b> ${phoneClean}\n` +
-      `📊 <b>Total na fila:</b> ${leads.length}\n` +
+      `🏷 <b>Fonte:</b> ${source || "landing-page"}\n` +
       `⏰ <b>Horário:</b> ${new Date().toLocaleString("pt-BR")}`;
 
     sendTelegramMessage(telegramMsg).catch(() => {});
 
     return NextResponse.json({
       success: true,
-      message: "Você está na fila de espera!",
+      message: "E-book liberado!",
+      downloadUrl: "/ebook.pdf",
     });
   } catch {
     return NextResponse.json({ error: "Erro interno" }, { status: 500 });
   }
-}
-
-export async function GET() {
-  const leads = getLeads();
-  return NextResponse.json({
-    total: leads.length,
-    leads: leads.map((l) => ({
-      name: l.name,
-      email: l.email,
-      phone: l.phone,
-      createdAt: l.createdAt,
-    })),
-  });
 }
