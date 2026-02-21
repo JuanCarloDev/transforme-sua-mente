@@ -15,7 +15,7 @@ const chapters = [
 
 export default function Chapters() {
   return (
-    <section className="py-25 px-6 bg-bg-deep border-t border-border">
+    <section className="py-16 sm:py-25 px-5 sm:px-6 bg-bg-deep border-t border-border">
       <div className="max-w-[1100px] mx-auto reveal">
         <div className="text-[10px] tracking-[5px] uppercase text-gold-dim font-medium mb-4">
           Conteúdo
@@ -23,15 +23,15 @@ export default function Chapters() {
         <h2 className="font-serif text-[clamp(32px,4vw,48px)] font-normal leading-[1.15] mb-5 tracking-tight">
           12 capítulos de transformação
         </h2>
-        <p className="text-base text-text-dim max-w-[600px] leading-[1.8] mb-14">
+        <p className="text-[15px] sm:text-base text-text-dim max-w-[600px] leading-[1.8] mb-10 sm:mb-14">
           Uma jornada progressiva — das origens do trauma até a restauração da identidade.
         </p>
 
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 max-[600px]:grid-cols-1">
+        <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-3 sm:gap-4">
           {chapters.map((ch) => (
             <div
               key={ch.num}
-              className="p-6 border border-border rounded-xl bg-bg-card flex gap-4 transition-all duration-300 hover:border-border-glow hover:-translate-y-0.5"
+              className="p-5 sm:p-6 border border-border rounded-xl bg-bg-card flex gap-3.5 sm:gap-4 transition-all duration-300 hover:border-border-glow hover:-translate-y-0.5"
             >
               <div className="font-serif text-[28px] font-bold text-gold-dim leading-none shrink-0 w-9">
                 {ch.num}

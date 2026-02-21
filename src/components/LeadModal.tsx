@@ -106,7 +106,7 @@ export default function LeadModal({ open, onClose }: LeadModalProps) {
       className={`modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-[10000] flex items-center justify-center p-6 ${open ? "active" : ""}`}
       onClick={(e) => e.target === e.currentTarget && handleClose()}
     >
-      <div className="modal-content bg-bg-card border border-border-glow rounded-3xl p-12 max-w-[480px] w-full relative shadow-[0_40px_80px_rgba(0,0,0,0.6)] max-[600px]:p-8 max-[600px]:rounded-[20px]">
+      <div className="modal-content bg-bg-card border border-border-glow rounded-3xl p-12 max-w-[480px] w-full relative shadow-[0_40px_80px_rgba(0,0,0,0.6)] max-[600px]:p-6 max-[600px]:rounded-[20px]">
         <button
           onClick={handleClose}
           className="absolute top-5 right-5 w-9 h-9 border border-border rounded-full bg-transparent text-text-muted cursor-pointer flex items-center justify-center text-lg transition-all duration-300 hover:border-text-muted hover:text-text"

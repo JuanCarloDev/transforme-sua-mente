@@ -32,7 +32,7 @@ const features = [
 export default function AboutBook() {
   return (
     <section
-      className="py-25 px-6 relative"
+      className="py-16 sm:py-25 px-5 sm:px-6 relative"
       style={{
         background: `radial-gradient(ellipse 50% 50% at 80% 20%, rgba(200, 164, 78, 0.03) 0%, transparent 60%), var(--color-bg)`,
       }}
@@ -44,12 +44,12 @@ export default function AboutBook() {
         <h2 className="font-serif text-[clamp(32px,4vw,48px)] font-normal leading-[1.15] mb-5 tracking-tight">
           Onde a ciência encontra a fé
         </h2>
-        <p className="text-base text-text-dim max-w-[600px] leading-[1.8] mb-14">
+        <p className="text-[15px] sm:text-base text-text-dim max-w-[600px] leading-[1.8] mb-10 sm:mb-14">
           Uma abordagem única que não opõe psicologia e espiritualidade — mostra que ambas apontam
           para as mesmas verdades por caminhos complementares.
         </p>
 
-        <div className="grid grid-cols-2 gap-15 items-start max-[900px]:grid-cols-1 max-[900px]:gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-15 items-start">
           <div>
             <p className="text-base text-text-dim leading-[1.9] mb-5">
               <strong className="text-text font-semibold">Transforme Sua Mente</strong> nasce da
@@ -79,7 +79,7 @@ export default function AboutBook() {
             {features.map((f) => (
               <div
                 key={f.title}
-                className="flex gap-4 p-5 border border-border rounded-xl bg-bg-card transition-all duration-300 hover:border-gold-dim hover:bg-bg-card-hover"
+                className="flex gap-3.5 sm:gap-4 p-4 sm:p-5 border border-border rounded-xl bg-bg-card transition-all duration-300 hover:border-gold-dim hover:bg-bg-card-hover"
               >
                 <div
                   className="w-11 h-11 rounded-[10px] flex items-center justify-center text-xl shrink-0"

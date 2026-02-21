@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 py-15 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center px-5 sm:px-6 py-12 sm:py-15 overflow-hidden">
       {/* Background gradients */}
       <div
         className="absolute inset-0"
@@ -23,9 +23,9 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
       <div className="shard w-[70px] h-[90px] top-[75%] right-[5%] -rotate-[20deg] max-md:hidden" style={{ clipPath: "polygon(40% 0, 100% 15%, 60% 100%, 0 50%)" }} />
 
       {/* Content */}
-      <div className="relative z-2 flex items-center gap-20 max-w-[1200px] w-full max-[900px]:flex-col-reverse max-[900px]:gap-12 max-[900px]:text-center">
+      <div className="relative z-2 flex items-center gap-12 lg:gap-20 max-w-[1200px] w-full max-[900px]:flex-col-reverse max-[900px]:gap-10 max-[900px]:text-center">
         <div className="flex-1 max-w-[580px] max-[900px]:max-w-full">
-          <div className="text-[11px] tracking-[4px] uppercase text-gold font-medium mb-6 animate-fade-up delay-300">
+          <div className="text-[11px] tracking-[4px] uppercase text-gold font-medium mb-4 sm:mb-6 animate-fade-up delay-300">
             E-book Gratuito
           </div>
           <h1 className="font-serif text-[clamp(42px,5.5vw,72px)] font-light leading-[1.08] tracking-tight mb-2 animate-fade-up delay-500">
@@ -35,10 +35,10 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
             <br />
             Sua Mente
           </h1>
-          <p className="font-serif text-[clamp(18px,2.2vw,26px)] font-light italic text-text-dim mb-8 tracking-wide animate-fade-up delay-700">
+          <p className="font-serif text-[clamp(18px,2.2vw,26px)] font-light italic text-text-dim mb-6 sm:mb-8 tracking-wide animate-fade-up delay-700">
             Ciência, Fé e a Superação dos Traumas
           </p>
-          <p className="text-[15px] text-text-muted leading-[1.8] mb-10 max-w-[460px] max-[900px]:max-w-full max-[900px]:mx-auto animate-fade-up delay-900">
+          <p className="text-[14px] sm:text-[15px] text-text-muted leading-[1.8] mb-8 sm:mb-10 max-w-[460px] max-[900px]:max-w-full max-[900px]:mx-auto animate-fade-up delay-900">
             Uma obra que integra psicanálise, neurociência e teologia cristã para iluminar as raízes
             do trauma emocional e abrir caminhos reais de cura e restauração da identidade.
           </p>
@@ -60,7 +60,7 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
 
         {/* Book 3D */}
         <div className="shrink-0 animate-fade-in" style={{ perspective: "1200px", animationDelay: "0.6s" }}>
-          <div className="book-3d w-[320px] max-[900px]:w-[240px] relative">
+          <div className="book-3d w-[320px] max-[900px]:w-[220px] max-[400px]:w-[180px] relative">
             <div className="absolute -inset-10 bg-radial-[ellipse_at_center] from-[rgba(200,164,78,0.1)] to-transparent pointer-events-none -z-1" />
             <div className="book-spine" />
             <Image

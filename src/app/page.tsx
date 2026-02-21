@@ -50,7 +50,7 @@ export default function Home() {
       />
       <FinalCTA onOpenModal={() => setModalOpen(true)} />
 
-      <footer className="py-10 px-6 text-center border-t border-border text-text-muted text-[13px]">
+      <footer className="py-8 sm:py-10 px-5 sm:px-6 text-center border-t border-border text-text-muted text-[12px] sm:text-[13px]">
         <p>&copy; 2026 Ricardo Batista Cavassin. Todos os direitos reservados.</p>
         <p className="mt-2">
           <a href="mailto:contato@transformesuamente.com.br" className="text-gold-dim no-underline">

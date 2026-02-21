@@ -19,7 +19,7 @@ const painCards = [
 export default function PainPoints() {
   return (
     <section
-      className="py-25 px-6 relative border-t border-b border-border"
+      className="py-16 sm:py-25 px-5 sm:px-6 relative border-t border-b border-border"
       style={{
         background: `radial-gradient(ellipse 60% 40% at 50% 50%, rgba(179, 90, 90, 0.04) 0%, transparent 60%), var(--color-bg-deep)`,
       }}
@@ -33,16 +33,16 @@ export default function PainPoints() {
           <br />
           mas que controlam tudo
         </h2>
-        <p className="text-base text-text-dim max-w-[600px] leading-[1.8] mb-14">
+        <p className="text-[15px] sm:text-base text-text-dim max-w-[600px] leading-[1.8] mb-10 sm:mb-14">
           Muitos adultos carregam dores da infância sem perceber como elas moldam cada decisão, cada
           relacionamento, cada padrão de autossabotagem.
         </p>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 sm:gap-6">
           {painCards.map((card) => (
             <div
               key={card.title}
-              className="p-8 border border-border rounded-2xl bg-bg-card transition-all duration-400 hover:border-border-glow hover:bg-bg-card-hover hover:-translate-y-1"
+              className="p-6 sm:p-8 border border-border rounded-2xl bg-bg-card transition-all duration-400 hover:border-border-glow hover:bg-bg-card-hover hover:-translate-y-1"
             >
               <span className="text-[28px] mb-4 block">{card.icon}</span>
               <h3 className="font-serif text-xl font-semibold mb-2.5">{card.title}</h3>
