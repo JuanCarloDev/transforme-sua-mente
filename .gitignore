@@ -39,6 +39,11 @@ yarn-error.log*
 # aios
 .aios-core/node_modules
 
+# database
+data/*.db
+data/*.db-wal
+data/*.db-shm
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

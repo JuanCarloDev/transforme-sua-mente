@@ -22,11 +22,32 @@ const analises = [
   },
 ];
 
+function EyeIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+function EyeOffIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+      <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+      <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+      <line x1="1" y1="1" x2="23" y2="23" />
+    </svg>
+  );
+}
+
 export default function AdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
   const [checking, setChecking] = useState(true);
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [loginLoading, setLoginLoading] = useState(false);
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -89,67 +110,130 @@ export default function AdminPage() {
   if (checking) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#060504]">
-        <div className="text-[#7a7067] text-sm">Verificando sessão...</div>
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-2 border-[#2a2520] border-t-[#c8a44e] rounded-full animate-spin" />
+          <div className="text-[#7a7067] text-sm">Verificando sessão...</div>
+        </div>
       </div>
     );
   }
 
   if (!authenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#060504] px-5">
-        <div className="w-full max-w-[400px]">
-          <div className="text-center mb-8">
-            <h1 className="font-serif text-3xl font-semibold text-[#f5f0e8] mb-2">
-              Área Restrita
+      <div
+        className="min-h-screen flex items-center justify-center px-5"
+        style={{
+          background: `
+            radial-gradient(ellipse 60% 50% at 50% 30%, rgba(200, 164, 78, 0.04) 0%, transparent 60%),
+            #060504
+          `,
+        }}
+      >
+        <div className="w-full max-w-[420px]">
+          {/* Logo / Branding */}
+          <div className="text-center mb-10">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[rgba(200,164,78,0.15)] to-[rgba(200,164,78,0.05)] border border-[rgba(200,164,78,0.2)] flex items-center justify-center mx-auto mb-5">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c8a44e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+            </div>
+            <h1 className="font-serif text-[32px] font-semibold text-[#f5f0e8] mb-1.5 tracking-tight">
+              Painel Admin
             </h1>
-            <p className="text-sm text-[#7a7067]">
-              Painel administrativo — Transforme Sua Mente
+            <p className="text-[13px] text-[#7a7067]">
+              Transforme Sua Mente — Acesso restrito
             </p>
           </div>
 
           <form
             onSubmit={handleLogin}
-            className="bg-[#151210] border border-[#2a2520] rounded-2xl p-8"
+            className="bg-[#151210] border border-[#2a2520] rounded-2xl p-8 sm:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
           >
-            <div className="mb-4">
-              <label className="block text-xs font-semibold tracking-wide uppercase text-[#7a7067] mb-1.5">
+            <div className="mb-5">
+              <label className="block text-[11px] font-semibold tracking-[2px] uppercase text-[#7a7067] mb-2">
                 Usuário
               </label>
-              <input
-                type="text"
-                value={user}
-                onChange={(e) => setUser(e.target.value)}
-                placeholder="Seu usuário"
-                className="w-full py-3 px-4 bg-[#060504] border border-[#2a2520] rounded-[10px] text-[#f5f0e8] text-[15px] outline-none transition-all duration-300 focus:border-[#8a6f2e] focus:shadow-[0_0_0_3px_rgba(200,164,78,0.1)] placeholder:text-[#7a7067]"
-                required
-              />
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#7a7067]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  value={user}
+                  onChange={(e) => setUser(e.target.value)}
+                  placeholder="Seu usuário"
+                  className="w-full py-3.5 pl-11 pr-4 bg-[#0a0908] border border-[#2a2520] rounded-xl text-[#f5f0e8] text-[15px] outline-none transition-all duration-300 focus:border-[#8a6f2e] focus:shadow-[0_0_0_3px_rgba(200,164,78,0.08)] placeholder:text-[#544e47]"
+                  required
+                  autoComplete="username"
+                />
+              </div>
             </div>
-            <div className="mb-6">
-              <label className="block text-xs font-semibold tracking-wide uppercase text-[#7a7067] mb-1.5">
+
+            <div className="mb-7">
+              <label className="block text-[11px] font-semibold tracking-[2px] uppercase text-[#7a7067] mb-2">
                 Senha
               </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Sua senha"
-                className="w-full py-3 px-4 bg-[#060504] border border-[#2a2520] rounded-[10px] text-[#f5f0e8] text-[15px] outline-none transition-all duration-300 focus:border-[#8a6f2e] focus:shadow-[0_0_0_3px_rgba(200,164,78,0.1)] placeholder:text-[#7a7067]"
-                required
-              />
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#7a7067]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                </span>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Sua senha"
+                  className="w-full py-3.5 pl-11 pr-12 bg-[#0a0908] border border-[#2a2520] rounded-xl text-[#f5f0e8] text-[15px] outline-none transition-all duration-300 focus:border-[#8a6f2e] focus:shadow-[0_0_0_3px_rgba(200,164,78,0.08)] placeholder:text-[#544e47]"
+                  required
+                  autoComplete="current-password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-[#7a7067] hover:text-[#b8ad9e] transition-colors bg-transparent border-none cursor-pointer"
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOffIcon /> : <EyeIcon />}
+                </button>
+              </div>
             </div>
 
             {loginError && (
-              <p className="text-xs text-[#b35a5a] mb-3">{loginError}</p>
+              <div className="flex items-center gap-2 px-4 py-3 mb-5 rounded-xl bg-[rgba(179,90,90,0.08)] border border-[rgba(179,90,90,0.2)]">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b35a5a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="15" y1="9" x2="9" y2="15" />
+                  <line x1="9" y1="9" x2="15" y2="15" />
+                </svg>
+                <p className="text-xs text-[#b35a5a]">{loginError}</p>
+              </div>
             )}
 
             <button
               type="submit"
               disabled={loginLoading}
-              className="w-full py-3.5 bg-gradient-to-br from-[#8a6f2e] to-[#c8a44e] text-[#0a0908] font-semibold text-[15px] rounded-full border-none cursor-pointer transition-all duration-300 hover:shadow-[0_8px_30px_rgba(200,164,78,0.3)] disabled:opacity-60"
+              className="w-full py-4 bg-gradient-to-br from-[#8a6f2e] to-[#c8a44e] text-[#0a0908] font-semibold text-[15px] tracking-wide rounded-xl border-none cursor-pointer transition-all duration-300 hover:shadow-[0_8px_30px_rgba(200,164,78,0.25)] hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:shadow-none"
             >
-              {loginLoading ? "Entrando..." : "Entrar"}
+              {loginLoading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="w-4 h-4 border-2 border-[#0a0908]/30 border-t-[#0a0908] rounded-full animate-spin" />
+                  Entrando...
+                </span>
+              ) : (
+                "Entrar"
+              )}
             </button>
           </form>
+
+          <p className="text-center text-[11px] text-[#544e47] mt-6">
+            Acesso exclusivo para administradores
+          </p>
         </div>
       </div>
     );

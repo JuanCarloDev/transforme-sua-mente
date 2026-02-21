@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramMessage } from "@/lib/telegram";
+import { insertLead, findLeadByEmail, getAllLeads, countLeads } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   try {
@@ -26,15 +27,33 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const existing = await findLeadByEmail(email.trim().toLowerCase());
+    if (existing) {
+      return NextResponse.json({
+        success: true,
+        message: "Você já está na fila de espera!",
+      });
+    }
+
+    await insertLead(
+      name.trim(),
+      email.trim().toLowerCase(),
+      phoneClean,
+      source || "landing-page"
+    );
+
+    const total = await countLeads();
+
     const telegramMsg =
-      `<b>📖 Novo lead - Transforme Sua Mente</b>\n\n` +
+      `<b>🔔 Nova inscrição - Fila de Espera</b>\n` +
+      `<b>📖 Transforme Sua Mente</b>\n\n` +
       `👤 <b>Nome:</b> ${name.trim()}\n` +
       `📧 <b>Email:</b> ${email.trim().toLowerCase()}\n` +
       `📱 <b>Telefone:</b> ${phoneClean}\n` +
-      `🏷 <b>Fonte:</b> ${source || "landing-page"}\n` +
+      `📊 <b>Total na fila:</b> ${total}\n` +
       `⏰ <b>Horário:</b> ${new Date().toLocaleString("pt-BR")}`;
 
-    await sendTelegramMessage(telegramMsg);
+    sendTelegramMessage(telegramMsg).catch(() => {});
 
     return NextResponse.json({
       success: true,
@@ -43,4 +62,19 @@ export async function POST(req: NextRequest) {
   } catch {
     return NextResponse.json({ error: "Erro interno" }, { status: 500 });
   }
+}
+
+export async function GET() {
+  const leads = await getAllLeads();
+  const total = await countLeads();
+
+  return NextResponse.json({
+    total,
+    leads: leads.map((l) => ({
+      name: l.name,
+      email: l.email,
+      phone: l.phone,
+      createdAt: l.created_at,
+    })),
+  });
 }
