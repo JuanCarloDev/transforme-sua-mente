@@ -63,8 +63,7 @@ export async function POST(req: NextRequest) {
     if (duplicate) {
       return NextResponse.json({
         success: true,
-        message: "Você já baixou o e-book! Enviando novamente.",
-        downloadUrl: "/ebook.pdf",
+        message: "Você já está na fila de espera!",
       });
     }
 
@@ -79,7 +78,7 @@ export async function POST(req: NextRequest) {
     saveLeads(leads);
 
     const telegramMsg =
-      `<b>📥 Novo Download - Transforme Sua Mente</b>\n\n` +
+      `<b>📥 Novo Lead - Transforme Sua Mente</b>\n\n` +
       `👤 <b>Nome:</b> ${name.trim()}\n` +
       `📧 <b>Email:</b> ${email.trim().toLowerCase()}\n` +
       `📱 <b>Telefone:</b> ${phoneClean}\n` +
@@ -90,8 +89,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: "E-book liberado! Seu download vai começar.",
-      downloadUrl: "/ebook.pdf",
+      message: "Você está na fila de espera!",
     });
   } catch {
     return NextResponse.json({ error: "Erro interno" }, { status: 500 });

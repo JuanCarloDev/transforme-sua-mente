@@ -17,7 +17,7 @@ export default function FinalCTA({ onOpenModal }: { onOpenModal: () => void }) {
         <div className="flex items-center justify-center gap-3 mb-6">
           <span className="w-8 h-px bg-gold-dim/40" />
           <span className="text-[10px] tracking-[5px] uppercase text-gold-dim font-medium">
-            E-book gratuito
+            Seja o primeiro
           </span>
           <span className="w-8 h-px bg-gold-dim/40" />
         </div>
@@ -36,13 +36,13 @@ export default function FinalCTA({ onOpenModal }: { onOpenModal: () => void }) {
           onClick={onOpenModal}
           className="cta-btn relative overflow-hidden inline-flex items-center gap-3 px-12 sm:px-14 py-[20px] sm:py-[22px] bg-gradient-to-br from-gold-dim to-gold text-[#0a0908] font-semibold text-[15px] sm:text-base tracking-wide border-none rounded-full cursor-pointer transition-all duration-400"
         >
-          <span className="relative z-1">Baixar E-book Grátis</span>
+          <span className="relative z-1">Entrar na Fila de Espera</span>
           <svg className="relative z-1 w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 5v14M5 12l7 7 7-7" />
+            <path d="M5 12l7-7 7 7M12 5v14" />
           </svg>
         </button>
         <span className="block mt-4 text-[11px] text-text-muted tracking-wide">
-          Sem custo &middot; Sem spam &middot; Direto no seu e-mail
+          Gratuito &middot; Sem spam &middot; Você será notificado
         </span>
       </div>
     </section>

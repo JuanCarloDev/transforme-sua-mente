@@ -82,16 +82,7 @@ export default function LeadModal({ open, onClose }: LeadModalProps) {
 
       setSuccess(true);
 
-      if (data.downloadUrl) {
-        const a = document.createElement("a");
-        a.href = data.downloadUrl;
-        a.download = "Transforme-Sua-Mente-Ricardo-Batista-Cavassin.pdf";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }
-
-      setTimeout(handleClose, 3000);
+      setTimeout(handleClose, 4000);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erro ao enviar");
       setLoading(false);
@@ -119,9 +110,9 @@ export default function LeadModal({ open, onClose }: LeadModalProps) {
             <div className="w-14 h-14 rounded-[14px] bg-gradient-to-br from-[rgba(200,164,78,0.15)] to-[rgba(200,164,78,0.05)] border border-[rgba(200,164,78,0.2)] flex items-center justify-center text-2xl mb-6">
               📖
             </div>
-            <h2 className="font-serif text-[28px] font-semibold mb-2">Baixar E-book</h2>
+            <h2 className="font-serif text-[28px] font-semibold mb-2">Entrar na Fila de Espera</h2>
             <p className="text-sm text-text-muted mb-7">
-              Preencha seus dados para receber o PDF gratuito.
+              Seja o primeiro a receber quando o livro for lançado.
             </p>
 
             <form onSubmit={handleSubmit}>
@@ -173,9 +164,9 @@ export default function LeadModal({ open, onClose }: LeadModalProps) {
                 disabled={loading}
                 className="cta-btn relative overflow-hidden w-full mt-2 inline-flex items-center justify-center gap-3 px-10 py-[18px] bg-gradient-to-br from-gold-dim to-gold text-[#0a0908] font-semibold text-[15px] tracking-wide border-none rounded-full cursor-pointer transition-all duration-400 disabled:opacity-60"
               >
-                <span className="relative z-1">{loading ? "Enviando..." : "Baixar Agora"}</span>
+                <span className="relative z-1">{loading ? "Enviando..." : "Garantir Minha Vaga"}</span>
                 <svg className="relative z-1 w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 5v14M5 12l7 7 7-7" />
+                  <path d="M5 12l7-7 7 7M12 5v14" />
                 </svg>
               </button>
             </form>
@@ -185,11 +176,11 @@ export default function LeadModal({ open, onClose }: LeadModalProps) {
             <div className="w-[72px] h-[72px] rounded-full bg-gradient-to-br from-[rgba(106,138,106,0.2)] to-[rgba(106,138,106,0.05)] border border-[rgba(106,138,106,0.3)] flex items-center justify-center text-[32px] mx-auto mb-5">
               ✓
             </div>
-            <h3 className="font-serif text-2xl mb-2">E-book liberado!</h3>
+            <h3 className="font-serif text-2xl mb-2">Você está na fila!</h3>
             <p className="text-sm text-text-muted leading-[1.7]">
-              Seu download começou automaticamente.
+              Você será notificado assim que o livro estiver pronto.
               <br />
-              Verifique sua pasta de downloads.
+              Fique atento!
             </p>
           </div>
         )}

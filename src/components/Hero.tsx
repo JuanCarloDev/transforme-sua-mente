@@ -28,7 +28,7 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-dim/30 bg-gold-dim/5 mb-6 sm:mb-8 animate-fade-up delay-300">
             <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
             <span className="text-[11px] tracking-[3px] uppercase text-gold font-medium">
-              E-book Gratuito
+              Em Breve
             </span>
           </div>
 
@@ -56,13 +56,13 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
               onClick={onOpenModal}
               className="cta-btn relative overflow-hidden inline-flex items-center gap-3 px-10 py-[18px] bg-gradient-to-br from-gold-dim to-gold text-[#0a0908] font-semibold text-[15px] tracking-wide border-none rounded-full cursor-pointer transition-all duration-400"
             >
-              <span className="relative z-1">Baixar E-book Grátis</span>
+              <span className="relative z-1">Garantir Meu Exemplar</span>
               <svg className="relative z-1 w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 5v14M5 12l7 7 7-7" />
+                <path d="M5 12l7-7 7 7M12 5v14" />
               </svg>
             </button>
             <span className="block mt-3 text-[11px] text-text-muted tracking-wide">
-              PDF gratuito &middot; sem spam &middot; sem pegadinha
+              Seja o primeiro a receber &middot; sem spam
             </span>
           </div>
         </div>

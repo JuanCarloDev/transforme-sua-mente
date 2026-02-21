@@ -23,9 +23,9 @@ export default function FloatingNav({ onOpenModal }: { onOpenModal: () => void }
           onClick={onOpenModal}
           className="cta-btn relative overflow-hidden inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-br from-gold-dim to-gold text-[#0a0908] font-semibold text-[13px] tracking-wide border-none rounded-full cursor-pointer transition-all duration-400"
         >
-          <span className="relative z-1">Baixar E-book</span>
+          <span className="relative z-1">Entrar na Fila</span>
           <svg className="relative z-1 w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 5v14M5 12l7 7 7-7" />
+            <path d="M5 12l7-7 7 7M12 5v14" />
           </svg>
         </button>
       </div>
