@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transforme Sua Mente — Palestra Completa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ["Playfair Display", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+            colors: {
+              accent: {
+                DEFAULT: "#B45309",
+                light: "rgba(180, 83, 9, 0.1)",
+                dark: "rgba(180, 83, 9, 0.15)",
+              },
+              teal: { DEFAULT: "#0D9488" },
+              warm: { DEFAULT: "#92400E" },
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-out",
+              "slide-up": "slideUp 0.5s ease-out",
+              "slide-in-left": "slideInLeft 0.5s ease-out",
+              "slide-in-right": "slideInRight 0.5s ease-out",
+              "scale-in": "scaleIn 0.4s ease-out",
+              "pulse-slow": "pulse 3s infinite",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              fadeIn: { "0%": { opacity: "0" }, "100%": { opacity: "1" } },
+              slideUp: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+              slideInLeft: {
+                "0%": { opacity: "0", transform: "translateX(-30px)" },
+                "100%": { opacity: "1", transform: "translateX(0)" },
+              },
+              slideInRight: {
+                "0%": { opacity: "0", transform: "translateX(30px)" },
+                "100%": { opacity: "1", transform: "translateX(0)" },
+              },
+              scaleIn: {
+                "0%": { opacity: "0", transform: "scale(0.9)" },
+                "100%": { opacity: "1", transform: "scale(1)" },
+              },
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .slide { display: none; min-height: 100vh; }
+      .slide.active { display: flex; }
+      .stagger > * { opacity: 0; animation: slideUp 0.5s ease-out forwards; }
+      .stagger > *:nth-child(1) { animation-delay: 0.1s; }
+      .stagger > *:nth-child(2) { animation-delay: 0.2s; }
+      .stagger > *:nth-child(3) { animation-delay: 0.3s; }
+      .stagger > *:nth-child(4) { animation-delay: 0.4s; }
+      .stagger > *:nth-child(5) { animation-delay: 0.5s; }
+      .stagger > *:nth-child(6) { animation-delay: 0.6s; }
+      .stagger > *:nth-child(7) { animation-delay: 0.7s; }
+      .stagger > *:nth-child(8) { animation-delay: 0.8s; }
+      .accent-text { color: #B45309; }
+      .draw-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; }
+      .draw-canvas.drawing { pointer-events: auto; cursor: crosshair; }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      .gradient-text {
+        background: linear-gradient(135deg, #B45309, #0D9488);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .gradient-text-gold {
+        background: linear-gradient(135deg, #D97706, #F59E0B);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .chapter-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .img-frame {
+        width: 160px;
+        height: 220px;
+        flex-shrink: 0;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      }
+      @media (min-width: 768px) {
+        .img-frame { width: 180px; height: 250px; }
+      }
+    </style>
+  </head>
+
+  <body class="font-sans bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 overflow-hidden antialiased">
+    <!-- Progress Bar -->
+    <div class="fixed top-0 left-0 h-1 bg-accent z-50 transition-all duration-300" id="progressBar"></div>
+
+    <!-- Slide Counter -->
+    <div class="fixed bottom-6 left-6 text-sm font-medium text-zinc-400 z-50 font-mono" id="slideCounter">1 / 24</div>
+
+    <!-- Theme Toggle -->
+    <button onclick="toggleTheme()" class="fixed top-6 left-6 z-50 p-2 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-accent transition-colors">
+      <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+      <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <nav class="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-2">
+      <div class="sidebar-item text-[10px] font-medium uppercase tracking-widest text-zinc-400 pl-3 border-l-2 border-transparent cursor-pointer hover:text-accent transition-colors" data-section="0">Capa</div>
+      <div class="sidebar-item text-[10px] font-medium uppercase tracking-widest text-zinc-400 pl-3 border-l-2 border-transparent cursor-pointer hover:text-accent transition-colors" data-section="1">Fundamentos</div>
+      <div class="sidebar-item text-[10px] font-medium uppercase tracking-widest text-zinc-400 pl-3 border-l-2 border-transparent cursor-pointer hover:text-accent transition-colors" data-section="2">Distorções</div>
+      <div class="sidebar-item text-[10px] font-medium uppercase tracking-widest text-zinc-400 pl-3 border-l-2 border-transparent cursor-pointer hover:text-accent transition-colors" data-section="3">Integração</div>
+      <div class="sidebar-item text-[10px] font-medium uppercase tracking-widest text-zinc-400 pl-3 border-l-2 border-transparent cursor-pointer hover:text-accent transition-colors" data-section="4">Manifestações</div>
+      <div class="sidebar-item text-[10px] font-medium uppercase tracking-widest text-zinc-400 pl-3 border-l-2 border-transparent cursor-pointer hover:text-accent transition-colors" data-section="5">Restauração</div>
+      <div class="sidebar-item text-[10px] font-medium uppercase tracking-widest text-zinc-400 pl-3 border-l-2 border-transparent cursor-pointer hover:text-accent transition-colors" data-section="6">Encerramento</div>
+    </nav>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 0: CAPA -->
+    <!-- ================================================== -->
+    <div class="slide active flex-col justify-center items-center px-8 relative" data-section="0">
+      <canvas class="draw-canvas" id="canvas-0"></canvas>
+      <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-amber-500/10 via-orange-500/5 to-transparent rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-teal-500/10 to-transparent rounded-full blur-3xl"></div>
+      <div class="stagger text-center relative z-10">
+        <p class="text-sm font-medium uppercase tracking-widest text-accent mb-6">Ciência, Fé e a Superação dos Traumas</p>
+        <h1 class="font-serif text-7xl md:text-8xl font-extrabold tracking-tight mb-4">
+          Transforme<br/><span class="gradient-text-gold">Sua Mente</span>
+        </h1>
+        <p class="text-2xl text-zinc-500 dark:text-zinc-400 mb-8">Uma jornada de <span class="text-accent font-semibold">cura</span> e <span class="text-teal font-semibold">restauração</span></p>
+        <div class="flex justify-center gap-4 flex-wrap">
+          <div class="px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium">12 Capítulos</div>
+          <div class="px-4 py-2 rounded-full bg-teal-500/10 text-teal-600 dark:text-teal-400 text-sm font-medium">Psicologia + Teologia</div>
+          <div class="px-4 py-2 rounded-full bg-violet-500/10 text-violet-600 dark:text-violet-400 text-sm font-medium">Romanos 12:2</div>
+        </div>
+        <p class="text-lg text-zinc-400 mt-8 font-serif italic">Ricardo</p>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 1: VISÃO GERAL -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="0">
+      <canvas class="draw-canvas" id="canvas-1"></canvas>
+      <div class="text-center max-w-5xl w-full">
+        <p class="text-sm font-medium uppercase tracking-widest text-accent mb-4 animate-fade-in">Sobre Este Livro</p>
+        <h2 class="font-serif text-4xl font-bold tracking-tight mb-10 animate-slide-up">O que vamos explorar</h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 stagger">
+          <div class="p-5 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 text-center">
+            <div class="text-3xl mb-2">I</div>
+            <div class="font-semibold text-sm mb-1">Fundamentos</div>
+            <div class="text-xs text-zinc-500">Caps 1–3</div>
+            <div class="text-xs text-zinc-400 mt-1">Infância, apego e identidade</div>
+          </div>
+          <div class="p-5 rounded-xl bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 text-center">
+            <div class="text-3xl mb-2">II</div>
+            <div class="font-semibold text-sm mb-1">Distorções</div>
+            <div class="text-xs text-zinc-500">Caps 4–6</div>
+            <div class="text-xs text-zinc-400 mt-1">Crenças, modelagem e trauma</div>
+          </div>
+          <div class="p-5 rounded-xl bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 text-center">
+            <div class="text-3xl mb-2">III</div>
+            <div class="font-semibold text-sm mb-1">Integração</div>
+            <div class="text-xs text-zinc-500">Caps 7–9</div>
+            <div class="text-xs text-zinc-400 mt-1">Carne, dor e gerações</div>
+          </div>
+          <div class="p-5 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-center">
+            <div class="text-3xl mb-2">IV</div>
+            <div class="font-semibold text-sm mb-1">Manifestações</div>
+            <div class="text-xs text-zinc-500">Cap 10</div>
+            <div class="text-xs text-zinc-400 mt-1">Feridas e comportamentos</div>
+          </div>
+          <div class="p-5 rounded-xl bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800 text-center">
+            <div class="text-3xl mb-2">V</div>
+            <div class="font-semibold text-sm mb-1">Restauração</div>
+            <div class="text-xs text-zinc-500">Caps 11–12</div>
+            <div class="text-xs text-zinc-400 mt-1">Reconexão e esperança</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 2: SEÇÃO I — FUNDAMENTOS (Transição) -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="1">
+      <canvas class="draw-canvas" id="canvas-2"></canvas>
+      <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent"></div>
+      <div class="stagger text-center relative z-10">
+        <p class="text-sm font-medium uppercase tracking-widest text-accent mb-6">Seção I · Capítulos 1–3</p>
+        <h2 class="font-serif text-6xl md:text-7xl font-extrabold tracking-tight">Fundamentos</h2>
+        <p class="text-xl text-zinc-500 mt-6">Infância, Apego e a Construção da Identidade</p>
+        <p class="text-lg text-zinc-400 mt-4 font-serif italic max-w-2xl mx-auto">"A criança é como cimento fresco — tudo que cai sobre ela deixa marcas."</p>
+        <p class="text-sm text-zinc-400 mt-2">— Haim Ginott</p>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 3: CAP 1 — O Convite à Transformação -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="1">
+      <canvas class="draw-canvas" id="canvas-3"></canvas>
+      <div class="max-w-5xl w-full flex gap-10 items-center">
+        <div class="stagger flex-1">
+          <p class="text-xs uppercase tracking-widest text-accent mb-2 font-medium">Capítulo 1</p>
+          <h2 class="font-serif text-4xl font-bold tracking-tight mb-6">O Convite à<br/><span class="text-accent">Transformação</span></h2>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-accent text-sm font-bold">1</span>
+              </div>
+              <div>
+                <div class="font-semibold text-sm">A infância molda a psique</div>
+                <div class="text-sm text-zinc-500">O ego se forma na vulnerabilidade das primeiras experiências emocionais</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-accent text-sm font-bold">2</span>
+              </div>
+              <div>
+                <div class="font-semibold text-sm">Trauma como ruptura relacional</div>
+                <div class="text-sm text-zinc-500">A instalação do trauma ocorre através de falhas nas relações primárias</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-accent text-sm font-bold">3</span>
+              </div>
+              <div>
+                <div class="font-semibold text-sm">A resistência à mudança</div>
+                <div class="text-sm text-zinc-500">O cérebro prefere o sofrimento conhecido ao paraíso desconhecido</div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 p-3 rounded-xl bg-accent/5 border border-accent/20">
+            <p class="text-sm font-serif italic text-zinc-600 dark:text-zinc-400">"Não se amoldem ao padrão deste mundo, mas transformem-se pela renovação da sua mente."</p>
+            <p class="text-xs text-accent mt-1 font-medium">Romanos 12:2</p>
+          </div>
+        </div>
+        <div class="hidden md:block">
+          <div class="img-frame border border-zinc-200 dark:border-zinc-800">
+            <img src="/palestra/img/cap-01-introducao-a-infancia-e-a-formacao-da-psique.png" alt="Capítulo 1" class="chapter-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 4: CAP 2 — A Criança Interior -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="1">
+      <canvas class="draw-canvas" id="canvas-4"></canvas>
+      <div class="max-w-5xl w-full flex gap-10 items-center">
+        <div class="hidden md:block">
+          <div class="img-frame border border-zinc-200 dark:border-zinc-800">
+            <img src="/palestra/img/cap-03-crianca-interior.png" alt="Criança Interior" class="chapter-img" />
+          </div>
+        </div>
+        <div class="stagger flex-1">
+          <p class="text-xs uppercase tracking-widest text-teal-600 dark:text-teal-400 mb-2 font-medium">Capítulo 2</p>
+          <h2 class="font-serif text-4xl font-bold tracking-tight mb-6">A Criança Interior e as <span class="text-teal-600 dark:text-teal-400">Primeiras Feridas</span></h2>
+          <div class="space-y-3">
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Teoria do Apego (Bowlby)</div>
+              <div class="text-sm text-zinc-500">Vínculos seguros na infância são a base da saúde emocional adulta</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Ambiente Suficientemente Bom (Winnicott)</div>
+              <div class="text-sm text-zinc-500">Não é necessário perfeição — mas presença e consistência emocional</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Falso Self</div>
+              <div class="text-sm text-zinc-500">Quando o ambiente falha, a criança cria uma máscara para sobreviver</div>
+            </div>
+            <div class="p-4 rounded-xl bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800">
+              <div class="text-xs text-teal-600 dark:text-teal-400 font-medium mb-1">Exemplo Bíblico</div>
+              <div class="text-sm text-zinc-600 dark:text-zinc-400"><strong>José:</strong> suporte afetivo = resiliência &nbsp;|&nbsp; <strong>Jefté:</strong> rejeição = perpetuação do trauma</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 5: CAP 3 — Construção da Identidade -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="1">
+      <canvas class="draw-canvas" id="canvas-5"></canvas>
+      <div class="max-w-5xl w-full flex gap-10 items-center">
+        <div class="stagger flex-1">
+          <p class="text-xs uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-2 font-medium">Capítulo 3</p>
+          <h2 class="font-serif text-4xl font-bold tracking-tight mb-6">A Construção da <span class="text-violet-600 dark:text-violet-400">Identidade</span></h2>
+          <div class="space-y-3">
+            <div class="p-4 rounded-xl bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800">
+              <div class="font-semibold text-sm mb-1 text-violet-700 dark:text-violet-300">Imago Dei — Gênesis 1:26</div>
+              <div class="text-sm text-zinc-600 dark:text-zinc-400">A identidade humana está enraizada na imagem de Deus</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">O Impacto da Queda (Gênesis 3)</div>
+              <div class="text-sm text-zinc-500">A desobediência fragmentou a identidade original do ser humano</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">A Figura Paterna</div>
+              <div class="text-sm text-zinc-500">O pai é a primeira referência de afirmação da identidade e segurança</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Congruência (Carl Rogers)</div>
+              <div class="text-sm text-zinc-500">Alinhamento entre o eu real e o eu ideal — a identidade como evolução contínua</div>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:block">
+          <div class="img-frame border border-zinc-200 dark:border-zinc-800">
+            <img src="/palestra/img/cap-07-quem-e-voce-identidade-e-criacao.png" alt="Identidade" class="chapter-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 6: FUNDAMENTOS — Conceitos-Chave -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="1">
+      <canvas class="draw-canvas" id="canvas-6"></canvas>
+      <div class="text-center max-w-5xl w-full">
+        <p class="text-sm font-medium uppercase tracking-widest text-accent mb-4 animate-fade-in">Conceitos Fundamentais</p>
+        <h2 class="font-serif text-4xl font-bold tracking-tight mb-10 animate-slide-up">O que forma quem somos</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 stagger">
+          <div class="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
+            <div class="text-4xl mb-3">🧱</div>
+            <div class="font-bold mb-2">Cimento Fresco</div>
+            <div class="text-sm text-zinc-500">A criança absorve tudo — cada palavra e gesto deixa marcas permanentes</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
+            <div class="text-4xl mb-3">🔗</div>
+            <div class="font-bold mb-2">Apego Seguro</div>
+            <div class="text-sm text-zinc-500">Bowlby e Ainsworth: o vínculo com os cuidadores define padrões de vida</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
+            <div class="text-4xl mb-3">🎭</div>
+            <div class="font-bold mb-2">Falso Self</div>
+            <div class="text-sm text-zinc-500">Winnicott: a máscara criada para sobreviver à negligência emocional</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
+            <div class="text-4xl mb-3">👤</div>
+            <div class="font-bold mb-2">Imago Dei</div>
+            <div class="text-sm text-zinc-500">Gênesis 1:26 — a identidade enraizada na imagem do Criador</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
+            <div class="text-4xl mb-3">👨‍👧</div>
+            <div class="font-bold mb-2">Figura Paterna</div>
+            <div class="text-sm text-zinc-500">Mateus 3:16-17 — a afirmação do Pai como modelo de identidade</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-accent/10 border-2 border-accent text-center">
+            <div class="text-4xl mb-3">🧠</div>
+            <div class="font-bold mb-2 text-accent">Renovação da Mente</div>
+            <div class="text-sm text-zinc-500">Romanos 12:2 — a coluna vertebral de toda a obra</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 7: SEÇÃO II — DISTORÇÕES (Transição) -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="2">
+      <canvas class="draw-canvas" id="canvas-7"></canvas>
+      <div class="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent"></div>
+      <div class="stagger text-center relative z-10">
+        <p class="text-sm font-medium uppercase tracking-widest text-rose-600 dark:text-rose-400 mb-6">Seção II · Capítulos 4–6</p>
+        <h2 class="font-serif text-6xl md:text-7xl font-extrabold tracking-tight">Distorções<br/><span class="text-rose-600 dark:text-rose-400">Psicológicas</span></h2>
+        <p class="text-xl text-zinc-500 mt-6">Crenças, Condicionamento e a Natureza do Trauma</p>
+        <p class="text-lg text-zinc-400 mt-4 font-serif italic max-w-2xl mx-auto">"Trauma não é o que aconteceu com você. É o que aconteceu dentro de você como resultado."</p>
+        <p class="text-sm text-zinc-400 mt-2">— Gabor Maté</p>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 8: CAP 4 — 10 Crenças Limitantes -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="2">
+      <canvas class="draw-canvas" id="canvas-8"></canvas>
+      <div class="text-center max-w-5xl w-full">
+        <p class="text-xs uppercase tracking-widest text-rose-600 dark:text-rose-400 mb-2 font-medium">Capítulo 4 · Crenças Limitantes e Falsos Profetas</p>
+        <h2 class="font-serif text-3xl font-bold tracking-tight mb-8 animate-slide-up">As <span class="text-rose-600 dark:text-rose-400">10 mentiras</span> que o trauma instala</h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 stagger">
+          <div class="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="text-xs text-rose-500 font-bold mb-1">01</div>
+            <div class="text-xs font-semibold">"Não sou bom o suficiente"</div>
+            <div class="text-[10px] text-zinc-400 mt-1">Crítica contínua</div>
+          </div>
+          <div class="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="text-xs text-rose-500 font-bold mb-1">02</div>
+            <div class="text-xs font-semibold">"Não mereço ser amado"</div>
+            <div class="text-[10px] text-zinc-400 mt-1">Abandono / Rejeição</div>
+          </div>
+          <div class="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="text-xs text-rose-500 font-bold mb-1">03</div>
+            <div class="text-xs font-semibold">"Preciso ser perfeito"</div>
+            <div class="text-[10px] text-zinc-400 mt-1">Amor condicional</div>
+          </div>
+          <div class="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="text-xs text-rose-500 font-bold mb-1">04</div>
+            <div class="text-xs font-semibold">"O mundo é perigoso"</div>
+            <div class="text-[10px] text-zinc-400 mt-1">Ambiente instável</div>
+          </div>
+          <div class="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="text-xs text-rose-500 font-bold mb-1">05</div>
+            <div class="text-xs font-semibold">"Sou responsável pelos outros"</div>
+            <div class="text-[10px] text-zinc-400 mt-1">Parentificação</div>
+          </div>
+          <div class="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="text-xs text-rose-500 font-bold mb-1">06</div>
+            <div class="text-xs font-semibold">"Não sou inteligente"</div>
+            <div class="text-[10px] text-zinc-400 mt-1">Comparações escolares</div>
+          </div>
+          <div class="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="text-xs text-rose-500 font-bold mb-1">07</div>
+            <div class="text-xs font-semibold">"Não posso confiar"</div>
+            <div class="text-[10px] text-zinc-400 mt-1">Traição / Quebra</div>
+          </div>
+          <div class="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="text-xs text-rose-500 font-bold mb-1">08</div>
+            <div class="text-xs font-semibold">"Sempre vou fracassar"</div>
+            <div class="text-[10px] text-zinc-400 mt-1">Falhas repetidas</div>
+          </div>
+          <div class="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="text-xs text-rose-500 font-bold mb-1">09</div>
+            <div class="text-xs font-semibold">"Não posso sentir"</div>
+            <div class="text-[10px] text-zinc-400 mt-1">Invalidação emocional</div>
+          </div>
+          <div class="p-3 rounded-xl bg-rose-50 dark:bg-rose-900/20 border-2 border-rose-300 dark:border-rose-800 text-left">
+            <div class="text-xs text-rose-500 font-bold mb-1">10</div>
+            <div class="text-xs font-semibold">"Não tenho controle"</div>
+            <div class="text-[10px] text-zinc-400 mt-1">Impotência aprendida</div>
+          </div>
+        </div>
+        <p class="text-sm text-zinc-400 mt-6 animate-fade-in" style="animation-delay:0.9s">O trauma cria "óculos invisíveis" — esquemas cognitivos que distorcem toda a percepção da realidade</p>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 9: CAP 5 — Aprendizagem Social -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="2">
+      <canvas class="draw-canvas" id="canvas-9"></canvas>
+      <div class="max-w-5xl w-full flex gap-10 items-center">
+        <div class="hidden md:block">
+          <div class="img-frame border border-zinc-200 dark:border-zinc-800">
+            <img src="/palestra/img/cap-06-modelagem-e-aprendizagem-social.png" alt="Aprendizagem Social" class="chapter-img" />
+          </div>
+        </div>
+        <div class="stagger flex-1">
+          <p class="text-xs uppercase tracking-widest text-orange-600 dark:text-orange-400 mb-2 font-medium">Capítulo 5</p>
+          <h2 class="font-serif text-4xl font-bold tracking-tight mb-6">Aprendizagem Social e <span class="text-orange-600 dark:text-orange-400">Modelagem</span></h2>
+          <div class="space-y-3">
+            <div class="p-4 rounded-xl bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800">
+              <div class="font-semibold text-sm mb-1">Experimento do Boneco Bobo (Bandura, 1961)</div>
+              <div class="text-sm text-zinc-500">Crianças imitam comportamento agressivo observado — aprendemos por observação</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Autoeficácia</div>
+              <div class="text-sm text-zinc-500">A crença na própria capacidade determina o quanto tentamos e persistimos</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Condicionamento Operante (Skinner)</div>
+              <div class="text-sm text-zinc-500">Trauma como resposta condicionada — repetimos padrões sem entender por quê</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Experimento dos 5 Macacos</div>
+              <div class="text-sm text-zinc-500">Transmissão cultural do trauma — perpetuamos dor sem conhecer a causa original</div>
+            </div>
+          </div>
+          <p class="text-xs text-zinc-400 mt-4 font-serif italic">"Ensine-as a seus filhos... andando pelo caminho" — Deuteronômio 6:6-7</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 10: CAP 6 — Trauma Emocional -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="2">
+      <canvas class="draw-canvas" id="canvas-10"></canvas>
+      <div class="text-center max-w-5xl w-full">
+        <p class="text-xs uppercase tracking-widest text-red-600 dark:text-red-400 mb-2 font-medium">Capítulo 6 · O Trauma Emocional</p>
+        <h2 class="font-serif text-3xl font-bold tracking-tight mb-8 animate-slide-up">Definições e <span class="text-red-600 dark:text-red-400">Teorias</span></h2>
+        <div class="grid md:grid-cols-2 gap-6 stagger">
+          <div class="p-5 rounded-2xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-left">
+            <div class="font-bold text-sm mb-2 text-red-700 dark:text-red-300">Trauma A vs. Trauma B</div>
+            <div class="text-sm text-zinc-600 dark:text-zinc-400"><strong>Tipo A:</strong> Violência explícita — abuso, agressão, eventos catastróficos</div>
+            <div class="text-sm text-zinc-600 dark:text-zinc-400 mt-1"><strong>Tipo B:</strong> Ausência de cuidado — negligência, frieza emocional, abandono silencioso</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="font-bold text-sm mb-2">Dissociação (Pierre Janet)</div>
+            <div class="text-sm text-zinc-500">A mente fragmenta para sobreviver — não é repressão, é separação da experiência</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="font-bold text-sm mb-2">O Corpo Guarda (Van der Kolk)</div>
+            <div class="text-sm text-zinc-500">"The Body Keeps the Score" — o trauma se inscreve no corpo, não apenas na mente</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="font-bold text-sm mb-2">Experiência Somática (Peter Levine)</div>
+            <div class="text-sm text-zinc-500">Liberação da ativação nervosa presa — o sistema nervoso precisa completar o ciclo</div>
+          </div>
+        </div>
+        <div class="mt-6 p-4 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 animate-fade-in" style="animation-delay:0.7s">
+          <p class="text-sm text-zinc-600 dark:text-zinc-400">4 Padrões de Apego: <span class="font-semibold text-teal-600">Seguro</span> · <span class="font-semibold text-amber-600">Ansioso-Ambivalente</span> · <span class="font-semibold text-red-600">Evitativo</span> · <span class="font-semibold text-rose-700">Desorganizado</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 11: SEÇÃO III — INTEGRAÇÃO (Transição) -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="3">
+      <canvas class="draw-canvas" id="canvas-11"></canvas>
+      <div class="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-transparent"></div>
+      <div class="stagger text-center relative z-10">
+        <p class="text-sm font-medium uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-6">Seção III · Capítulos 7–9</p>
+        <h2 class="font-serif text-6xl md:text-7xl font-extrabold tracking-tight">Integração<br/><span class="text-violet-600 dark:text-violet-400">Espiritual</span></h2>
+        <p class="text-xl text-zinc-500 mt-6">Carne, Dor e a Herança entre Gerações</p>
+        <p class="text-lg text-zinc-400 mt-4 font-serif italic max-w-2xl mx-auto">"A inclinação da carne é morte, mas a inclinação do Espírito é vida e paz."</p>
+        <p class="text-sm text-zinc-400 mt-2">— Romanos 8:6</p>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 12: CAP 7 — Carne e Espírito -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="3">
+      <canvas class="draw-canvas" id="canvas-12"></canvas>
+      <div class="max-w-5xl w-full flex gap-10 items-center">
+        <div class="stagger flex-1">
+          <p class="text-xs uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-2 font-medium">Capítulo 7</p>
+          <h2 class="font-serif text-4xl font-bold tracking-tight mb-6">Carne e Espírito — <span class="text-violet-600 dark:text-violet-400">Uma Leitura Psicanalítica</span></h2>
+          <div class="space-y-3">
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Carne (sarx) ≠ corpo físico</div>
+              <div class="text-sm text-zinc-500">Carne = funcionamento reativo impulsionado por feridas não curadas</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Obras da Carne (Gálatas 5:19-21)</div>
+              <div class="text-sm text-zinc-500">Sintomas de fragmentação emocional — imoralidade, ira, ciúmes, facções</div>
+            </div>
+            <div class="p-4 rounded-xl bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800">
+              <div class="font-semibold text-sm mb-1 text-violet-700 dark:text-violet-300">Fruto do Espírito (Gálatas 5:22-23)</div>
+              <div class="text-sm text-zinc-500">Indicador do eu integrado — amor, paz, paciência, domínio próprio</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Hamartía (ἁμαρτία) = "errar o alvo"</div>
+              <div class="text-sm text-zinc-500">O trauma desalinha do propósito — pecado como desconexão da identidade original</div>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:block">
+          <div class="img-frame border border-zinc-200 dark:border-zinc-800">
+            <img src="/palestra/img/cap-12-adao-eva-e-a-serpente-mecanismos-de-defesa.png" alt="Carne e Espírito" class="chapter-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 13: CAP 8 — A Dor como Mecanismo -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="3">
+      <canvas class="draw-canvas" id="canvas-13"></canvas>
+      <div class="text-center max-w-4xl w-full">
+        <p class="text-xs uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-2 font-medium">Capítulo 8</p>
+        <h2 class="font-serif text-4xl font-bold tracking-tight mb-8 animate-slide-up">A Dor como <span class="text-amber-600 dark:text-amber-400">Mecanismo e Motivação</span></h2>
+        <div class="stagger">
+          <div class="p-6 rounded-2xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 mb-6 text-left">
+            <div class="font-bold text-sm mb-2 text-amber-700 dark:text-amber-300">Caso: "João, o ovo e o óleo"</div>
+            <div class="text-sm text-zinc-600 dark:text-zinc-400">Menino de 8-10 anos pede óleo emprestado à vizinha para fritar um ovo. A mãe responde: <span class="font-semibold italic">"Nunca peça nada a ninguém."</span></div>
+            <div class="text-sm text-zinc-500 mt-2">Resultado: incapacidade vitalícia de pedir ajuda — um padrão instalado em uma única noite.</div>
+          </div>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="p-5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
+              <div class="text-2xl mb-2">🛡️</div>
+              <div class="font-bold text-sm mb-1">Dor como proteção</div>
+              <div class="text-xs text-zinc-500">Vigilância permanente que consome energia vital</div>
+            </div>
+            <div class="p-5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
+              <div class="text-2xl mb-2">🔒</div>
+              <div class="font-bold text-sm mb-1">Dor como sequestradora</div>
+              <div class="text-xs text-zinc-500">Modo sobrevivência substitui o propósito de vida</div>
+            </div>
+            <div class="p-5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
+              <div class="text-2xl mb-2">🗝️</div>
+              <div class="font-bold text-sm mb-1">Verdade como libertadora</div>
+              <div class="text-xs text-zinc-500">João 8:32 — "Conhecereis a verdade e a verdade vos libertará"</div>
+            </div>
+          </div>
+          <div class="mt-6 p-4 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+            <p class="text-sm font-serif italic text-zinc-600 dark:text-zinc-400">Ciclo de Adão e Eva: <span class="font-semibold">Vergonha → Medo → Culpa → Fuga → Acusação</span></p>
+            <p class="text-xs text-zinc-400 mt-1">Éden = integração original · Queda = fragmentação original</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 14: CAP 9 — Traumas Geracionais -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="3">
+      <canvas class="draw-canvas" id="canvas-14"></canvas>
+      <div class="max-w-5xl w-full flex gap-10 items-center">
+        <div class="hidden md:block">
+          <div class="img-frame border border-zinc-200 dark:border-zinc-800">
+            <img src="/palestra/img/cap-13-traumas-geracionais.png" alt="Traumas Geracionais" class="chapter-img" />
+          </div>
+        </div>
+        <div class="stagger flex-1">
+          <p class="text-xs uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-2 font-medium">Capítulo 9</p>
+          <h2 class="font-serif text-4xl font-bold tracking-tight mb-6">Traumas Geracionais e <span class="text-indigo-600 dark:text-indigo-400">Epigenética</span></h2>
+          <div class="space-y-3">
+            <div class="p-4 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800">
+              <div class="font-semibold text-sm mb-1 text-indigo-700 dark:text-indigo-300">Evidência Científica</div>
+              <div class="text-sm text-zinc-500">Descendentes de sobreviventes do Holocausto mostram desregulação do eixo HPA (Yehuda et al., 2014)</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Expressão Gênica Intergeracional</div>
+              <div class="text-sm text-zinc-500">Cuidado parental afeta a expressão de genes por gerações (Meaney, 2001)</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Padrões Bíblicos de Herança</div>
+              <div class="text-sm text-zinc-500">Abraão → Isaque → Jacó: padrão de engano transmitido. Isaque → Jacó: favoritismo repetido.</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="text-xs text-indigo-500 font-semibold">Êxodo 20:5</div>
+              <div class="text-sm text-zinc-500 font-serif italic">"Visito a iniquidade dos pais nos filhos até a terceira e quarta geração"</div>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800">
+              <div class="text-xs text-teal-600 font-semibold">Ezequiel 18:20 — a esperança</div>
+              <div class="text-sm text-zinc-500">"O filho não levará a culpa do pai" — responsabilidade individual apesar dos padrões herdados</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 15: SEÇÃO IV — MANIFESTAÇÕES (Transição) -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="4">
+      <canvas class="draw-canvas" id="canvas-15"></canvas>
+      <div class="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent"></div>
+      <div class="stagger text-center relative z-10">
+        <p class="text-sm font-medium uppercase tracking-widest text-red-600 dark:text-red-400 mb-6">Seção IV · Capítulo 10</p>
+        <h2 class="font-serif text-6xl md:text-7xl font-extrabold tracking-tight">Manifestações<br/><span class="text-red-600 dark:text-red-400">Comportamentais</span></h2>
+        <p class="text-xl text-zinc-500 mt-6">Quando a fragmentação interna se torna disfunção externa</p>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 16: CAP 10 — 5 Feridas Emocionais -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="4">
+      <canvas class="draw-canvas" id="canvas-16"></canvas>
+      <div class="text-center max-w-5xl w-full">
+        <p class="text-xs uppercase tracking-widest text-red-600 dark:text-red-400 mb-2 font-medium">Capítulo 10</p>
+        <h2 class="font-serif text-3xl font-bold tracking-tight mb-8 animate-slide-up">As <span class="text-red-600 dark:text-red-400">5 Feridas</span> Emocionais Centrais</h2>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 stagger">
+          <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border-2 border-red-200 dark:border-red-900 text-center">
+            <div class="text-2xl mb-2">⚖️</div>
+            <div class="font-bold text-sm mb-1 text-red-600">Injustiça</div>
+            <div class="text-xs text-zinc-500">Escapismo, invisibilidade, evitação</div>
+          </div>
+          <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border-2 border-amber-200 dark:border-amber-900 text-center">
+            <div class="text-2xl mb-2">💔</div>
+            <div class="font-bold text-sm mb-1 text-amber-600">Abandono</div>
+            <div class="text-xs text-zinc-500">Dependência, ciúmes, necessidade de validação constante</div>
+          </div>
+          <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border-2 border-rose-200 dark:border-rose-900 text-center">
+            <div class="text-2xl mb-2">🚫</div>
+            <div class="font-bold text-sm mb-1 text-rose-600">Rejeição</div>
+            <div class="text-xs text-zinc-500">Crença de indignidade, negocia o próprio eu, depressão</div>
+          </div>
+          <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border-2 border-orange-200 dark:border-orange-900 text-center">
+            <div class="text-2xl mb-2">😔</div>
+            <div class="font-bold text-sm mb-1 text-orange-600">Humilhação</div>
+            <div class="text-xs text-zinc-500">Autoestima destruída, perfeccionismo como compensação</div>
+          </div>
+          <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border-2 border-violet-200 dark:border-violet-900 text-center">
+            <div class="text-2xl mb-2">🗡️</div>
+            <div class="font-bold text-sm mb-1 text-violet-600">Traição</div>
+            <div class="text-xs text-zinc-500">Relações competitivas, necessidade de controle</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 17: CAP 10 — Síndrome do Impostor -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="4">
+      <canvas class="draw-canvas" id="canvas-17"></canvas>
+      <div class="text-center max-w-5xl w-full">
+        <p class="text-xs uppercase tracking-widest text-red-600 dark:text-red-400 mb-2 font-medium">Capítulo 10 · Continuação</p>
+        <h2 class="font-serif text-3xl font-bold tracking-tight mb-8 animate-slide-up">Consequências <span class="text-red-600 dark:text-red-400">Visíveis</span> das Feridas</h2>
+        <div class="grid md:grid-cols-2 gap-6 stagger">
+          <div class="p-5 rounded-2xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-left">
+            <div class="font-bold text-sm mb-2 text-red-700 dark:text-red-300">Síndrome do Impostor</div>
+            <div class="text-sm text-zinc-600 dark:text-zinc-400">Dissociação entre <strong>fazer</strong> e <strong>ser</strong>. Conquistas não são integradas à identidade. Sucesso atribuído à sorte, nunca à capacidade pessoal.</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="font-bold text-sm mb-2">Baixa Autoestima</div>
+            <div class="text-sm text-zinc-500">Incapacidade de amar incondicionalmente. Raízes na rejeição — o espelho interno está distorcido.</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="font-bold text-sm mb-2">Comportamentos Autodestrutivos</div>
+            <div class="text-sm text-zinc-500">Vícios, automutilação, compulsões — a adicção é sintoma de uma dor mais profunda, não o problema primário.</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+            <div class="font-bold text-sm mb-2">Infantilização no Adulto</div>
+            <div class="text-sm text-zinc-500">Evita conflito (associação com perda). Reações emocionais desproporcionais. Oscila entre apego excessivo e barreiras defensivas absolutas.</div>
+          </div>
+        </div>
+        <div class="mt-6 p-4 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 animate-fade-in" style="animation-delay:0.7s">
+          <p class="text-sm text-zinc-600 dark:text-zinc-400">Agressividade = comunicação silenciosa de existência: <span class="font-semibold italic">"Olhe para mim"</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 18: SEÇÃO V — RESTAURAÇÃO (Transição) -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="5">
+      <canvas class="draw-canvas" id="canvas-18"></canvas>
+      <div class="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-transparent"></div>
+      <div class="stagger text-center relative z-10">
+        <p class="text-sm font-medium uppercase tracking-widest text-teal-600 dark:text-teal-400 mb-6">Seção V · Capítulos 11–12</p>
+        <h2 class="font-serif text-6xl md:text-7xl font-extrabold tracking-tight">O Caminho<br/>da <span class="text-teal-600 dark:text-teal-400">Cura</span></h2>
+        <p class="text-xl text-zinc-500 mt-6">Reconexão, Hábitos e a Esperança que Restaura</p>
+        <p class="text-lg text-zinc-400 mt-4 font-serif italic max-w-2xl mx-auto">"Nem tudo que se enfrenta pode ser curado, mas nada pode ser curado sem ser enfrentado."</p>
+        <p class="text-sm text-zinc-400 mt-2">— James Baldwin</p>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 19: CAP 11 — Cadeia da Identidade -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="5">
+      <canvas class="draw-canvas" id="canvas-19"></canvas>
+      <div class="text-center max-w-5xl w-full">
+        <p class="text-xs uppercase tracking-widest text-teal-600 dark:text-teal-400 mb-2 font-medium">Capítulo 11 · Reconexão, Hábitos e Enfrentamento</p>
+        <h2 class="font-serif text-3xl font-bold tracking-tight mb-8 animate-slide-up">A Cadeia da <span class="text-teal-600 dark:text-teal-400">Identidade</span></h2>
+        <div class="stagger">
+          <!-- Chain visualization -->
+          <div class="flex items-center justify-center gap-2 md:gap-3 mb-10 flex-wrap">
+            <div class="px-4 py-3 rounded-xl bg-teal-50 dark:bg-teal-900/30 border-2 border-teal-300 dark:border-teal-700 text-center">
+              <div class="text-lg font-bold text-teal-700 dark:text-teal-300">Pensamento</div>
+            </div>
+            <div class="text-2xl text-teal-400">→</div>
+            <div class="px-4 py-3 rounded-xl bg-teal-50 dark:bg-teal-900/30 border-2 border-teal-300 dark:border-teal-700 text-center">
+              <div class="text-lg font-bold text-teal-700 dark:text-teal-300">Sentimento</div>
+            </div>
+            <div class="text-2xl text-teal-400">→</div>
+            <div class="px-4 py-3 rounded-xl bg-teal-50 dark:bg-teal-900/30 border-2 border-teal-300 dark:border-teal-700 text-center">
+              <div class="text-lg font-bold text-teal-700 dark:text-teal-300">Ação</div>
+            </div>
+            <div class="text-2xl text-teal-400">→</div>
+            <div class="px-4 py-3 rounded-xl bg-teal-50 dark:bg-teal-900/30 border-2 border-teal-300 dark:border-teal-700 text-center">
+              <div class="text-lg font-bold text-teal-700 dark:text-teal-300">Hábito</div>
+            </div>
+            <div class="text-2xl text-teal-400">→</div>
+            <div class="px-4 py-3 rounded-xl bg-teal-50 dark:bg-teal-900/30 border-2 border-teal-300 dark:border-teal-700 text-center">
+              <div class="text-lg font-bold text-teal-700 dark:text-teal-300">Caráter</div>
+            </div>
+            <div class="text-2xl text-teal-400">→</div>
+            <div class="px-4 py-3 rounded-xl bg-accent/10 border-2 border-accent text-center">
+              <div class="text-lg font-bold text-accent">Destino</div>
+            </div>
+          </div>
+          <p class="text-sm text-zinc-500 mb-8 font-serif italic">"Despojando-vos do velho homem... e revestindo-vos do novo" — Efésios 4:22-24</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+              <div class="font-semibold text-sm mb-1">Reconexão ≠ criar um novo eu</div>
+              <div class="text-sm text-zinc-500">É reencontrar o eu autêntico que foi soterrado pelas mentiras internalizadas</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-left">
+              <div class="font-semibold text-sm mb-1">Ciclo do Hábito</div>
+              <div class="text-sm text-zinc-500">Gatilho → Ação → Recompensa — interromper o ciclo requer decisão contínua</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 20: CAP 11 — 3 Caminhos Indispensáveis -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="5">
+      <canvas class="draw-canvas" id="canvas-20"></canvas>
+      <div class="max-w-5xl w-full flex gap-10 items-center">
+        <div class="stagger flex-1">
+          <p class="text-xs uppercase tracking-widest text-teal-600 dark:text-teal-400 mb-2 font-medium">Capítulo 11 · O Processo</p>
+          <h2 class="font-serif text-4xl font-bold tracking-tight mb-6"><span class="text-teal-600 dark:text-teal-400">4 Caminhos</span> Indispensáveis</h2>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 p-4 rounded-xl bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800">
+              <div class="w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center flex-shrink-0 font-bold text-sm">1</div>
+              <div>
+                <div class="font-semibold text-sm">Autoconhecimento Honesto</div>
+                <div class="text-sm text-zinc-500">Sem romantização nem autocondenação</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-4 rounded-xl bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800">
+              <div class="w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center flex-shrink-0 font-bold text-sm">2</div>
+              <div>
+                <div class="font-semibold text-sm">Enfrentar as Feridas</div>
+                <div class="text-sm text-zinc-500">Sair da posição de vítima para sujeito ativo da própria história</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-4 rounded-xl bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800">
+              <div class="w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center flex-shrink-0 font-bold text-sm">3</div>
+              <div>
+                <div class="font-semibold text-sm">Construir Relações Seguras</div>
+                <div class="text-sm text-zinc-500">A cura precisa de contexto relacional — não acontece no isolamento</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-4 rounded-xl bg-accent/10 border-2 border-accent">
+              <div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center flex-shrink-0 font-bold text-sm">4</div>
+              <div>
+                <div class="font-semibold text-sm">Decisão Contínua</div>
+                <div class="text-sm text-zinc-500">Interromper padrões diariamente — a mudança não é um evento, é um processo</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:flex flex-col items-center gap-4">
+          <div class="img-frame border border-zinc-200 dark:border-zinc-800">
+            <img src="/palestra/img/cap-17-a-mudanca-comeca-no-enfrentamento.png" alt="Enfrentamento" class="chapter-img" />
+          </div>
+          <div class="p-3 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center" style="width:180px">
+            <p class="text-xs font-serif italic text-zinc-600 dark:text-zinc-400">"O que eu temia veio sobre mim."</p>
+            <p class="text-[10px] text-zinc-400 mt-1">— Jó 3:25</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 21: CAP 12 — Há Esperança -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="5">
+      <canvas class="draw-canvas" id="canvas-21"></canvas>
+      <div class="max-w-5xl w-full flex gap-10 items-center">
+        <div class="hidden md:block">
+          <div class="img-frame border border-zinc-200 dark:border-zinc-800">
+            <img src="/palestra/img/cap-18-ha-esperanca.png" alt="Há Esperança" class="chapter-img" />
+          </div>
+        </div>
+        <div class="stagger flex-1">
+          <p class="text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2 font-medium">Capítulo 12</p>
+          <h2 class="font-serif text-4xl font-bold tracking-tight mb-6">Há <span class="text-emerald-600 dark:text-emerald-400">Esperança</span></h2>
+          <div class="space-y-3">
+            <div class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800">
+              <div class="text-xs text-emerald-600 font-semibold mb-1">Malaquias 4:6</div>
+              <div class="text-sm text-zinc-600 dark:text-zinc-400 font-serif italic">"Ele converterá o coração dos pais aos filhos e o coração dos filhos aos pais."</div>
+              <div class="text-xs text-zinc-400 mt-1">A última palavra do Antigo Testamento é reconciliação</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">"Sine Cera" — Sem Cera</div>
+              <div class="text-sm text-zinc-500">Sinceridade = autenticidade sem disfarçar as rachaduras. Mateus 18:3: tornar-se como criança.</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">A Voz de um Filho de 5 Anos</div>
+              <div class="text-sm text-zinc-500 font-serif italic">"Eu te perdoo, papai. Mas eu não sou você. Só porque coisas ruins aconteceram com você não quer dizer que vão acontecer comigo."</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              <div class="font-semibold text-sm mb-1">Perdão como Libertação</div>
+              <div class="text-sm text-zinc-500">Perdoar não é concordar — é libertar-se da escravidão emocional</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 22: VERSÍCULO CENTRAL -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="6">
+      <canvas class="draw-canvas" id="canvas-22"></canvas>
+      <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-amber-500/10 via-orange-500/5 to-transparent rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-teal-500/10 to-transparent rounded-full blur-3xl"></div>
+      <div class="stagger text-center relative z-10 max-w-3xl">
+        <p class="text-sm font-medium uppercase tracking-widest text-accent mb-8">A Coluna Vertebral</p>
+        <blockquote class="font-serif text-3xl md:text-4xl leading-relaxed text-zinc-700 dark:text-zinc-200 mb-8">
+          "Não se amoldem ao padrão deste mundo, mas <span class="text-accent font-bold">transformem-se</span> pela <span class="text-teal-600 dark:text-teal-400 font-bold">renovação da sua mente</span>, para que sejam capazes de experimentar e comprovar a boa, agradável e perfeita vontade de Deus."
+        </blockquote>
+        <p class="text-lg text-accent font-semibold">Romanos 12:2</p>
+        <div class="mt-10 grid md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-xl bg-accent/5 border border-accent/20 text-center">
+            <div class="font-bold text-sm text-accent mb-1">Trauma</div>
+            <div class="text-xs text-zinc-500">Não é o fim da história</div>
+          </div>
+          <div class="p-4 rounded-xl bg-teal-500/5 border border-teal-500/20 text-center">
+            <div class="font-bold text-sm text-teal-600 dark:text-teal-400 mb-1">Cura</div>
+            <div class="text-xs text-zinc-500">É possível</div>
+          </div>
+          <div class="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/20 text-center">
+            <div class="font-bold text-sm text-emerald-600 dark:text-emerald-400 mb-1">O Caminho</div>
+            <div class="text-xs text-zinc-500">Começa ao enfrentar a verdade</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- SLIDE 23: ENCERRAMENTO -->
+    <!-- ================================================== -->
+    <div class="slide flex-col justify-center items-center px-8 relative" data-section="6">
+      <canvas class="draw-canvas" id="canvas-23"></canvas>
+      <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-amber-500/10 to-transparent rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-teal-500/10 to-transparent rounded-full blur-3xl"></div>
+      <div class="stagger text-center relative z-10">
+        <h2 class="font-serif text-6xl md:text-7xl font-extrabold tracking-tight mb-8">
+          Transforme<br/><span class="gradient-text-gold">Sua Mente</span>
+        </h2>
+        <p class="text-2xl text-zinc-500 dark:text-zinc-400 mb-4">Ciência, Fé e a Superação dos Traumas</p>
+        <p class="text-lg text-zinc-400 mb-12 font-serif italic">Ricardo</p>
+        <div class="flex justify-center gap-4">
+          <div class="px-6 py-3 rounded-xl bg-accent text-white font-semibold">Adquira o Livro</div>
+          <div class="px-6 py-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 font-semibold">Saiba Mais</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawing Controls -->
+    <div class="fixed bottom-6 right-6 flex gap-2 z-50" id="drawControls">
+      <button onclick="toggleDrawing()" class="control-btn flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-sm font-medium hover:border-accent transition-colors" id="drawToggle">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+        <span>Desenhar</span>
+      </button>
+    </div>
+
+    <!-- Drawing Toolbar -->
+    <div class="fixed bottom-6 right-6 hidden gap-3 p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 z-[200]" id="drawToolbar">
+      <div class="flex gap-2">
+        <button class="tool-btn w-9 h-9 rounded-lg border border-zinc-200 dark:border-zinc-700 flex items-center justify-center hover:border-accent transition-colors" data-tool="pen" title="Caneta">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+        </button>
+        <button class="tool-btn w-9 h-9 rounded-lg border border-zinc-200 dark:border-zinc-700 flex items-center justify-center hover:border-accent transition-colors" data-tool="highlight" title="Marca-texto">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11l-6 6v3h9l3-3m4.6-4.6a2 2 0 010 2.8l-5.2 5.2a2 2 0 01-2.8 0l-5.2-5.2a2 2 0 010-2.8L14 4"></path></svg>
+        </button>
+        <button class="tool-btn w-9 h-9 rounded-lg border border-zinc-200 dark:border-zinc-700 flex items-center justify-center hover:border-accent transition-colors" data-tool="arrow" title="Seta">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+        </button>
+        <button class="tool-btn w-9 h-9 rounded-lg border border-zinc-200 dark:border-zinc-700 flex items-center justify-center hover:border-accent transition-colors" data-tool="circle" title="Círculo">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"></circle></svg>
+        </button>
+      </div>
+      <div class="w-px h-9 bg-zinc-200 dark:bg-zinc-700"></div>
+      <div class="flex gap-2 items-center">
+        <button class="color-btn w-6 h-6 rounded-full bg-red-300 border-2 border-transparent hover:scale-110 transition-transform" data-color="#ef4444"></button>
+        <button class="color-btn w-6 h-6 rounded-full bg-amber-400 border-2 border-transparent hover:scale-110 transition-transform" data-color="#f59e0b"></button>
+        <button class="color-btn w-6 h-6 rounded-full bg-teal-400 border-2 border-transparent hover:scale-110 transition-transform" data-color="#14b8a6"></button>
+        <button class="color-btn w-6 h-6 rounded-full bg-blue-300 border-2 border-transparent hover:scale-110 transition-transform" data-color="#3b82f6"></button>
+        <button class="color-btn w-6 h-6 rounded-full bg-violet-400 border-2 border-transparent hover:scale-110 transition-transform" data-color="#7C3AED"></button>
+      </div>
+      <div class="w-px h-9 bg-zinc-200 dark:bg-zinc-700"></div>
+      <div class="flex gap-2">
+        <button onclick="undoLastStroke()" class="w-9 h-9 rounded-lg border border-zinc-200 dark:border-zinc-700 flex items-center justify-center hover:border-accent transition-colors" title="Desfazer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path></svg>
+        </button>
+        <button onclick="clearCurrentSlide()" class="w-9 h-9 rounded-lg border border-zinc-200 dark:border-zinc-700 flex items-center justify-center hover:border-accent transition-colors" title="Limpar">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+        </button>
+        <button onclick="toggleDrawing()" class="w-9 h-9 rounded-lg bg-accent text-white flex items-center justify-center hover:bg-accent/90 transition-colors" title="Fechar (Esc)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const slides = document.querySelectorAll(".slide");
+      const totalSlides = slides.length;
+      let currentSlide = 0;
+      let drawingEnabled = false;
+      let isDrawing = false;
+      let currentTool = "pen";
+      let currentColor = "#ef4444";
+      let startPoint = null;
+      const slideStrokes = new Map();
+      let currentStroke = [];
+
+      slides.forEach((_, i) => slideStrokes.set(i, []));
+
+      const slideToSection = [0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 6, 6];
+
+      slides.forEach((slide, index) => {
+        const canvas = slide.querySelector(".draw-canvas");
+        if (canvas) {
+          const resizeCanvas = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; redrawStrokes(index); };
+          resizeCanvas();
+          window.addEventListener("resize", resizeCanvas);
+        }
+      });
+
+      window.toggleTheme = function () { document.documentElement.classList.toggle("dark"); };
+
+      window.goToSlide = function (index) {
+        if (index < 0 || index >= totalSlides) return;
+        slides[currentSlide].classList.remove("active");
+        currentSlide = index;
+        slides[currentSlide].classList.add("active");
+        localStorage.setItem("palestra-currentSlide", currentSlide);
+        document.getElementById("slideCounter").textContent = `${currentSlide + 1} / ${totalSlides}`;
+        document.getElementById("progressBar").style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+        updateSidebar(currentSlide);
+        if (drawingEnabled) {
+          document.querySelectorAll(".draw-canvas").forEach((c) => c.classList.remove("drawing"));
+          const currentCanvas = slides[currentSlide].querySelector(".draw-canvas");
+          if (currentCanvas) currentCanvas.classList.add("drawing");
+        }
+      };
+
+      function updateSidebar(slideIndex) {
+        const currentSection = slideToSection[slideIndex] || 0;
+        document.querySelectorAll(".sidebar-item").forEach((item, idx) => {
+          item.classList.remove("border-accent", "text-accent");
+          item.classList.add("border-transparent", "text-zinc-400");
+          if (idx === currentSection) {
+            item.classList.add("border-accent", "text-accent");
+            item.classList.remove("border-transparent", "text-zinc-400");
+          } else if (idx < currentSection) {
+            item.classList.remove("text-zinc-400");
+            item.classList.add("text-zinc-500");
+          }
+        });
+      }
+
+      window.toggleDrawing = function (forceState) {
+        drawingEnabled = forceState !== undefined ? forceState : !drawingEnabled;
+        document.querySelectorAll(".draw-canvas").forEach((c) => c.classList.remove("drawing"));
+        if (drawingEnabled) {
+          const currentCanvas = slides[currentSlide].querySelector(".draw-canvas");
+          if (currentCanvas) currentCanvas.classList.add("drawing");
+        }
+        document.getElementById("drawControls").classList.toggle("hidden", drawingEnabled);
+        document.getElementById("drawToolbar").classList.toggle("hidden", !drawingEnabled);
+        document.getElementById("drawToolbar").classList.toggle("flex", drawingEnabled);
+      };
+
+      window.clearCurrentSlide = function () { slideStrokes.set(currentSlide, []); redrawStrokes(currentSlide); };
+      window.undoLastStroke = function () { const strokes = slideStrokes.get(currentSlide); if (strokes.length) { strokes.pop(); redrawStrokes(currentSlide); } };
+
+      function getStrokeStyle(tool, color) {
+        if (tool === "highlight") return { color: color + "60", width: 24, cap: "round", join: "round" };
+        return { color, width: 3, cap: "round", join: "round" };
+      }
+
+      function applyStrokeStyle(ctx, style) { ctx.strokeStyle = style.color; ctx.lineWidth = style.width; ctx.lineCap = style.cap; ctx.lineJoin = style.join; }
+
+      function drawEllipse(ctx, x1, y1, x2, y2) {
+        const cx = (x1 + x2) / 2, cy = (y1 + y2) / 2;
+        const rx = Math.abs(x2 - x1) / 2, ry = Math.abs(y2 - y1) / 2;
+        ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, 2 * Math.PI); ctx.stroke();
+      }
+
+      function drawArrow(ctx, fx, fy, tx, ty) {
+        const hl = 15, a = Math.atan2(ty - fy, tx - fx);
+        ctx.beginPath(); ctx.moveTo(fx, fy); ctx.lineTo(tx, ty); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(tx - hl * Math.cos(a - Math.PI / 6), ty - hl * Math.sin(a - Math.PI / 6));
+        ctx.moveTo(tx, ty); ctx.lineTo(tx - hl * Math.cos(a + Math.PI / 6), ty - hl * Math.sin(a + Math.PI / 6)); ctx.stroke();
+      }
+
+      function redrawStrokes(slideIndex) {
+        const canvas = slides[slideIndex].querySelector(".draw-canvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        slideStrokes.get(slideIndex).forEach((stroke) => {
+          const style = getStrokeStyle(stroke.type, stroke.color || "#ef4444");
+          applyStrokeStyle(ctx, style);
+          if ((stroke.type === "pen" || stroke.type === "highlight") && stroke.points?.length >= 2) {
+            ctx.beginPath(); ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
+            stroke.points.forEach((p) => ctx.lineTo(p.x, p.y)); ctx.stroke();
+          } else if (stroke.type === "arrow") { drawArrow(ctx, stroke.start.x, stroke.start.y, stroke.end.x, stroke.end.y);
+          } else if (stroke.type === "circle") { drawEllipse(ctx, stroke.start.x, stroke.start.y, stroke.end.x, stroke.end.y); }
+        });
+      }
+
+      document.querySelectorAll(".tool-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tool-btn").forEach((b) => b.classList.remove("bg-accent", "text-white", "border-accent"));
+          btn.classList.add("bg-accent", "text-white", "border-accent");
+          currentTool = btn.dataset.tool;
+        });
+      });
+
+      document.querySelectorAll(".color-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".color-btn").forEach((b) => b.classList.remove("ring-2", "ring-offset-2", "ring-accent"));
+          btn.classList.add("ring-2", "ring-offset-2", "ring-accent");
+          currentColor = btn.dataset.color;
+        });
+      });
+
+      document.addEventListener("mousedown", (e) => {
+        if (!drawingEnabled || e.target.closest(".control-btn, #drawToolbar, button")) return;
+        isDrawing = true; startPoint = { x: e.clientX, y: e.clientY };
+        if (currentTool === "pen" || currentTool === "highlight") currentStroke = [startPoint];
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDrawing || !drawingEnabled) return;
+        const canvas = slides[currentSlide].querySelector(".draw-canvas");
+        const ctx = canvas.getContext("2d");
+        redrawStrokes(currentSlide);
+        const style = getStrokeStyle(currentTool, currentColor);
+        applyStrokeStyle(ctx, style);
+        if (currentTool === "pen" || currentTool === "highlight") {
+          currentStroke.push({ x: e.clientX, y: e.clientY });
+          if (currentStroke.length >= 2) { ctx.beginPath(); ctx.moveTo(currentStroke[0].x, currentStroke[0].y); currentStroke.forEach((p) => ctx.lineTo(p.x, p.y)); ctx.stroke(); }
+        } else if (currentTool === "arrow") { drawArrow(ctx, startPoint.x, startPoint.y, e.clientX, e.clientY);
+        } else if (currentTool === "circle") { drawEllipse(ctx, startPoint.x, startPoint.y, e.clientX, e.clientY); }
+      });
+
+      document.addEventListener("mouseup", (e) => {
+        if (!isDrawing) return;
+        if ((currentTool === "pen" || currentTool === "highlight") && currentStroke.length > 1) {
+          slideStrokes.get(currentSlide).push({ type: currentTool, points: [...currentStroke], color: currentColor });
+        } else if (currentTool !== "pen" && currentTool !== "highlight" && startPoint) {
+          slideStrokes.get(currentSlide).push({ type: currentTool, start: startPoint, end: { x: e.clientX, y: e.clientY }, color: currentColor });
+        }
+        isDrawing = false; currentStroke = []; startPoint = null;
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || (e.key === " " && !drawingEnabled)) { e.preventDefault(); goToSlide(currentSlide + 1); }
+        else if (e.key === "ArrowLeft") { goToSlide(currentSlide - 1); }
+        else if (e.key === "Home") { goToSlide(0); }
+        else if (e.key === "End") { goToSlide(totalSlides - 1); }
+        else if (e.key.toLowerCase() === "d" && !drawingEnabled) { toggleDrawing(); }
+        else if (e.key === "Escape" && drawingEnabled) { toggleDrawing(); }
+        else if (e.key.toLowerCase() === "z" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); undoLastStroke(); }
+        else if (e.key.toLowerCase() === "c" && drawingEnabled) { clearCurrentSlide(); }
+      });
+
+      document.querySelectorAll(".sidebar-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          const section = parseInt(item.dataset.section);
+          const firstSlide = slideToSection.indexOf(section);
+          if (firstSlide !== -1) goToSlide(firstSlide);
+        });
+      });
+
+      const savedSlide = localStorage.getItem("palestra-currentSlide");
+      if (savedSlide !== null) { const slideIndex = parseInt(savedSlide, 10); if (slideIndex > 0 && slideIndex < totalSlides) goToSlide(slideIndex); }
+      updateSidebar(currentSlide);
+      document.querySelectorAll(".tool-btn")[0].classList.add("bg-accent", "text-white", "border-accent");
+      document.querySelectorAll(".color-btn")[0].classList.add("ring-2", "ring-offset-2", "ring-accent");
+    </script>
+  </body>
+</html>

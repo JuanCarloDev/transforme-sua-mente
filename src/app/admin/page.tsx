@@ -22,6 +22,15 @@ const analises = [
   },
 ];
 
+const apresentacoes = [
+  {
+    title: "Palestra Completa — Transforme Sua Mente",
+    desc: "Apresentação interativa com todos os 12 capítulos do livro. Dark/Light mode, navegação por teclado, ferramenta de desenho.",
+    href: "/palestra.html",
+    slides: 24,
+  },
+];
+
 function EyeIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -332,6 +341,67 @@ export default function AdminPage() {
               </div>
             </div>
           )}
+        </section>
+
+        {/* Apresentações */}
+        <section>
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-10 h-10 rounded-xl bg-[rgba(180,83,9,0.1)] flex items-center justify-center text-[#B45309]">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold">Apresentações</h2>
+              <p className="text-xs text-[#7a7067]">
+                Palestras e slides do livro
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {apresentacoes.map((a) => (
+              <a
+                key={a.href}
+                href={a.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-6 bg-[#151210] border border-[#2a2520] rounded-xl transition-all duration-300 hover:border-[#3d3529] hover:bg-[#1c1916] hover:-translate-y-0.5 no-underline"
+              >
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <h3 className="font-semibold text-[15px] text-[#f5f0e8]">
+                    {a.title}
+                  </h3>
+                  <svg
+                    className="w-4 h-4 text-[#7a7067] shrink-0 mt-0.5 group-hover:text-[#B45309] transition-colors"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </div>
+                <p className="text-[13px] text-[#7a7067] leading-[1.6]">
+                  {a.desc}
+                </p>
+                <div className="mt-3 flex items-center gap-2">
+                  <span className="text-[10px] font-medium tracking-wider uppercase px-2 py-0.5 rounded-full bg-[rgba(180,83,9,0.1)] text-[#B45309]">
+                    {a.slides} slides
+                  </span>
+                  <span className="text-[10px] font-medium tracking-wider uppercase px-2 py-0.5 rounded-full bg-[rgba(106,138,106,0.1)] text-[#6a8a6a]">
+                    Dark/Light
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
         </section>
 
         {/* Análises */}
