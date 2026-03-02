@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   questions,
@@ -149,43 +150,54 @@ export default function QuizPage() {
       <div className="relative z-[1]">
         {/* HERO */}
         {step === "hero" && (
-          <section className="min-h-screen flex flex-col items-center justify-center px-6 py-16 text-center">
-            <div className="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 border border-[rgba(200,164,78,0.3)] rounded-full text-[0.68rem] tracking-[3px] uppercase text-gold mb-9">
+          <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 text-center">
+            <div className="animate-fade-up inline-flex items-center gap-2 px-5 py-2 border border-[rgba(200,164,78,0.3)] rounded-full text-[0.72rem] tracking-[3px] uppercase text-gold mb-10">
               <span className="w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
               Psicanálise · Autoconhecimento
             </div>
 
-            <div className="animate-fade-up delay-300 w-[90px] h-[90px] rounded-full bg-gradient-to-br from-rose to-sage flex items-center justify-center mb-7 border-2 border-rose relative mx-auto">
-              <span className="text-4xl">🧠</span>
-              <span className="absolute -inset-2 rounded-full border border-[rgba(179,90,90,0.2)] animate-ping" style={{ animationDuration: "3s" }} />
+            {/* Ricardo's Photo */}
+            <div className="animate-fade-up delay-300 relative mx-auto mb-5">
+              <div className="w-[110px] h-[110px] sm:w-[130px] sm:h-[130px] rounded-full overflow-hidden border-2 border-[rgba(200,164,78,0.4)] shadow-[0_0_60px_rgba(200,164,78,0.15)]">
+                <Image
+                  src="/ricardo.jpeg"
+                  alt="Ricardo Cavassin"
+                  width={130}
+                  height={130}
+                  className="w-full h-full object-cover object-top"
+                  priority
+                />
+              </div>
+              <span className="absolute -inset-3 rounded-full border border-[rgba(200,164,78,0.12)]" />
+              <span className="absolute -inset-6 rounded-full border border-[rgba(200,164,78,0.06)]" />
             </div>
 
-            <p className="animate-fade-up delay-300 font-sans text-[1rem] text-text-muted tracking-[1px] mb-1.5">
+            <p className="animate-fade-up delay-300 font-serif text-lg sm:text-xl text-text tracking-[0.5px] mb-1">
               Ricardo Cavassin
             </p>
-            <p className="animate-fade-up delay-300 text-[0.65rem] tracking-[3px] uppercase text-rose mb-10 font-medium">
+            <p className="animate-fade-up delay-300 text-[0.72rem] sm:text-[0.78rem] tracking-[3px] uppercase text-gold-dim mb-12 font-medium">
               Psicanalista · Terapeuta
             </p>
 
-            <h1 className="animate-fade-up delay-500 font-serif text-[clamp(2.4rem,8vw,4.2rem)] font-bold leading-[1.1] mb-5">
+            <h1 className="animate-fade-up delay-500 font-serif text-[clamp(2.6rem,9vw,4.5rem)] font-bold leading-[1.08] mb-6">
               Qual é a sua
               <br />
               <em className="text-gold-bright italic">Ferida Emocional?</em>
             </h1>
 
-            <p className="animate-fade-up delay-700 text-base text-text-muted leading-[1.7] max-w-[420px] mx-auto mb-11 font-light">
+            <p className="animate-fade-up delay-700 text-[1.05rem] sm:text-lg text-text-dim leading-[1.8] max-w-[480px] mx-auto mb-14 font-light">
               Responda 10 perguntas e descubra qual ferida emocional está influenciando seus
               relacionamentos, suas escolhas e sua forma de se ver.
             </p>
 
             <button
               onClick={handleStartQuiz}
-              className="animate-fade-up delay-900 inline-flex items-center gap-2.5 px-9 py-4 bg-gradient-to-br from-rose to-sage text-text text-[0.9rem] font-medium border-none rounded-full cursor-pointer transition-all duration-300 tracking-[0.5px] shadow-[0_8px_40px_rgba(179,90,90,0.35)] hover:translate-y-[-3px] hover:shadow-[0_16px_50px_rgba(179,90,90,0.5)]"
+              className="animate-fade-up delay-900 inline-flex items-center gap-3 px-10 py-[18px] bg-gradient-to-br from-rose to-sage text-text text-[1rem] font-medium border-none rounded-full cursor-pointer transition-all duration-300 tracking-[0.5px] shadow-[0_8px_40px_rgba(179,90,90,0.35)] hover:translate-y-[-3px] hover:shadow-[0_16px_50px_rgba(179,90,90,0.5)]"
             >
               ✦ Descobrir minha ferida
             </button>
 
-            <div className="animate-fade-up delay-1100 mt-16 flex flex-col items-center gap-2 text-[0.7rem] tracking-[2px] uppercase text-border-glow">
+            <div className="animate-fade-up delay-1100 mt-20 flex flex-col items-center gap-2 text-[0.72rem] tracking-[2px] uppercase text-border-glow">
               <span>role para baixo</span>
               <div className="w-px h-10 bg-gradient-to-b from-border-glow to-transparent" />
             </div>
@@ -194,40 +206,55 @@ export default function QuizPage() {
 
         {/* INFO STEP (Nome + Telefone) */}
         {step === "info" && (
-          <section className="max-w-[640px] mx-auto px-5 py-20">
-            <div className="bg-bg-card border border-border rounded-[20px] p-9 text-center">
-              <h2 className="font-serif text-[1.6rem] text-text mb-2">Antes de começar...</h2>
-              <p className="text-[0.85rem] text-text-muted mb-6 leading-[1.6]">
+          <section className="max-w-[560px] mx-auto px-5 pt-24 pb-20 min-h-screen flex flex-col justify-center">
+            <div className="bg-bg-card border border-border rounded-[24px] p-8 sm:p-12 text-center">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[rgba(200,164,78,0.15)] to-[rgba(200,164,78,0.05)] border border-[rgba(200,164,78,0.2)] flex items-center justify-center text-2xl mx-auto mb-6">
+                ✦
+              </div>
+              <h2 className="font-serif text-[1.8rem] sm:text-[2rem] text-text mb-3">Antes de começar...</h2>
+              <p className="text-[0.95rem] text-text-muted mb-8 leading-[1.7]">
                 Precisamos de algumas informações para personalizar sua análise e enviar o resultado.
               </p>
 
-              <input
-                ref={nameRef}
-                type="text"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                placeholder="Seu primeiro nome"
-                maxLength={40}
-                className="w-full bg-bg-deep border border-border rounded-xl py-3.5 px-5 text-text font-sans text-base text-center transition-colors duration-200 outline-none placeholder:text-text-muted mb-4 focus:border-gold"
-              />
+              <div className="space-y-4 mb-4">
+                <div>
+                  <label className="block text-[0.72rem] font-semibold tracking-[2px] uppercase text-text-muted mb-2 text-left">
+                    Seu nome
+                  </label>
+                  <input
+                    ref={nameRef}
+                    type="text"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    placeholder="Seu primeiro nome"
+                    maxLength={40}
+                    className="w-full bg-bg-deep border border-border rounded-xl py-4 px-5 text-text font-sans text-[1rem] transition-colors duration-200 outline-none placeholder:text-text-muted focus:border-gold"
+                  />
+                </div>
 
-              <input
-                ref={phoneRef}
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(phoneMask(e.target.value))}
-                placeholder="(11) 99999-9999"
-                className="w-full bg-bg-deep border border-border rounded-xl py-3.5 px-5 text-text font-sans text-base text-center transition-colors duration-200 outline-none placeholder:text-text-muted mb-4 focus:border-gold"
-              />
+                <div>
+                  <label className="block text-[0.72rem] font-semibold tracking-[2px] uppercase text-text-muted mb-2 text-left">
+                    Seu telefone
+                  </label>
+                  <input
+                    ref={phoneRef}
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(phoneMask(e.target.value))}
+                    placeholder="(11) 99999-9999"
+                    className="w-full bg-bg-deep border border-border rounded-xl py-4 px-5 text-text font-sans text-[1rem] transition-colors duration-200 outline-none placeholder:text-text-muted focus:border-gold"
+                  />
+                </div>
+              </div>
 
-              <p className="text-[0.75rem] text-text-muted mb-6">
+              <p className="text-[0.78rem] text-text-muted mb-8">
                 Seu telefone será usado para enviar o resultado personalizado.
               </p>
 
               <button
                 onClick={handleStartQuestions}
                 disabled={!infoValid}
-                className={`w-full py-4 bg-gradient-to-br from-rose to-sage text-text font-sans text-[0.88rem] font-medium border-none rounded-xl cursor-pointer transition-all duration-200 tracking-[0.5px] ${
+                className={`w-full py-[18px] bg-gradient-to-br from-rose to-sage text-text font-sans text-[1rem] font-medium border-none rounded-xl cursor-pointer transition-all duration-200 tracking-[0.5px] ${
                   infoValid
                     ? "opacity-100 hover:translate-y-[-2px] hover:shadow-[0_8px_30px_rgba(179,90,90,0.4)]"
                     : "opacity-35 pointer-events-none"
@@ -241,10 +268,10 @@ export default function QuizPage() {
 
         {/* QUESTIONS */}
         {step === "questions" && q && (
-          <section className="max-w-[640px] mx-auto px-5 pt-8 pb-20">
+          <section className="max-w-[640px] mx-auto px-5 pt-10 pb-20">
             {/* Progress */}
-            <div className="flex items-center gap-3 mb-5">
-              <div className="flex-1 h-[3px] bg-border rounded-full overflow-hidden">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="flex-1 h-1 bg-border rounded-full overflow-hidden">
                 <div
                   className="h-full rounded-full transition-all duration-500 ease-out"
                   style={{
@@ -253,40 +280,40 @@ export default function QuizPage() {
                   }}
                 />
               </div>
-              <span className="text-[0.75rem] text-text-muted whitespace-nowrap">
-                {currentQ} / {questions.length}
+              <span className="text-[0.8rem] text-text-muted whitespace-nowrap font-medium">
+                {currentQ + 1} / {questions.length}
               </span>
             </div>
 
             {/* Question Card */}
             <div
               key={currentQ}
-              className="bg-bg-card border border-border rounded-[20px] p-7 mb-3.5 animate-fade-up"
+              className="bg-bg-card border border-border rounded-[24px] p-8 sm:p-10 mb-4 animate-fade-up"
             >
-              <div className="text-[0.68rem] tracking-[3px] uppercase text-rose font-medium mb-3">
+              <div className="text-[0.72rem] tracking-[3px] uppercase text-rose font-medium mb-4">
                 Pergunta {currentQ + 1} de {questions.length}
               </div>
-              <div className="font-serif text-[1.3rem] text-text leading-[1.45] mb-2">
+              <div className="font-serif text-[1.4rem] sm:text-[1.6rem] text-text leading-[1.4] mb-3">
                 {q.text}
               </div>
-              <div className="text-[0.78rem] text-text-muted italic mb-5 leading-[1.5]">
+              <div className="text-[0.85rem] text-text-muted italic mb-7 leading-[1.6]">
                 {q.hint}
               </div>
 
               {/* Options */}
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2.5">
                 {q.options.map((opt, i) => (
                   <button
                     key={i}
                     onClick={() => handleSelect(i, opt.wound)}
-                    className={`flex items-start gap-3 py-3.5 px-4 border-[1.5px] rounded-xl cursor-pointer transition-all duration-200 text-left w-full font-sans text-[0.87rem] leading-[1.5] ${
+                    className={`flex items-start gap-3.5 py-4 px-5 border-[1.5px] rounded-2xl cursor-pointer transition-all duration-200 text-left w-full font-sans text-[0.92rem] leading-[1.55] ${
                       selected === i
                         ? "border-gold bg-[rgba(200,164,78,0.08)] text-text"
                         : "bg-bg-deep border-border text-text-dim hover:border-rose hover:bg-[rgba(179,90,90,0.07)]"
                     }`}
                   >
                     <span
-                      className={`min-w-[26px] h-[26px] rounded-full border flex items-center justify-center text-[0.72rem] font-semibold flex-shrink-0 transition-all duration-200 ${
+                      className={`min-w-[28px] h-[28px] rounded-full border flex items-center justify-center text-[0.75rem] font-semibold flex-shrink-0 transition-all duration-200 mt-0.5 ${
                         selected === i
                           ? "bg-gold border-gold text-bg-deep"
                           : "border-border-glow text-text-muted"
@@ -303,7 +330,7 @@ export default function QuizPage() {
               <button
                 onClick={handleNext}
                 disabled={selected === null}
-                className={`block w-full py-4 mt-2 bg-gradient-to-br from-rose to-sage text-text font-sans text-[0.88rem] font-medium border-none rounded-xl cursor-pointer transition-all duration-200 tracking-[0.5px] ${
+                className={`block w-full py-[18px] mt-4 bg-gradient-to-br from-rose to-sage text-text font-sans text-[1rem] font-medium border-none rounded-2xl cursor-pointer transition-all duration-200 tracking-[0.5px] ${
                   selected !== null
                     ? "opacity-100 hover:translate-y-[-2px] hover:shadow-[0_8px_30px_rgba(179,90,90,0.4)]"
                     : "opacity-35 pointer-events-none"
@@ -389,16 +416,22 @@ export default function QuizPage() {
             </div>
 
             {/* Footer */}
-            <div className="flex items-center gap-4 p-5 bg-bg-card border border-border rounded-2xl mb-3">
-              <div className="w-[52px] h-[52px] rounded-full bg-gradient-to-br from-rose to-sage flex items-center justify-center border-2 border-rose flex-shrink-0 text-[1.4rem]">
-                📖
+            <div className="flex items-center gap-4 p-6 bg-bg-card border border-border rounded-2xl mb-3">
+              <div className="w-[56px] h-[56px] rounded-full overflow-hidden border-2 border-[rgba(200,164,78,0.3)] flex-shrink-0">
+                <Image
+                  src="/ricardo.jpeg"
+                  alt="Ricardo Cavassin"
+                  width={56}
+                  height={56}
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
               <div>
-                <div className="font-serif text-base font-semibold text-text">Ricardo Cavassin</div>
-                <div className="text-[0.7rem] text-rose tracking-[2px] uppercase mt-0.5">
+                <div className="font-serif text-[1.05rem] font-semibold text-text">Ricardo Cavassin</div>
+                <div className="text-[0.72rem] text-gold-dim tracking-[2px] uppercase mt-0.5">
                   Psicanalista · Terapeuta
                 </div>
-                <div className="text-[0.78rem] text-text-muted italic mt-1 leading-[1.4]">
+                <div className="text-[0.82rem] text-text-muted italic mt-1.5 leading-[1.5]">
                   &ldquo;A cura começa quando você nomeia o que dói.&rdquo;
                 </div>
               </div>

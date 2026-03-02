@@ -59,31 +59,37 @@ export default function Home() {
 
       {/* Quiz CTA Section */}
       <section className="py-20 sm:py-28 px-5 sm:px-6 reveal">
-        <div className="max-w-[680px] mx-auto text-center">
-          <div className="section-ornament justify-center">
-            <span className="text-[11px] sm:text-xs tracking-[3px] uppercase text-rose font-medium">
-              Quiz Gratuito
-            </span>
+        <div className="max-w-[640px] mx-auto">
+          <div className="bg-bg-card border border-border rounded-[24px] p-8 sm:p-12 text-center relative overflow-hidden">
+            <div
+              className="absolute top-0 left-0 right-0 h-[3px]"
+              style={{ background: "linear-gradient(90deg, var(--color-rose), var(--color-gold), var(--color-sage))" }}
+            />
+            <div className="section-ornament justify-center mb-6">
+              <span className="text-[11px] sm:text-xs tracking-[3px] uppercase text-rose font-medium">
+                Quiz Gratuito
+              </span>
+            </div>
+            <h2 className="font-serif text-[clamp(1.8rem,5vw,2.8rem)] font-semibold leading-[1.15] mb-5">
+              Descubra qual <em className="text-gold-bright italic">Ferida Emocional</em>
+              <br />
+              está influenciando sua vida
+            </h2>
+            <p className="text-[15px] sm:text-base text-text-muted leading-[1.8] max-w-[480px] mx-auto mb-10">
+              Responda 10 perguntas e descubra qual ferida emocional está moldando seus
+              relacionamentos, escolhas e forma de se ver.
+            </p>
+            <Link
+              href="/quiz"
+              className="inline-flex items-center gap-3 px-10 py-[18px] bg-gradient-to-br from-rose to-sage text-text font-semibold text-[15px] sm:text-base tracking-wide border-none rounded-full cursor-pointer transition-all duration-400 no-underline shadow-[0_8px_30px_rgba(179,90,90,0.3)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_rgba(179,90,90,0.4)]"
+            >
+              <span>✦</span>
+              <span>Fazer o Quiz Agora</span>
+              <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </Link>
           </div>
-          <h2 className="font-serif text-[clamp(1.8rem,5vw,2.8rem)] font-semibold leading-[1.15] mt-4 mb-4">
-            Descubra qual <em className="text-gold-bright italic">Ferida Emocional</em>
-            <br />
-            está influenciando sua vida
-          </h2>
-          <p className="text-[15px] text-text-muted leading-[1.8] max-w-[520px] mx-auto mb-8">
-            Responda 10 perguntas e descubra qual ferida emocional está moldando seus
-            relacionamentos, escolhas e forma de se ver.
-          </p>
-          <Link
-            href="/quiz"
-            className="inline-flex items-center gap-3 px-10 py-[18px] bg-gradient-to-br from-rose to-sage text-text font-semibold text-[15px] tracking-wide border-none rounded-full cursor-pointer transition-all duration-400 no-underline shadow-[0_8px_30px_rgba(179,90,90,0.3)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_rgba(179,90,90,0.4)]"
-          >
-            <span>🧠</span>
-            <span>Fazer o Quiz Agora</span>
-            <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </Link>
         </div>
       </section>
 
