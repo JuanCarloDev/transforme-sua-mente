@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function FloatingNav({ onOpenModal }: { onOpenModal: () => void }) {
   const [visible, setVisible] = useState(false);
@@ -19,15 +20,23 @@ export default function FloatingNav({ onOpenModal }: { onOpenModal: () => void }
         <span className="font-serif text-lg font-semibold tracking-tight text-text">
           Transforme Sua Mente
         </span>
-        <button
-          onClick={onOpenModal}
-          className="cta-btn relative overflow-hidden inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-br from-gold-dim to-gold text-[#0a0908] font-semibold text-[13px] tracking-wide border-none rounded-full cursor-pointer transition-all duration-400"
-        >
-          <span className="relative z-1">Entrar na Fila</span>
-          <svg className="relative z-1 w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </button>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/quiz"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 text-rose text-[13px] font-medium tracking-wide border border-[rgba(179,90,90,0.3)] rounded-full transition-all duration-300 no-underline hover:bg-[rgba(179,90,90,0.1)] hover:border-rose"
+          >
+            🧠 Quiz
+          </Link>
+          <button
+            onClick={onOpenModal}
+            className="cta-btn relative overflow-hidden inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-br from-gold-dim to-gold text-[#0a0908] font-semibold text-[13px] tracking-wide border-none rounded-full cursor-pointer transition-all duration-400"
+          >
+            <span className="relative z-1">Entrar na Fila</span>
+            <svg className="relative z-1 w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </button>
+        </div>
       </div>
     </nav>
   );

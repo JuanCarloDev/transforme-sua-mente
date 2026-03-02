@@ -9,6 +9,22 @@ interface Lead {
   createdAt: string;
 }
 
+interface QuizResultItem {
+  name: string;
+  phone: string;
+  wound: string;
+  scores: Record<string, number>;
+  createdAt: string;
+}
+
+const woundLabels: Record<string, string> = {
+  abandono: "Abandono 🌑",
+  rejeicao: "Rejeição 🌒",
+  humilhacao: "Humilhação 🌓",
+  traicao: "Traição 🌔",
+  injustica: "Injustiça 🌕",
+};
+
 const analises = [
   {
     title: "Análise Editorial Completa",
@@ -61,6 +77,8 @@ export default function AdminPage() {
   const [loginLoading, setLoginLoading] = useState(false);
   const [leads, setLeads] = useState<Lead[]>([]);
   const [totalLeads, setTotalLeads] = useState(0);
+  const [quizResults, setQuizResults] = useState<QuizResultItem[]>([]);
+  const [totalQuiz, setTotalQuiz] = useState(0);
 
   useEffect(() => {
     fetch("/api/admin/verify")
@@ -68,6 +86,7 @@ export default function AdminPage() {
         if (r.ok) {
           setAuthenticated(true);
           loadLeads();
+          loadQuizResults();
         }
       })
       .finally(() => setChecking(false));
@@ -79,6 +98,15 @@ export default function AdminPage() {
       .then((data) => {
         setLeads(data.leads || []);
         setTotalLeads(data.total || 0);
+      });
+  }
+
+  function loadQuizResults() {
+    fetch("/api/quiz")
+      .then((r) => r.json())
+      .then((data) => {
+        setQuizResults(data.results || []);
+        setTotalQuiz(data.total || 0);
       });
   }
 
@@ -327,6 +355,79 @@ export default function AdminPage() {
                         </td>
                         <td className="py-3 px-4 text-[#7a7067] hidden sm:table-cell">
                           {new Date(lead.createdAt).toLocaleDateString("pt-BR", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Quiz Results */}
+        <section>
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-10 h-10 rounded-xl bg-[rgba(179,90,90,0.1)] flex items-center justify-center text-[#b35a5a]">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold">Quiz — Ferida Emocional</h2>
+              <p className="text-xs text-[#7a7067]">
+                {totalQuiz} {totalQuiz === 1 ? "resultado" : "resultados"}
+              </p>
+            </div>
+          </div>
+
+          {quizResults.length === 0 ? (
+            <div className="bg-[#151210] border border-[#2a2520] rounded-xl p-8 text-center text-sm text-[#7a7067]">
+              Nenhum resultado de quiz ainda.
+            </div>
+          ) : (
+            <div className="bg-[#151210] border border-[#2a2520] rounded-xl overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-[#2a2520]">
+                      <th className="text-left py-3 px-4 text-[10px] font-semibold tracking-[2px] uppercase text-[#7a7067]">
+                        Nome
+                      </th>
+                      <th className="text-left py-3 px-4 text-[10px] font-semibold tracking-[2px] uppercase text-[#7a7067]">
+                        Telefone
+                      </th>
+                      <th className="text-left py-3 px-4 text-[10px] font-semibold tracking-[2px] uppercase text-[#7a7067]">
+                        Ferida
+                      </th>
+                      <th className="text-left py-3 px-4 text-[10px] font-semibold tracking-[2px] uppercase text-[#7a7067] hidden sm:table-cell">
+                        Data
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {quizResults.map((r, i) => (
+                      <tr
+                        key={i}
+                        className="border-b border-[#2a2520] last:border-b-0 hover:bg-[#1c1916] transition-colors"
+                      >
+                        <td className="py-3 px-4 font-medium">{r.name}</td>
+                        <td className="py-3 px-4 text-[#b8ad9e]">{r.phone}</td>
+                        <td className="py-3 px-4">
+                          <span className="text-[11px] font-medium tracking-wider px-2.5 py-1 rounded-full bg-[rgba(179,90,90,0.1)] text-[#b35a5a]">
+                            {woundLabels[r.wound] || r.wound}
+                          </span>
+                        </td>
+                        <td className="py-3 px-4 text-[#7a7067] hidden sm:table-cell">
+                          {new Date(r.createdAt).toLocaleDateString("pt-BR", {
                             day: "2-digit",
                             month: "2-digit",
                             year: "numeric",
