@@ -46,7 +46,7 @@ export default function QuizPage() {
   }, [step]);
 
   const handleStartQuiz = useCallback(() => {
-    setStep("info");
+    setStep("questions");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
@@ -54,9 +54,30 @@ export default function QuizPage() {
     if (userName.trim().length < 2) return;
     const phoneClean = phone.replace(/\D/g, "");
     if (phoneClean.length < 10) return;
-    setStep("questions");
+    setStep("loading");
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [userName, phone]);
+
+    const msgs = [
+      "Analisando suas respostas...",
+      "Identificando padrões emocionais...",
+      "Conectando com sua história...",
+      "Preparando sua análise...",
+    ];
+    let mi = 0;
+    const interval = setInterval(() => {
+      mi++;
+      if (mi < msgs.length) setLoaderText(msgs[mi]);
+    }, 700);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      const wound = (Object.entries(scores) as [WoundType, number][])
+        .sort((a, b) => b[1] - a[1])[0][0];
+      setTopWound(wound);
+      setStep("result");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 3000);
+  }, [userName, phone, scores]);
 
   const handleSelect = useCallback((index: number, wound: WoundType) => {
     setSelected(index);
@@ -71,29 +92,8 @@ export default function QuizPage() {
     setSelectedWound(null);
 
     if (currentQ + 1 >= questions.length) {
-      setStep("loading");
+      setStep("info");
       window.scrollTo({ top: 0, behavior: "smooth" });
-
-      const msgs = [
-        "Analisando suas respostas...",
-        "Identificando padrões emocionais...",
-        "Conectando com sua história...",
-        "Preparando sua análise...",
-      ];
-      let mi = 0;
-      const interval = setInterval(() => {
-        mi++;
-        if (mi < msgs.length) setLoaderText(msgs[mi]);
-      }, 700);
-
-      setTimeout(() => {
-        clearInterval(interval);
-        const wound = (Object.entries(newScores) as [WoundType, number][])
-          .sort((a, b) => b[1] - a[1])[0][0];
-        setTopWound(wound);
-        setStep("result");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }, 3000);
     } else {
       setCurrentQ(currentQ + 1);
     }
@@ -211,9 +211,9 @@ export default function QuizPage() {
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[rgba(200,164,78,0.15)] to-[rgba(200,164,78,0.05)] border border-[rgba(200,164,78,0.2)] flex items-center justify-center text-2xl mx-auto mb-6">
                 ✦
               </div>
-              <h2 className="font-serif text-[1.8rem] sm:text-[2rem] text-text mb-3">Antes de começar...</h2>
+              <h2 className="font-serif text-[1.8rem] sm:text-[2rem] text-text mb-3">Falta pouco...</h2>
               <p className="text-[0.95rem] text-text-muted mb-8 leading-[1.7]">
-                Precisamos de algumas informações para personalizar sua análise e enviar o resultado.
+                Suas respostas foram registradas! Informe seus dados para receber sua análise personalizada.
               </p>
 
               <div className="space-y-4 mb-4">
@@ -260,7 +260,7 @@ export default function QuizPage() {
                     : "opacity-35 pointer-events-none"
                 }`}
               >
-                Começar o quiz →
+                Ver meu resultado →
               </button>
             </div>
           </section>
