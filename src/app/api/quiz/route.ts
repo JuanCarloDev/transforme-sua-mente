@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage } from "@/lib/telegram";
+import { sendTelegramMessage, escapeHtml } from "@/lib/telegram";
 import { insertQuizResult, getAllQuizResults, countQuizResults } from "@/lib/quiz-db";
 import { wounds } from "@/lib/quiz-data";
 import type { WoundType, Scores } from "@/lib/quiz-data";
@@ -51,9 +51,11 @@ export async function POST(req: NextRequest) {
 
     const traitsText = w.traits.map((t) => `• ${t}`).join("\n");
 
+    const safeName = escapeHtml(name.trim());
+
     const telegramMsg =
       `<b>🧠 RESULTADO DO QUIZ — Ferida Emocional</b>\n\n` +
-      `👤 <b>Nome:</b> ${name.trim()}\n` +
+      `👤 <b>Nome:</b> ${safeName}\n` +
       `📱 <b>Telefone:</b> ${phoneFormatted}\n\n` +
       `🔮 <b>Ferida:</b> ${w.name} ${w.emoji}\n` +
       `📊 <b>Pontuação:</b> ${scoresSummary}\n` +
@@ -62,7 +64,7 @@ export async function POST(req: NextRequest) {
       `━━━━━━━━━━━━━━━━━━━━\n` +
       `<b>📋 COPIAR E ENVIAR PRO CLIENTE:</b>\n` +
       `━━━━━━━━━━━━━━━━━━━━\n\n` +
-      `Olá ${name.trim()}! 🌟\n\n` +
+      `Olá ${safeName}! 🌟\n\n` +
       `Você completou o quiz "Descubra sua Ferida Emocional" e o resultado mostrou que sua ferida predominante é:\n\n` +
       `${w.emoji} <b>${w.name}</b> — ${w.sub}\n\n` +
       `${w.teaser}\n\n` +
@@ -71,7 +73,8 @@ export async function POST(req: NextRequest) {
       `Agende uma conversa gratuita comigo. Vamos entender juntos como essa ferida se formou e qual é o caminho da sua cura.\n\n` +
       `— Ricardo Cavassin, Psicanalista`;
 
-    sendTelegramMessage(telegramMsg).catch(() => {});
+    const sent = await sendTelegramMessage(telegramMsg);
+    if (!sent) console.error("[quiz/POST] Falha ao enviar Telegram para:", phoneClean);
 
     return NextResponse.json({ success: true });
   } catch (err) {
