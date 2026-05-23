@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descubra sua Ferida Emocional — Ricardo Cavassin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080608;
+  --surface: #110f12;
+  --surface2: #181520;
+  --border: #2a2535;
+  --border2: #3d3850;
+  --cream: #ede8e0;
+  --cream-dim: #9990a8;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --rose: #9b3a5a;
+  --rose-light: #d4607a;
+  --violet: #7a5a9b;
+  --violet-light: #a880d4;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--cream); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 40% at 15% 10%, rgba(155,58,90,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 90%, rgba(122,90,155,0.08) 0%, transparent 60%);
+  pointer-events: none; z-index: 0;
+}
+.page { position: relative; z-index: 1; }
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px 50px; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; border: 1px solid rgba(201,168,76,0.3); border-radius: 999px; font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 36px; animation: fadeDown 0.8s ease both; }
+.hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+.hero-avatar { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--rose), var(--violet)); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; border: 2px solid var(--rose-light); font-size: 2.2rem; animation: fadeDown 0.9s ease 0.1s both; position: relative; }
+.hero-avatar-glow { position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(212,96,122,0.2); animation: ringPulse 3s ease infinite; }
+.hero-avatar-glow2 { position: absolute; inset: -16px; border-radius: 50%; border: 1px solid rgba(212,96,122,0.08); animation: ringPulse 3s ease 1s infinite; }
+@keyframes ringPulse { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.05);opacity:0.5;} }
+.hero-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--cream-dim); letter-spacing: 1px; margin-bottom: 6px; animation: fadeDown 1s ease 0.2s both; }
+.hero-title-tag { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--rose-light); margin-bottom: 40px; font-weight: 500; animation: fadeDown 1s ease 0.25s both; }
+.hero-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 8vw, 4.2rem); font-weight: 700; line-height: 1.1; color: var(--cream); margin-bottom: 20px; animation: fadeDown 1s ease 0.3s both; }
+.hero-headline em { font-style: italic; color: var(--gold-light); }
+.hero-sub { font-size: 1rem; color: var(--cream-dim); line-height: 1.7; max-width: 420px; margin: 0 auto 44px; font-weight: 300; animation: fadeDown 1s ease 0.4s both; }
+.hero-cta { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; background: linear-gradient(135deg, var(--rose), var(--violet)); color: var(--cream); font-size: 0.9rem; font-weight: 500; border: none; border-radius: 999px; cursor: pointer; transition: all 0.3s; letter-spacing: 0.5px; animation: fadeDown 1s ease 0.5s both; box-shadow: 0 8px 40px rgba(155,58,90,0.35); }
+.hero-cta:hover { transform: translateY(-3px); box-shadow: 0 16px 50px rgba(155,58,90,0.5); }
+.hero-scroll { margin-top: 60px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--border2); animation: fadeDown 1s ease 0.7s both; }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--border2), transparent); }
+@keyframes fadeDown { from{opacity:0;transform:translateY(-16px);} to{opacity:1;transform:translateY(0);} }
+
+#quizSection { display: none; max-width: 640px; margin: 0 auto; padding: 20px 20px 80px; }
+.name-step { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 36px; margin-bottom: 24px; text-align: center; }
+.name-step h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--cream); margin-bottom: 8px; }
+.name-step p { font-size: 0.85rem; color: var(--cream-dim); margin-bottom: 24px; line-height: 1.6; }
+.name-input { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 1rem; text-align: center; transition: border-color 0.2s; margin-bottom: 16px; }
+.name-input:focus { outline: none; border-color: var(--gold); }
+.name-input::placeholder { color: var(--border2); }
+.quiz-progress { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.quiz-progress-bar { flex: 1; height: 3px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.quiz-progress-fill { height: 100%; background: linear-gradient(90deg, var(--rose-light), var(--gold)); border-radius: 999px; transition: width 0.5s ease; }
+.quiz-progress-label { font-size: 0.75rem; color: var(--cream-dim); white-space: nowrap; }
+.q-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 28px; margin-bottom: 14px; animation: cardIn 0.35s ease; }
+@keyframes cardIn { from{opacity:0;transform:translateX(20px);} to{opacity:1;transform:translateX(0);} }
+.q-num { font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: var(--rose-light); font-weight: 500; margin-bottom: 12px; }
+.q-text { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--cream); line-height: 1.45; margin-bottom: 8px; }
+.q-hint { font-size: 0.78rem; color: var(--cream-dim); font-style: italic; margin-bottom: 20px; line-height: 1.5; }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.opt-btn { display: flex; align-items: flex-start; gap: 12px; padding: 13px 16px; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.87rem; line-height: 1.5; }
+.opt-btn:hover { border-color: var(--rose-light); background: rgba(212,96,122,0.07); }
+.opt-btn.selected { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+.opt-letter { min-width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 600; color: var(--cream-dim); flex-shrink: 0; transition: all 0.2s; }
+.opt-btn.selected .opt-letter { background: var(--gold); border-color: var(--gold); color: var(--bg); }
+.next-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, var(--rose), var(--violet)); color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; border: none; border-radius: 12px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; margin-top: 8px; opacity: 0.35; pointer-events: none; }
+.next-btn.active { opacity: 1; pointer-events: all; }
+.next-btn.active:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(155,58,90,0.4); }
+
+.loader-section { display: none; text-align: center; padding: 80px 20px; max-width: 400px; margin: 0 auto; }
+.loader-ring { width: 56px; height: 56px; border: 2px solid var(--border); border-top-color: var(--rose-light); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 24px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-text { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--cream); margin-bottom: 8px; font-style: italic; }
+.loader-sub { font-size: 0.8rem; color: var(--cream-dim); }
+
+#resultSection { display: none; max-width: 640px; margin: 0 auto; padding: 20px 20px 80px; }
+.result-hero-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 40px 28px; text-align: center; margin-bottom: 18px; position: relative; overflow: hidden; }
+.result-hero-card::before { content: ''; position: absolute; top:0;left:0;right:0; height: 3px; background: linear-gradient(90deg, var(--rose-light), var(--gold), var(--violet-light)); }
+.result-eyebrow { font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: var(--rose-light); margin-bottom: 16px; font-weight: 500; }
+.result-wound-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 7vw, 3rem); font-weight: 700; color: var(--cream); line-height: 1.1; margin-bottom: 8px; }
+.result-wound-sub { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 22px; }
+.result-divider { width: 40px; height: 1px; background: var(--border2); margin: 0 auto 20px; }
+.result-teaser { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--cream-dim); line-height: 1.8; max-width: 440px; margin: 0 auto; }
+.result-description { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 18px; }
+.result-description h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold-light); margin-bottom: 12px; }
+.result-description p { font-size: 0.87rem; color: var(--cream-dim); line-height: 1.8; }
+.result-traits { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 18px; }
+.result-traits h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); margin-bottom: 14px; }
+.trait-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 0.84rem; color: var(--cream-dim); line-height: 1.5; }
+.trait-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rose-light); margin-top: 6px; flex-shrink: 0; }
+.cta-box { background: linear-gradient(135deg, rgba(155,58,90,0.15), rgba(122,90,155,0.1)); border: 1px solid rgba(212,96,122,0.3); border-radius: 16px; padding: 28px; text-align: center; margin-bottom: 18px; }
+.cta-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--cream); margin-bottom: 10px; line-height: 1.3; }
+.cta-box p { font-size: 0.85rem; color: var(--cream-dim); line-height: 1.7; margin-bottom: 22px; }
+.whatsapp-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 30px; background: #25d366; color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600; border: none; border-radius: 999px; cursor: pointer; text-decoration: none; transition: all 0.25s; box-shadow: 0 8px 30px rgba(37,211,102,0.3); }
+.whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(37,211,102,0.45); }
+.prof-footer { display: flex; align-items: center; gap: 16px; padding: 20px 22px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; }
+.prof-footer-avatar { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--rose), var(--violet)); display: flex; align-items: center; justify-content: center; border: 2px solid var(--rose-light); flex-shrink: 0; font-size: 1.4rem; }
+.prof-footer-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--cream); }
+.prof-footer-title { font-size: 0.7rem; color: var(--rose-light); letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+.prof-footer-quote { font-size: 0.78rem; color: var(--cream-dim); font-style: italic; margin-top: 4px; line-height: 1.4; }
+.restart-btn { display: block; width: 100%; padding: 14px; background: transparent; color: var(--cream-dim); font-family: 'DM Sans', sans-serif; font-size: 0.82rem; border: 1px solid var(--border); border-radius: 12px; cursor: pointer; margin-top: 4px; transition: all 0.2s; }
+.restart-btn:hover { border-color: var(--border2); color: var(--cream); }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<section class="hero" id="heroSection">
+  <div class="hero-badge">Psicanálise · Autoconhecimento</div>
+  <div class="hero-avatar" style="background:none;padding:0;overflow:hidden;">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADIAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDgi4A4FIZT0xxQUIHSo2BznHFTcuw9ZcNxTzKfxqtgg+1OHIouKxMZC1GTjANQ5A70eYT9KGx2LCZxyalX5R61WWQdzUN/qEdnbPM/JVSwHripbGkaQyQKivL6xsV33VzHGfQtz+VefzeIJV1J5HkZgDlQDxjt9ap3Pk38sl9ES+7llZyQD79xWfPrsach6JF4k0SRcreA47bD/hTovEeiMP8Aj5cd+YzxXmtq7xoYHtkQBvmHoT0/PtSy3n2UB58eUMZMZwVycZOO3vVXYcqPX9Ov9OvFzBeQt6gnB/I1rQQKyB1IZT0IORXhq3DRyFVY7CrEfUc5H4HP511vw08Rta6qNOuZv9Hmbadx4Vv4WGegNFxNJHp8VuCMdDU4t8Hj+VW4I0dVkXDKwyCO9TrGDj9aLhYpR2/qMVYWBe/WrPlgcU4RkilcdiqY8H2prIp7Vd8knNRSwsBnFK4FGZAF6VWZFNXZFI4OarybcYFVcVio8YPWodmOTVmQ46VA59KdwIioB60UvWigRhPFxgCojECDxyK0nQDpVd0Bai4WKDw8c1H5R9K0miBUUxogvbincRlTxtniliTtV2WMH2pIYCSD2oYIpTqETe52qO9cT40v3GoLaoRtWMSL7k9vyrsfHDG18N3D4JBABIPTmvItSup7m4M7MTIAOvtxU7lbGhLEDeI6H91PHge3GQP5ipbINFcFWYBiMEf3h6j8KyI7t3h2LnCZYDHIFRJdTJN5yuTj15p2uHMdLNcpAdjFXjx8o6lR3H+77dqy7i6jLlHbfFJna5HTPUH2PQ/nWerXE7/Jl2J+6e30NXNP0XVr8hbW3dt55CijYLt7E5mC2EYQ7pY0KgHrkZH8sVFb3vlwRuFDNtAJP8v5V1vh7wBrFxcIk8LBAMs2M4PYVW8d+Dp9Bvod6FoJhwy8DPepU43tc0dKajzNHefAnxU+oRroF9IS4UtbM7ZOOuwewHNevLakHFfKfh24l0nVbXUbY5ktpVkTjuD0/EV9eaZPb6lp1tqFsweG4iWRCPQjNKWhEVcqLang4zUq2zE9K0hENuAKesRxipuXYzjbgduaje368VqvFjoM0ySNcE0rgc9c2wz7Vm3cSqp6Ct+/4VuxxxXz9478W6ra6rcW6SsUViBincLHpF5d28JxJOij61kXXiLS4Sczg49K8Rv/ABNqcxO6Vh+NZFxqd5IctKaqzIuke3X/AI60+BT5QVj7mivBnnlflnY/jRT5WHMux7InjmzY8gYre0PVYNUj3R/pXPar8PU07LEHANdB4V0lLG0G1ePetpQsYxndmsEHJPSoZUJPtVwx5Tpim+USo5ziszQz5I+3rVu0gLDpxTmhwegNaumwLtGRUtjSOe8X6FPq3h6e0t22zEBl98dq8BlQwTPFKASrEHA7jrX1rbwLjOOa+afiJo50DxnqFqysUMpliyPvI/zD+o/CnFhJWMuw06W9j329u7knAJFdd4e+G97qIjaUCJGPzc1c+HfltbIjKN2/PHbNewaXEIVXBA5BCjuK5K2IlB2R6GGwkJxUmc34c+F+m2yMt0DMwAAIGK9K0Pw3pumwRRWlqkSIOu3kn3qe1RpFjZFIA68c4rYEWXjjB3E5OSc1h7WUtzujRhDZFG5trZH2xjBHPTGa4D4saN9t8PSSBX3Wx3qcZyO9errpkCluckDLNn7prlNU1PQZbmWwF9DIxG10+8D7HFKPNGXNYKjjKLiz5ba3McjMuD/jX0X8C777Z8P7W3aQM9nI8JHdRnco/I1518V/BH/COwQarp6u9lK2yVDyYifukHup7ehrrPgnZanp3hGfUvvrdXO6OIjCkD5ckj1wce9d86i5eY8mnQk6nIesKKeoqK3kWaFJUBCuuR61YHHSl5kSTTsxCuT0qvOMZqy2SM9KrTgFc5oEZF+AYm+hr5k+Iij+27j13mvpy+xtbPpXzT8Qwv8Abl1j++aGVE4S4iGaqPEK05VBJqtKmDWikZyiUTGB2oqw60VRFj638X2BaE8VjW9qEtwDxXZeJ0xAeBWDtU268da2qPQyhuZTxY4xTPLOc54q88eelQumKwNisqdunNa1hGMc81nAfNjGK2dOXgcVMhovQIBivJv2kdAZ7XT/ABFEpwn+i3GB0B5Q/nkfiK9ihjzjNc/8UImvPDsmjfZ4Xjvo2VpJc4QjBUjHfPOfapclDVlxpuo+VbngXwyuJTeywEFgqgZ9ya9+0Z7OGGI3NzEkgGcFua8C8GWl1Yaxqdi6lLmNAQPcEgEfmK623s7e8vzpYuXju3g8yS5u5ykSnnCgL1JPqQB71zVqanU3O7D1HTp7HuOj6zpymaGTULRwuGXZIC2O4I9RWxd6jFBLJdpC0kEMQZnj5Gw9x9K+ZLHwhfJaPezRMJSU8snABIz5nAOSOmCfevX/AIOapcS6W9pfuZCEKDd12dhWdSCp7HTRqSq7qxjeKPFniXxVrq6Lo1tJp1gz/PLna0v1z93/AD1qp4f1TX7G9n0u38NacptQ4mjk8yS4Zg+DucgLk9fpXU6p4TguL9Z45Mxs/wAqf3Tmuv8AD2lWVpF5c6MkudxBPGfWtVNNWM5UJc17lIaVBqmgS6bqETLDeRlPKY5MWfT6H+VZfw/kubDwe2m30JZtHlktLps4+VWyrY91YGu3eJDINi7QBkVzWp2szeLbmxt8LBqsUNxPliBmIlX6dyNlRHZplNcs0zdsIfJtUTduHLKf9kkkfoas5A570NGyjBYNySCPQngU08DNdcPhR51f+JIGcc+9U5j1qxIcAmq0zbc4FVYxMy/PBxmvm74hjOvXWP75r6RvmyhNfOPxGGzX7kH+/wBamWxcNzjJlAOarTAk4UE/Sp7luSa3fDNsv9ny3TxbnycZFS5OKuNrmdjlvs9wx+SFz/wGivRPB0P9p6k6XEKoqcgHvRR7SXVEqCfU+jPGQxatjg1zcXNuvc11HjFc2rcVztrGPsi56121djlhuV5EOM4qvICDitCZSF6cVUZRnPX61zm5Ub73etrTPug1ksuWH1rasF+QYoaBGlACcVD4o0ttS0SaOIHzo1LR+/HI/EVbt1xWlbqcY71LipKzNITcJKS6Hz1qtpBZ+NreaMhxLbmKQqONwwy/jjP5V32haPbXhivfLCsT8xxVb4g+HTDqdzcwuqNgTxKP4lBzj8DkA+hxU/hHUQLRYgxGPWvPqXWnY9anaUrrrqdHr1tbx2bKqjcYzz6CuN+H8kya0IEJDEbenXHBrvZStxCGYbSQevNeZ6pqp0LUopYUYXKyttGOHU9Oc9fwrO7k7I6VaCuz1eWz1BZfLES7gQW5yD34rctcTJx99flw3avKZ/FV3exqJZJN7qsuBKyYOcHIH3seh4rpdI8X2lq6wStMZAvVlzu9efWt+SS6GXtYPqdjIoR87eSDyKxtYuFh1GwuinmBGeJhuwdrDPX6qKvy6jaz2Au45VkiK7twPGK4rXdRknuka3J8lWBA28sQR1qqeu5zVpdUegEkDkjPtSEggZ61DaTC4tYph0dQalcgJzxXYkraHlybbuyOUg1SuHxxmrLtg1RuCWc07CKN6crwetfOnxNLf29dH/br6KugAOa+dviSfM8Q3SAZO+pkio7nB3THBOa6DSb2YaekcIJ9qx57KdugFdHodxBZWiLLECy+/WlJaFJ2Zq/DqRxr8iSZz3H40VS0/V1sdbOoRJGoIxtJ4oqZRbY4WVz6h8XjFkcelc7aAm1BFdJ4wVvsLEVz1j/x6j3ruqbHFTeolwMx8DBqhIpA5xmtOZcrnpVGUBTXOblQjJFbGn8IBWUx+b/61aNk+AMZoYI27boM1o22VxzWXbMcKRWlA3qeaQxus6RYaxHGtyJFePOySNtrAHqPcV5LfW8eg+LrrR97JGhDQbzy0bDIPvjkfhXsyGuD+M/hx9T0uHWrSPdc2GRIAMkxHqf+Ann6E1lVpqSZvRrShJa6FOTW/I0d2zl8FR656Vx8tlFcXS3etz4m3ZSFSefT8PpWFb6jdQSySyzNJBj5QeQG/wD1811ulWsMjJctMZJdoKSA53cdM9q4lH2Z6caiqvU6PRIrp5jHaaVHGJV3GURiMFfTLEnH0FWrnT9XvXZHlhjCgliqBjnsAcDj8K5TUdc8WR6iljaQQRnjbIFLkDueeld1BP8A2dpkBubh57hl3Yzj5u+a0lsmluXKpTaa7GRp08lvaXVhvAkWTLRbhtXjn8O9VpJ2luUEakRPIY8j1BGf0BrLvJUmvr2SSUq8p47fh+ldL8PdAvvEWqxW2npkOuEduVRM/NI3t2Hrx61ray03OC93rsdt8MLO91621i3W02QWO37NOCR5krZZo8d+MHPbIpgnjm3mORHCsVJVgcMOoOOhHpXr+naZpvhXw2LWJ1hs7SNpJZpDjPGXdj69Sa+J4fiTb2/xc1rX7WMxaLqt4xlhUYymcCXH97+L3yRXcqTUV3PPnUTm2tj3V2yetQODkmnRSxzQpNDIskcih0dTkMpGQR7U16gZn6iflzXzr8SCU8R3LJ13V9D37fIVr58+JQx4juRjHzVMhx3OJuLmcd6ozz3LD/WkVcuR1qlKOKaBlV/PY8zN+dFTqMnrRTJPubxeubB8elcxYcWoyOldP4ncfYHA64rmLPH2auipsc9PcnkwUNUZ+M8VbkbKgDpVSdSRXOdBRdsZx+VX9PYELniqMq8HtirdiDtU5oA3bUjjvV+FgWAFZdu4HersLZx60DNKM4qwNpQjGQeo9apI2BUySGgDyT4teE4NJKaxpcJWzmfZcW6jIjbqCo9Dzx2PTrXn/h/WUs7wRxytuDYVDwv+RX0hrdjHrGlXOnS4CzxlQf7rdQfwODXzx4i0TydQkivrcxzwuY5QDghh/ng1zVUovVaM6qXNKOj1R3eg3qRrPM/lSTzrkqxGemTznjvj3xTNY8RWMlurLMrfZ2yiMcsSOM8dz0/CuU0vSEeFX+0zuF4ALZ49DxXTeB/BGpeK9YFppVuIbeNh9pvHGUhXrgerHso/HFZwabtHVm81JRvPRE/w+0LV/GGtNa2lqTGX3NvJ2on+0ew6+/YV9ZeBfC1h4V0cWlriSd8GecrgyH+ijsO1U/AvhrS/Cujx6dpkOxRzJIeXlb+8x7n+VVPi74+0/wCH/gy71y8KyTKPLtbfODNMfuqP5n0ANenTocmr3PMq1ubSOx5D+2b8TF07TF+H2kT/AOmXqCTU3Q/6uA/dj+r9T/sj3r5FLYq54g1jUNe1u81rVbhri+vZmmmkPdj6egHQDsAKoZrRmSPXPgv46Gn+X4f1ab/Q2bFtKx/1LE/dP+yf0PtXtUjArkEHIyPQivjeacxABThj/Kuu8HePde0LZHBdGW2HWCb50x7d1/CspR1LjKx9C6ifkzXgfxLGdcuGHUGvStF+Iej63GsNx/oF0eNrtmNj7N/Q15v8Q/m1u5PY9KxmrI1g0L4J8NWWq6De3dwAZI1JBPtXKxaTFKs67CWQkDivSPhSA+k3sY5ypzWTOFtdRuIljGGBq4pcxEnpc8xutPnic7VOPpRXQXkhLys4A+biitOUz50fXfiYbbJz7Vy9qSLbHqa6zxNh9Nc1ysYxZg+9XU2M6e45n9qrysenrTyxwBSOQOSBXMdJVm+6Rjmp7M4QVXuCO3ep7fIRSDQBoROcj0q/BJgjvWZEcqDmrls/TNAGqj571OjgDk/hVCNwB7/WodU1Wx0qzkvdRuY7e3jGWdz+g9T7UAXL/UrXTLC61G+mWG1to2lldugUDJrkvHHhqbxHpkHibRrd53mtkee3VcyMhUFXA7kAgEV4v8a/ibceI7J9G02NrfTWbcd3+smx0z6DPOKPiv478Q+faeF9O1C5sLGxsbaKWO3kMbSSCJdxdhycHgDpxQ6amrSHCq6crxPU/hL4J1fxXeMHEtlo8TlZrgqQ8jDqiA9/U9vrX07oGkafomlw6bpdqlvBEMKqj8yT3J9a+HfhJ8bPGHgCbF3dSa7pcjbpLK8lJYepjkOSh/MHuO9fangLxnovjPQLXVdM8+2e4hEptLpNkyA+o7j3HFbUKMKS03JrV5VXqdCZ1ghLMcV8M/tMfEBvG3j57W0uDJpOlFoLfaflkkz+8k/EjaPYe9e+/tReP/8AhFPBr6fYz7NV1UNBb7TzGmPnk/AHA9yK+KjkDFbSfQwSJPakJJYBaYJF2ksQMDvVZrlmJWMcdCx/pUXKAv5sxYdAcD6CrSMRg5qpGMcCpVPPWoYGjb3BQ5zWkLjz02zMSMYBz0rBDAVOk5Xo1LpZlJnp3wouba1lubWa7hVpQRGGbG7jpz3qpr2F1109ciuEiuo1xu3E1qxayJHjNx5jlOAxOT+NEVaVxSd1YTTdKuNa8QtYQ5ABzRWx4C1BLLxj9rK74nA5zRTko3FBaH0z4kBGntmuYBJswSOhrq/E7KNNckj2rjpriNLLAYZz61rNaGUHqRyPheSAe1V5bhFX53Fcx4x1eWCNfIfae9cqPE0wO2WTiuQ6Oex6I2o2zyCLfzmtCCdcYBrzbT5xfP56s2Qa6vTrvaEVnyaBxkdTE4AFWopOrbgABkk9qyI5sOOeDXkfxH8dz6lezaVpsrRafCxSRlODOw68/wB0enemlcbdj0rxR8R9F0SKSO2db+7HASNvkU+7f4V4t4p8Van4lvWuNTuS0cYO2JeEjHoB/WufuJmZTyeeKrTMUhEa9XPNNIls6T4Z+E7vxh4qikMZFlbyB5WI4OOi1N8TrT7P8TtYWYrhWV8D0KAj9MV758FdDt9E8EwSOFSSWPzJXbjGRk5/CvnjxZqieI/F2u6xFkxXNyzQhufkHyr+gH51ot7CeiN74P8Agk+M9d+2XiO2nQOBsUf61hzt+nrX1Cuh2VlGbp2+zTQp+5MchUxADlie2AK4P9mKKKH4cho4wtw99KjMBzjIp37SnipND8LDw9ZSYv8AVgVlYH5lgB+Y/wDAj8v/AH1WzaSIV9zw34oeLr7xn4tuNUurmS4hjHkWhfAPlKTg4HduWP1rk2JzTicUxvUcYrMYyQK42sMiomXacZqSVwuMD5z0HpURGOvJPX3pMBRT05pgGakUACiwDt2KVSTyOlRf6xwgP1qwMDA7UJAPQZ9qkV+aiJ44p69QRVgWLa6ltp1liYqymiosBqKTSYXPqzxJrvmWZhx8w6ivPLzUpGvRGr4QnpXQ+Kba5hsXvEQZPOFOa801LVklZTGwEinke9RUcupjAm8eTsyZQ4PrXE27SCQPcA4rW8SXpaAFjhu46g1nWUq3dmykAOO561ia7s3NL1BY22RMQP510qahFbqj7yT1rzyxZ0k27uQa34WDIPUdyc0hpm34p8WS2vh+5kiLJK6+VEfQnv8AlXkw4UYJzXSePbhjBZ2nRWYufftXNjritIrQdxHY9Kv+FtObVvEtlY7SweQAj2HJrNH+sOegr0n9nnTPtfjB751BW3TC5/vMf8KpLUD1X4x6k3hT4SzwwvsuL0LZxYOCAw+Y/wDfIb86+aNJcKje/avXv2tNYE2s6PoSNxbQtcyAf3nO1f0U/nXjVpuWM7eTVLe4SPrL9nuOPTPhbHqt4ywxM89xubgBQSCx9gFr52+IniabxZ4vvtcl3LHK+y3Q/wDLOFeEH5cn3Jr1T4t65/wjXwo8PeCrVyl1eWUZuQp5WEAEg/7z8fQGvCmPbrVXAQkGmMQo3HOB+vtTsAcDmoSRI+R90fd/xqRAq8lm6mlIpaFGTQAirzSuQFJp+3AqKUbpFT1PNMCS3XCbjwx5NSbgD60EYFJ0p2AeoHU9aeuOajU5p4HegB6kiimMW7UUAfRun3/2jQpYWLOvOWxXjuveVbXrhSA2416+NY0OTRvKtwiy7MYWvMPEGj/vGuGIOTkVE3dWMYHMyy+e+2XBB9Kr2jGCcqh+Wpb+L7PLhsAVSYlX8xOR71iaI0LjK4lPGas2d03ylD096y5JJJYSGJAqexRigWIc0DKviiWaXUrcTHOFyPpzWf0BNWtaEv8AaMfnHJCcVVkI28cCtFsMhU9TXv37L+ls8Vzdsvyl+vrXgCdMe9fTvwmlXw38Eb7XSAHjtJZ1J9Qpx+uKuI1ueD/GPWP7d+JmuX6tuiFyYIiOmyP5B/In8aoeCrWO98T6ZZ3EgjgkuU85z0SMHc5/BQTWEzvJIXkOXY5Y+pPWrtkzxylkYr8hUkehGCPyoEdJ4+8QyeJ/Fl/rTgrFNJtt0P8AyzhXhF/L9Sa58njNK5J+lRu2Fz17AetMBkh3ZQH/AHvpTlGKbGuAcnk8mnilYBwXPWgL6UoGBSjpk1SQC4qCL57pz2UYqcnAyar2xyGf+8xpAWSabjmkBJpQc0wFBqRCDxnFRAc8c09fXFAEnbHeimE5YgNgmii4HryeG57WyS5UEFx2rO15XTTsbwSOtdlq3iGO70lYrdMADnA6/SvLtWubtrx4WPy5qHypaGMb31MTUIZrhiGBIB4qrbwsqspboa3mCxxsWwTisOe4JkcIOM84FYmo4q32fr9aksbhYGBP5mqyiYRknJWp4rdWILDGaAIfEjK95FIv8UX9aynP7vNX9eXy7iJQcjy/61nPytarYYxB8wr6R+Iko0P9miK0U7Wu1t7Ye+4hm/QGvnCAjzUB6Zr3P9pPUVj+H3hHR0bmVmuGAPZUCj9Wq1swPBIz8wzV+LCx+/U1QhG6QCrwIpIBc54FRE7nz/COB/jRIxHyjq38qXHHBxTAeOaUUgp20EcGmA4EDuKUnPFRjjpTi3Az60wGyuMHrmorY/uVp05AUnPaoYH/AHS/SpYFtGwaX1qEHBzmpkORxTAegxnGDUUnnMflGBUqnDDPQ1NkdqAKBtpyfvc0VeyM+lFKwHqNxbtYvJbeYRIo4GelclfSTJcHzBk7uWNFFc70lYzRB9qTcVbnIqiskcdwUaP73NFFBbJrqSNIVGBzzioo5+AChx14ooqugGXrsm6+X08uqDHINFFWhjYzhhXoHx71BrvXNGtd3yW2lRYHoXJJ/kKKKpfCLqee2Yy7NjoMCrDEDmiihDI1Jb5j36fSnjJNFFMCRVOO1Oyf8iiimA1vcmjAxxn86KKAK07MQVbmobRiY146cUUUmBaJJp0JKnhsjvRRQBLJcRhcdaiR7iXlW2L6miigCaOKXPMpNFFFAH//2Q==" alt="Ricardo Cavassin" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;">
+    <div class="hero-avatar-glow"></div>
+    <div class="hero-avatar-glow2"></div>
+  </div>
+  <div class="hero-name">Ricardo Cavassin</div>
+  <div class="hero-title-tag">Psicanalista · Terapeuta</div>
+  <h1 class="hero-headline">Qual é a sua<br><em>Ferida Emocional?</em></h1>
+  <p class="hero-sub">Responda 10 perguntas e descubra qual ferida emocional está influenciando seus relacionamentos, suas escolhas e sua forma de se ver.</p>
+  <button class="hero-cta" onclick="startQuiz()">✦ Descobrir minha ferida</button>
+  <div class="hero-scroll">
+    <span>role para baixo</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quizSection">
+  <div class="name-step" id="nameStep">
+    <h2>Antes de começar...</h2>
+    <p>Como posso te chamar? Isso torna a sua análise mais pessoal.</p>
+    <input class="name-input" type="text" id="nameInput" placeholder="Seu primeiro nome" maxlength="40" oninput="checkName()">
+    <button class="next-btn" id="nameNextBtn" onclick="startQuestions()">Começar o quiz →</button>
+  </div>
+  <div class="quiz-progress" id="progressBar" style="display:none;">
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill" style="width:0%"></div></div>
+    <span class="quiz-progress-label" id="progressLabel">0 / 10</span>
+  </div>
+  <div id="questionCard"></div>
+</section>
+
+<!-- LOADER -->
+<div class="loader-section" id="loaderSection">
+  <div class="loader-ring"></div>
+  <div class="loader-text" id="loaderText">Analisando suas respostas...</div>
+  <div class="loader-sub">Identificando sua ferida emocional predominante</div>
+</div>
+
+<!-- RESULT -->
+<section id="resultSection"></section>
+
+</div>
+
+<script>
+const questions = [
+  {
+    text: "Quando alguém próximo se afasta ou para de dar atenção, como você costuma reagir?",
+    hint: "Pense em relacionamentos amorosos ou de amizade",
+    options: [
+      { text: "Fico apavorado(a) e faço tudo para reconquistar essa pessoa", wound: "abandono" },
+      { text: "Sinto que fiz algo errado e fico com vergonha de mim mesmo(a)", wound: "rejeicao" },
+      { text: "Acredito que não mereço atenção mesmo — não me surpreende", wound: "humilhacao" },
+      { text: "Sinto raiva e me fecho, esperando que a pessoa venha até mim", wound: "traicao" },
+      { text: "Prefiro não me apegar demais para não sofrer depois", wound: "injustica" }
+    ]
+  },
+  {
+    text: "Em grupo, como você costuma se sentir?",
+    hint: "Observe seu padrão mais frequente",
+    options: [
+      { text: "Com medo de que as pessoas me abandonem ou se cansem de mim", wound: "abandono" },
+      { text: "Sempre precisando agradar e ser aceito(a) pelo grupo", wound: "rejeicao" },
+      { text: "Envergonhado(a) do meu corpo ou da minha forma de ser", wound: "humilhacao" },
+      { text: "Desconfiante — acho que podem me trair ou falar mal de mim", wound: "traicao" },
+      { text: "Exigente comigo mesmo(a), tentando ser perfeito(a) o tempo todo", wound: "injustica" }
+    ]
+  },
+  {
+    text: "Qual dessas frases ressoa mais com você?",
+    hint: "Escolha a que você diria ou pensaria com mais frequência",
+    options: [
+      { text: "\"Tenho medo de ser abandonado(a) pelas pessoas que amo\"", wound: "abandono" },
+      { text: "\"Tenho medo de ser rejeitado(a) e não ser aceito(a) do jeito que sou\"", wound: "rejeicao" },
+      { text: "\"Sinto vergonha de quem sou ou de como apareço para o mundo\"", wound: "humilhacao" },
+      { text: "\"Tenho dificuldade de confiar — sempre espero ser traído(a)\"", wound: "traicao" },
+      { text: "\"Nunca me sinto suficientemente bom(boa) ou justo(a) comigo\"", wound: "injustica" }
+    ]
+  },
+  {
+    text: "Como você lida com críticas?",
+    hint: "Mesmo críticas dadas com boa intenção",
+    options: [
+      { text: "Fico com medo de que a pessoa me abandone por causa disso", wound: "abandono" },
+      { text: "Sinto que estou sendo rejeitado(a) como pessoa, não só o que fiz", wound: "rejeicao" },
+      { text: "Sinto muita vergonha e quero sumir naquele momento", wound: "humilhacao" },
+      { text: "Fico na defensiva e desconfio da intenção de quem criticou", wound: "traicao" },
+      { text: "Concordo mesmo quando não devia, para evitar qualquer conflito", wound: "injustica" }
+    ]
+  },
+  {
+    text: "Como você se relaciona com seus limites pessoais?",
+    hint: "Pense em situações do dia a dia",
+    options: [
+      { text: "Tenho dificuldade de dizer não — tenho medo de perder as pessoas", wound: "abandono" },
+      { text: "Cedo facilmente para ser aceito(a) e não gerar desconforto", wound: "rejeicao" },
+      { text: "Deixo as pessoas ultrapassarem meus limites por não me sentir merecedor(a)", wound: "humilhacao" },
+      { text: "Imponho limites muito rígidos para me proteger de traições", wound: "traicao" },
+      { text: "Sou muito rígido(a) com regras e com o que é certo ou errado", wound: "injustica" }
+    ]
+  },
+  {
+    text: "Qual é sua maior dificuldade nos relacionamentos amorosos?",
+    hint: "Seja honesto(a) consigo mesmo(a)",
+    options: [
+      { text: "Ciúme excessivo e medo constante de ser deixado(a)", wound: "abandono" },
+      { text: "Me sentir inadequado(a) e não merecedor(a) de amor", wound: "rejeicao" },
+      { text: "Me expor de verdade — tenho vergonha de quem sou", wound: "humilhacao" },
+      { text: "Confiar plenamente na outra pessoa sem esperar traição", wound: "traicao" },
+      { text: "Me permitir errar sem me punir ou me culpar demais", wound: "injustica" }
+    ]
+  },
+  {
+    text: "Como você costuma lidar com suas emoções?",
+    hint: "Observe seu padrão predominante",
+    options: [
+      { text: "As expresso de forma intensa, especialmente o medo de perder alguém", wound: "abandono" },
+      { text: "As escondo para não me tornar um peso para os outros", wound: "rejeicao" },
+      { text: "Sinto vergonha de sentir o que sinto", wound: "humilhacao" },
+      { text: "Guardo tudo dentro e me fecho quando me machucam", wound: "traicao" },
+      { text: "As controlo muito — tenho medo de perder o controle", wound: "injustica" }
+    ]
+  },
+  {
+    text: "O que você mais busca nas pessoas ao seu redor?",
+    hint: "Pense no que te faz se sentir seguro(a)",
+    options: [
+      { text: "Presença constante e a certeza de que não vão embora", wound: "abandono" },
+      { text: "Aprovação e aceitação do jeito que sou", wound: "rejeicao" },
+      { text: "Alguém que não me julgue nem me humilhe", wound: "humilhacao" },
+      { text: "Lealdade e comprometimento acima de tudo", wound: "traicao" },
+      { text: "Honestidade e justiça no trato sempre", wound: "injustica" }
+    ]
+  },
+  {
+    text: "Como sua infância influenciou sua forma de se relacionar?",
+    hint: "Pense no que você aprendeu sobre amor e vínculos",
+    options: [
+      { text: "Aprendi que as pessoas que amo podem me deixar a qualquer momento", wound: "abandono" },
+      { text: "Aprendi que não sou suficientemente bom(boa) para ser amado(a)", wound: "rejeicao" },
+      { text: "Aprendi a sentir vergonha de quem sou e de como me expresso", wound: "humilhacao" },
+      { text: "Aprendi que as pessoas podem me trair quando menos espero", wound: "traicao" },
+      { text: "Aprendi que tenho que ser perfeito(a) para merecer amor", wound: "injustica" }
+    ]
+  },
+  {
+    text: "Qual dessas situações mais te machuca?",
+    hint: "Escolha a que provoca mais dor em você",
+    options: [
+      { text: "Ser ignorado(a) ou perceber que alguém está se distanciando", wound: "abandono" },
+      { text: "Ser excluído(a) ou sentir que não pertence ao grupo", wound: "rejeicao" },
+      { text: "Ser humilhado(a) ou ridicularizado(a) na frente de outros", wound: "humilhacao" },
+      { text: "Ser traído(a) ou descobrir que alguém mentiu para você", wound: "traicao" },
+      { text: "Ser tratado(a) de forma injusta ou desigual", wound: "injustica" }
+    ]
+  }
+];
+
+const wounds = {
+  abandono: {
+    name: "Ferida do Abandono",
+    sub: "O medo de ser deixado",
+    emoji: "🌑",
+    teaser: "Você carrega um medo profundo de ser deixado para trás — e isso molda cada escolha que você faz nos seus relacionamentos.",
+    description: "A ferida do abandono nasce geralmente na infância, quando a criança vivencia ausências emocionais ou físicas dos pais ou cuidadores. Esse padrão cria um adulto que vive em alerta constante de perda, que se apega intensamente e que às vezes faz coisas que não queria para garantir que as pessoas fiquem. A boa notícia é que quando reconhecemos essa ferida, podemos começar a criar vínculos mais saudáveis e seguros.",
+    traits: [
+      "Medo intenso de ser abandonado(a) ou deixado(a) para trás",
+      "Tendência a se apegar demais ou sufocar as pessoas que ama",
+      "Ciúmes frequentes e necessidade constante de reasseguramento",
+      "Dificuldade de ficar sozinho(a) sem se sentir ansioso(a)",
+      "Padrão de se relacionar com pessoas emocionalmente indisponíveis"
+    ],
+    cta: "Quer entender como essa ferida surgiu e como se curar dela?"
+  },
+  rejeicao: {
+    name: "Ferida da Rejeição",
+    sub: "O medo de não ser aceito",
+    emoji: "🌒",
+    teaser: "Você passou a vida tentando se encaixar, agradar e ser aceito — porque no fundo, sente que do jeito que é, não é suficiente.",
+    description: "A ferida da rejeição é uma das mais dolorosas porque atinge diretamente o senso de valor pessoal. Quem carrega essa ferida frequentemente sente que precisa se tornar outra pessoa para ser amado(a) e aceito(a). Esse padrão leva à busca constante por aprovação externa e à dificuldade de se amar de forma incondicional. A cura passa por reconhecer que você é digno(a) de amor e pertencimento exatamente como é.",
+    traits: [
+      "Necessidade constante de aprovação das pessoas ao redor",
+      "Dificuldade em se expressar com medo de ser julgado(a)",
+      "Sensação de que nunca é suficientemente bom(boa)",
+      "Tendência a se anular e se calar para agradar os outros",
+      "Mágoa intensa quando sente que não foi aceito(a)"
+    ],
+    cta: "Quer descobrir como parar de buscar aprovação e se amar de verdade?"
+  },
+  humilhacao: {
+    name: "Ferida da Humilhação",
+    sub: "A vergonha de existir",
+    emoji: "🌓",
+    teaser: "Você aprendeu cedo que havia algo errado em você — e carrega até hoje uma vergonha profunda de quem é, do seu corpo ou das suas emoções.",
+    description: "A ferida da humilhação surge quando a criança é envergonhada, ridicularizada ou constantemente criticada. O resultado é um adulto que sente vergonha de se mostrar, que se esconde atrás de uma imagem construída e que tem dificuldade de receber elogios ou reconhecimento. Curar essa ferida significa aprender a se mostrar ao mundo sem medo e reconhecer que você tem valor inerente.",
+    traits: [
+      "Vergonha do próprio corpo, emoções ou forma de ser",
+      "Dificuldade em receber elogios ou reconhecimento sem desconfiar",
+      "Tendência a se diminuir ou se colocar como menos importante",
+      "Medo de ser exposto(a), julgado(a) ou ridicularizado(a)",
+      "Comportamentos de autossabotagem para não se destacar"
+    ],
+    cta: "Quer aprender a se mostrar ao mundo sem vergonha e sem medo?"
+  },
+  traicao: {
+    name: "Ferida da Traição",
+    sub: "A dificuldade de confiar",
+    emoji: "🌔",
+    teaser: "Você já foi tão machucado(a) por pessoas em quem confiava, que hoje tem dificuldade de se abrir de verdade — e carrega esse escudo para se proteger.",
+    description: "A ferida da traição nasce quando promessas são quebradas, segredos são revelados ou quando figuras de confiança desapontam profundamente. Quem carrega essa ferida tende a ser controlador(a), desconfiante e tem dificuldade de delegar ou se vulnerabilizar. A cura não significa ser ingênuo(a) — significa aprender a confiar com sabedoria e a se abrir para conexões genuínas.",
+    traits: [
+      "Grande dificuldade de confiar nas pessoas ao redor",
+      "Tendência a controlar situações, pessoas e resultados",
+      "Hipervigilância — sempre esperando ser traído(a) de alguma forma",
+      "Dificuldade de pedir ajuda ou mostrar vulnerabilidade",
+      "Lealdade muito intensa com quem considera digno de confiança"
+    ],
+    cta: "Quer aprender a confiar novamente sem se colocar em risco?"
+  },
+  injustica: {
+    name: "Ferida da Injustiça",
+    sub: "A busca pela perfeição",
+    emoji: "🌕",
+    teaser: "Você aprendeu que o amor era condicional — que só merecia ser amado(a) se fosse perfeito(a). E até hoje cobra demais de si mesmo(a).",
+    description: "A ferida da injustiça nasce em ambientes muito rígidos, frios ou perfeccionistas. A criança aprende que para ser amada, precisa ser perfeita, justa e impecável. O resultado é um adulto extremamente crítico consigo mesmo(a), com dificuldade de aceitar os próprios erros e com padrões de exigência muito altos. Curar essa ferida é aprender que você já é suficiente — mesmo imperfeito(a).",
+    traits: [
+      "Autocrítica excessiva e dificuldade de aceitar os próprios erros",
+      "Padrões de exigência muito altos para si mesmo(a)",
+      "Dificuldade em relaxar e simplesmente 'ser humano(a)'",
+      "Rigidez com regras — o certo e o errado são muito claros",
+      "Sensação de que nunca faz o suficiente, mesmo fazendo muito"
+    ],
+    cta: "Quer aprender a se tratar com mais gentileza e compaixão?"
+  }
+};
+
+let userName = '';
+let currentQ = 0;
+let scores = { abandono: 0, rejeicao: 0, humilhacao: 0, traicao: 0, injustica: 0 };
+let selectedOption = null;
+
+function startQuiz() {
+  document.getElementById('heroSection').style.display = 'none';
+  document.getElementById('quizSection').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function checkName() {
+  const val = document.getElementById('nameInput').value.trim();
+  const btn = document.getElementById('nameNextBtn');
+  btn.classList.toggle('active', val.length >= 2);
+}
+
+function startQuestions() {
+  userName = document.getElementById('nameInput').value.trim() || 'você';
+  document.getElementById('nameStep').style.display = 'none';
+  document.getElementById('progressBar').style.display = 'flex';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  selectedOption = null;
+  const q = questions[currentQ];
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+  updateProgress();
+  const isLast = currentQ === questions.length - 1;
+  document.getElementById('questionCard').innerHTML = `
+    <div class="q-card">
+      <div class="q-num">Pergunta ${currentQ + 1} de ${questions.length}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-hint">${q.hint}</div>
+      <div class="options">
+        ${q.options.map((opt, i) => `
+          <button class="opt-btn" onclick="selectOption(${i}, '${opt.wound}')">
+            <span class="opt-letter">${letters[i]}</span>
+            <span>${opt.text}</span>
+          </button>
+        `).join('')}
+      </div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
+        ${isLast ? 'Ver meu resultado →' : 'Próxima pergunta →'}
+      </button>
+    </div>
+  `;
+}
+
+function selectOption(index, wound) {
+  selectedOption = { index, wound };
+  document.querySelectorAll('.opt-btn').forEach((btn, i) => {
+    btn.classList.toggle('selected', i === index);
+  });
+  document.getElementById('nextBtn').classList.add('active');
+}
+
+function updateProgress() {
+  const pct = (currentQ / questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${currentQ} / ${questions.length}`;
+}
+
+function nextQuestion() {
+  if (!selectedOption) return;
+  scores[selectedOption.wound]++;
+  currentQ++;
+  if (currentQ >= questions.length) {
+    showLoader();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showLoader() {
+  document.getElementById('quizSection').style.display = 'none';
+  const loader = document.getElementById('loaderSection');
+  loader.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const msgs = [
+    'Analisando suas respostas...',
+    'Identificando padrões emocionais...',
+    'Conectando com sua história...',
+    'Preparando sua análise...'
+  ];
+  let mi = 0;
+  const interval = setInterval(() => {
+    mi++;
+    if (mi < msgs.length) document.getElementById('loaderText').textContent = msgs[mi];
+  }, 700);
+
+  setTimeout(() => {
+    clearInterval(interval);
+    loader.style.display = 'none';
+    showResult();
+  }, 3000);
+}
+
+function showResult() {
+  const topWound = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+  const w = wounds[topWound];
+  const resultSection = document.getElementById('resultSection');
+  resultSection.style.display = 'block';
+  resultSection.innerHTML = `
+    <div class="result-hero-card">
+      <div class="result-eyebrow">${userName}, sua ferida predominante é</div>
+      <div style="font-size:3rem;margin-bottom:12px;">${w.emoji}</div>
+      <div class="result-wound-name">${w.name}</div>
+      <div class="result-wound-sub">${w.sub}</div>
+      <div class="result-divider"></div>
+      <div class="result-teaser">${w.teaser}</div>
+    </div>
+    <div class="result-description">
+      <h3>O que isso significa?</h3>
+      <p>${w.description}</p>
+    </div>
+    <div class="result-traits">
+      <h3>Sinais que aparecem na sua vida</h3>
+      ${w.traits.map(t => `<div class="trait-item"><div class="trait-dot"></div><span>${t}</span></div>`).join('')}
+    </div>
+    <div class="cta-box">
+      <h3>${w.cta}</h3>
+      <p>Agende uma conversa gratuita comigo. Vamos entender juntos como essa ferida se formou e qual é o caminho da sua cura.</p>
+      <a class="whatsapp-btn" href="https://wa.me/5500000000000?text=Ol%C3%A1%20Ricardo!%20Fiz%20o%20quiz%20e%20descobri%20que%20minha%20ferida%20predominante%20%C3%A9%3A%20${encodeURIComponent(w.name)}.%20Quero%20saber%20mais!" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar com Ricardo no WhatsApp
+      </a>
+    </div>
+    <div class="prof-footer">
+      <div class="prof-footer-avatar" style="background:none;padding:0;overflow:hidden;">
+        <img src="data:image/jpeg;base64,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" alt="Ricardo Cavassin" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;">
+      </div>
+      <div>
+        <div class="prof-footer-name">Ricardo Cavassin</div>
+        <div class="prof-footer-title">Psicanalista · Terapeuta</div>
+        <div class="prof-footer-quote">"A cura começa quando você nomeia o que dói."</div>
+      </div>
+    </div>
+    <button class="restart-btn" onclick="restartQuiz()">↺ Refazer o quiz</button>
+  `;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  currentQ = 0;
+  scores = { abandono: 0, rejeicao: 0, humilhacao: 0, traicao: 0, injustica: 0 };
+  selectedOption = null;
+  userName = '';
+  document.getElementById('resultSection').style.display = 'none';
+  document.getElementById('heroSection').style.display = 'flex';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

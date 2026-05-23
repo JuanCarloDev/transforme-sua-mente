@@ -1,0 +1,28 @@
+---
+title: "Transforme Sua Mente"
+subtitle: "Manual prático para cura do trauma emocional"
+author: "Ricardo Batista Cavassin"
+date: "2025"
+lang: pt-BR
+documentclass: book
+classoption:
+  - openright
+fontsize: 11pt
+mainfont: "Palatino"
+sansfont: "Helvetica Neue"
+linestretch: 1.4
+geometry:
+  - paperwidth=14cm
+  - paperheight=21cm
+  - top=2.5cm
+  - bottom=2cm
+  - inner=2.5cm
+  - outer=1.8cm
+  - bindingoffset=0.5cm
+toc: true
+toc-depth: 0
+numbersections: false
+colorlinks: true
+linkcolor: black
+urlcolor: black
+---
