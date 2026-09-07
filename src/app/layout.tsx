@@ -18,11 +18,12 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Transforme Sua Mente — Ciência, Fé e a Superação dos Traumas | Ricardo Batista Cavassin",
+  metadataBase: new URL("https://www.ricardocavassin.com"),
+  title: "Transforme Sua Mente | Ciência, Fé e a Superação dos Traumas | Ricardo Batista Cavassin",
   description:
     "Baixe gratuitamente o e-book que integra psicanálise, neurociência e fé cristã para a cura de traumas emocionais e restauração de identidade.",
   openGraph: {
-    title: "Transforme Sua Mente — E-book Gratuito",
+    title: "Transforme Sua Mente | E-book Gratuito",
     description:
       "Ciência, Fé e a Superação dos Traumas. Baixe agora o e-book de Ricardo Batista Cavassin.",
     images: ["/capa.png"],

@@ -1,11 +1,15 @@
-export default function Author() {
+import { siteContent, type SiteLocale } from "@/lib/site-content";
+
+export default function Author({ locale }: { locale: SiteLocale }) {
+  const copy = siteContent[locale].author;
+
   return (
     <section className="py-20 sm:py-28 px-5 sm:px-6 bg-bg border-t border-border">
       <div className="max-w-[1100px] mx-auto">
         <div className="reveal">
           <div className="section-ornament">
             <span className="text-[10px] tracking-[5px] uppercase text-gold-dim font-medium">
-              O Autor
+              {copy.eyebrow}
             </span>
           </div>
           <h2 className="font-serif text-[clamp(32px,4vw,48px)] font-normal leading-[1.15] mb-10 sm:mb-12 tracking-tight">
@@ -27,19 +31,14 @@ export default function Author() {
             <div className="flex items-center gap-2 mb-5 max-[900px]:justify-center">
               <span className="w-4 h-px bg-gold-dim" />
               <span className="text-[11px] text-gold tracking-[1.5px] uppercase font-medium">
-                Escritor &middot; Pesquisador &middot; Conselheiro
+                {copy.role}
               </span>
             </div>
             <p className="text-[14px] sm:text-[15px] text-text-dim leading-[1.85] max-w-[540px] max-[900px]:max-w-full mb-6">
-              Ricardo é estudioso da interseção entre psicanálise e teologia cristã, com anos de
-              dedicação à compreensão dos traumas emocionais e seus efeitos na identidade humana. Sua
-              abordagem única combina rigor acadêmico com sensibilidade pastoral, criando pontes
-              entre a ciência do comportamento e a fé cristã.
+              {copy.body}
             </p>
             <p className="text-[14px] sm:text-[15px] text-text-dim leading-[1.85] max-w-[540px] max-[900px]:max-w-full italic">
-              &ldquo;Transforme Sua Mente&rdquo; é o resultado dessa jornada de pesquisa e vivência
-              — um convite a olhar para dentro com coragem e encontrar, na renovação da mente, o
-              caminho para a verdadeira liberdade.
+              {copy.closing}
             </p>
           </div>
         </div>

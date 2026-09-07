@@ -1,6 +1,9 @@
 import Image from "next/image";
+import { siteContent, type SiteLocale } from "@/lib/site-content";
 
-export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
+export default function Hero({ locale }: { locale: SiteLocale }) {
+  const copy = siteContent[locale].hero;
+
   return (
     <section className="relative min-h-screen flex items-center justify-center px-5 sm:px-6 py-16 sm:py-20 overflow-hidden">
       {/* Background gradients */}
@@ -28,41 +31,40 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-dim/30 bg-gold-dim/5 mb-6 sm:mb-8 animate-fade-up delay-300">
             <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
             <span className="text-[11px] tracking-[3px] uppercase text-gold font-medium">
-              Em Breve
+              {copy.eyebrow}
             </span>
           </div>
 
           <h1 className="font-serif text-[clamp(44px,5.5vw,76px)] font-light leading-[1.05] tracking-tight mb-3 animate-fade-up delay-500">
             <strong className="font-bold bg-gradient-to-br from-gold-bright via-gold to-amber bg-clip-text text-transparent">
-              Transforme
+              {copy.titleLine1}
             </strong>
             <br />
-            Sua Mente
+            {copy.titleLine2}
           </h1>
 
           <div className="golden-line mb-5 animate-fade-up delay-500 max-[900px]:mx-auto" />
 
           <p className="font-serif text-[clamp(18px,2.2vw,26px)] font-light italic text-text-dim mb-6 sm:mb-8 tracking-wide animate-fade-up delay-700">
-            Ciência, Fé e a Superação dos Traumas
+            {copy.tagline}
           </p>
 
           <p className="text-[14px] sm:text-[15px] text-text-muted leading-[1.85] mb-8 sm:mb-10 max-w-[460px] max-[900px]:max-w-full max-[900px]:mx-auto animate-fade-up delay-900">
-            Uma obra que integra psicanálise, neurociência e teologia cristã para iluminar as raízes
-            do trauma emocional e abrir caminhos reais de cura e restauração da identidade.
+            {copy.description}
           </p>
 
           <div className="animate-fade-up delay-1100 max-[600px]:flex max-[600px]:flex-col max-[600px]:items-center">
-            <button
-              onClick={onOpenModal}
-              className="cta-btn relative overflow-hidden inline-flex items-center gap-3 px-10 py-[18px] bg-gradient-to-br from-gold-dim to-gold text-[#0a0908] font-semibold text-[15px] tracking-wide border-none rounded-full cursor-pointer transition-all duration-400"
+            <a
+              href="#downloads"
+              className="cta-btn relative overflow-hidden inline-flex items-center gap-3 px-10 py-[18px] bg-gradient-to-br from-gold-dim to-gold text-[#0a0908] font-semibold text-[15px] tracking-wide border-none rounded-full cursor-pointer transition-all duration-400 no-underline"
             >
-              <span className="relative z-1">Garantir Meu Exemplar</span>
+              <span className="relative z-1">{copy.button}</span>
               <svg className="relative z-1 w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M13 6l6 6-6 6" />
+                <path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14" />
               </svg>
-            </button>
+            </a>
             <span className="block mt-3 text-[11px] text-text-muted tracking-wide">
-              Vagas limitadas &middot; Seja o primeiro a receber
+              {copy.note}
             </span>
           </div>
         </div>
@@ -73,8 +75,8 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
             <div className="absolute -inset-16 bg-radial-[ellipse_at_center] from-[rgba(200,164,78,0.12)] to-transparent pointer-events-none -z-1" />
             <div className="book-spine" />
             <Image
-              src="/capa.png"
-              alt="Capa do livro Transforme Sua Mente"
+              src={copy.cover}
+              alt={copy.coverAlt}
               width={320}
               height={480}
               priority
@@ -87,7 +89,7 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
       {/* Scroll hint */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-muted text-[10px] tracking-[3px] uppercase animate-fade-in max-[600px]:hidden" style={{ animationDelay: "2s" }}>
         <div className="w-px h-10 bg-gradient-to-b from-gold-dim to-transparent" style={{ animation: "scrollPulse 2s ease infinite" }} />
-        <span>Descubra</span>
+        <span>{copy.discover}</span>
       </div>
     </section>
   );

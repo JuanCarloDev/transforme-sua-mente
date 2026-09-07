@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="342.5mm" height="260mm" viewBox="0 0 342.5 260" role="img" aria-labelledby="title desc">
+  <title id="title">Transform Your Mind full English cover</title>
+  <desc id="desc">Print cover spread with back cover, 12.5 millimeter spine, and front cover</desc>
+
+  <defs>
+    <filter id="titleShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="1.2" stdDeviation="1.1" flood-color="#000" flood-opacity="0.85"/>
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="0.65" stdDeviation="0.7" flood-color="#000" flood-opacity="0.75"/>
+    </filter>
+    <clipPath id="authorPhotoClip">
+      <rect x="32" y="199" width="20" height="35" rx="1.7"/>
+    </clipPath>
+    <style>
+      .title { font-family: "DIN Condensed", Impact, sans-serif; font-weight: 700; letter-spacing: 0.55mm; }
+      .sans { font-family: "Avenir Next", "Open Sans", sans-serif; }
+      .body { font-family: "Palatino", "Palatino Linotype", serif; fill: #f3eee7; }
+      .gold { fill: #f9bf3c; }
+      .cream { fill: #f2dab8; }
+      .muted { fill: #c9c2b8; }
+    </style>
+  </defs>
+
+  <rect width="342.5" height="260" fill="#fff"/>
+
+  <rect x="20" y="20" width="157.5" height="220" fill="#03050b"/>
+  <rect x="20" y="20" width="145" height="33" fill="#1f1009"/>
+  <path d="M22 49 L24 47 L27 50 L32 49 L36 50 L41 47.8 L45 49 L49 46.8 L54 50 L59 47.5 L64 49.5 L69 48 L75 50 L82 46.9 L89 49.2 L96 46.7 L103 48.4 L108 46.6 L114 50 L121 48 L128 49.5 L135 47.2 L142 49 L148 47.5 L154 49.6 L162 48" fill="none" stroke="#f3eee7" stroke-width="0.55"/>
+
+  <text x="92.5" y="38.5" class="body gold" font-size="3.65" font-style="italic" font-weight="700" text-anchor="middle">There are wounds that time cannot heal on its own.</text>
+  <line x1="30" y1="59" x2="155" y2="59" stroke="#5d4522" stroke-width="0.3"/>
+  <circle cx="92.5" cy="59" r="1.15" fill="#f9bf3c" transform="rotate(45 92.5 59)"/>
+
+
+  <text x="92.5" y="68" class="body gold" font-size="5.1" text-anchor="middle">
+    <tspan x="92.5" dy="0">What happens when a child grows up carrying</tspan>
+    <tspan x="92.5" dy="5.2">pain that was never given a name?</tspan>
+  </text>
+
+
+  <text x="92.5" y="82" class="sans muted" font-size="3.05" text-anchor="middle">
+    <tspan x="92.5" dy="0">Childhood trauma does not stay in the past. It grows with us, shaping our choices,</tspan>
+    <tspan x="92.5" dy="4.35">relationships, emotions, and even the way we see ourselves. But there is a path</tspan>
+    <tspan x="92.5" dy="4.35">to freedom, and it begins with the courage to look within.</tspan>
+  </text>
+
+
+  <text x="92.5" y="100" class="body gold" font-size="3.45" text-anchor="middle">
+    <tspan x="92.5" dy="0">&quot;Do not be conformed to this world, but be transformed</tspan>
+    <tspan x="92.5" dy="4.7">by the renewing of your mind.&quot; Romans 12:2</tspan>
+  </text>
+
+  <line x1="41" y1="111" x2="144" y2="111" stroke="#4b371b" stroke-width="0.28"/>
+
+  <text x="92.5" y="119" class="sans muted" font-size="3.05" text-anchor="middle">
+    <tspan x="92.5" dy="0">Bringing together science, psychoanalysis, and faith, Ricardo Batista Cavassin</tspan>
+    <tspan x="92.5" dy="4.35">guides the reader on a profound journey of self-knowledge. The result of nearly a</tspan>
+    <tspan x="92.5" dy="4.35">decade of research and personal experience, this book offers answers where there</tspan>
+    <tspan x="92.5" dy="4.35">were only questions, and hope where there was only pain.</tspan>
+  </text>
+
+  <line x1="30" y1="140.5" x2="155" y2="140.5" stroke="#5d4522" stroke-width="0.3"/>
+  <circle cx="92.5" cy="140.5" r="1.15" fill="#f9bf3c" transform="rotate(45 92.5 140.5)"/>
+  <text x="92.5" y="149" class="sans gold" font-size="2.75" font-weight="700" letter-spacing="0.42" text-anchor="middle">WHAT YOU WILL FIND IN THIS BOOK</text>
+
+
+  <text x="35" y="158" class="body" font-size="2.95" text-anchor="start">
+    <tspan x="35" dy="0">The origins of childhood trauma</tspan>
+    <tspan x="35" dy="4.4">and its invisible scars;</tspan>
+    <tspan x="35" dy="4.4">Causes, patterns, and the psyche's</tspan>
+    <tspan x="35" dy="4.4">defense mechanisms;</tspan>
+    <tspan x="35" dy="4.4">Practical tools for renewing</tspan>
+    <tspan x="35" dy="4.4">the mind;</tspan>
+  </text>
+
+  <text x="96" y="158" class="body" font-size="2.95" text-anchor="start">
+    <tspan x="96" dy="0">How the past appears in adult life;</tspan>
+    <tspan x="96" dy="4.4"></tspan>
+    <tspan x="96" dy="4.4">The path to healing: science and faith</tspan>
+    <tspan x="96" dy="4.4">walking together;</tspan>
+    <tspan x="96" dy="4.4">A true testimony: from pain</tspan>
+    <tspan x="96" dy="4.4">to transformation.</tspan>
+  </text>
+  <g fill="#f9bf3c">
+    <circle cx="32.5" cy="157.1" r="0.7"/><circle cx="32.5" cy="165.9" r="0.7"/><circle cx="32.5" cy="174.7" r="0.7"/>
+    <circle cx="93.5" cy="157.1" r="0.7"/><circle cx="93.5" cy="165.9" r="0.7"/><circle cx="93.5" cy="174.7" r="0.7"/>
+  </g>
+
+  <line x1="30" y1="189" x2="155" y2="189" stroke="#5d4522" stroke-width="0.3"/>
+  <circle cx="92.5" cy="189" r="1.15" fill="#f9bf3c" transform="rotate(45 92.5 189)"/>
+
+  <image href="../ricardo.jpeg" x="32" y="199" width="20" height="35" preserveAspectRatio="xMidYMin slice" clip-path="url(#authorPhotoClip)"/>
+  <text x="57" y="201.5" class="sans gold" font-size="2.35" font-weight="700" letter-spacing="0.25">ABOUT THE AUTHOR</text>
+  <text x="57" y="207" class="body gold" font-size="4.6" font-weight="700">Ricardo Batista Cavassin</text>
+  <text x="57" y="212" class="sans gold" font-size="2.35" font-weight="700" letter-spacing="0.13">PROFESSOR | HISTORIAN | PSYCHOANALYST | WRITER</text>
+
+  <text x="57" y="217.2" class="sans muted" font-size="2.35" text-anchor="start">
+    <tspan x="57" dy="0">Since 2016, Ricardo has devoted himself to the in-depth study</tspan>
+    <tspan x="57" dy="3.45">of trauma and the human mind. His research grew from his own</tspan>
+    <tspan x="57" dy="3.45">healing journey, becoming a reference at the intersection of</tspan>
+    <tspan x="57" dy="3.45">science and biblical faith. With sensitivity and rigor, he guides</tspan>
+    <tspan x="57" dy="3.45">people toward real transformation.</tspan>
+  </text>
+
+
+    <g aria-label="ISBN 978-65-88908-87-7">
+      <rect x="129" y="216" width="30" height="18" rx="0.8" fill="#fff"/>
+      <text x="144" y="218.7" text-anchor="middle" font-family="Courier New, monospace" font-size="2.2" fill="#111">ISBN 978-65-88908-87-7</text>
+      <rect x="133.000" y="216" width="0.252" height="14" fill="#111"/><rect x="133.463" y="216" width="0.252" height="14" fill="#111"/><rect x="133.926" y="216" width="0.252" height="14" fill="#111"/><rect x="134.158" y="216" width="0.252" height="14" fill="#111"/><rect x="134.389" y="216" width="0.252" height="14" fill="#111"/><rect x="134.853" y="216" width="0.252" height="14" fill="#111"/><rect x="135.084" y="216" width="0.252" height="14" fill="#111"/><rect x="136.011" y="216" width="0.252" height="14" fill="#111"/><rect x="136.705" y="216" width="0.252" height="14" fill="#111"/><rect x="137.863" y="216" width="0.252" height="14" fill="#111"/><rect x="138.326" y="216" width="0.252" height="14" fill="#111"/><rect x="138.789" y="216" width="0.252" height="14" fill="#111"/><rect x="139.021" y="216" width="0.252" height="14" fill="#111"/><rect x="139.947" y="216" width="0.252" height="14" fill="#111"/><rect x="140.874" y="216" width="0.252" height="14" fill="#111"/><rect x="141.568" y="216" width="0.252" height="14" fill="#111"/><rect x="142.032" y="216" width="0.252" height="14" fill="#111"/><rect x="142.263" y="216" width="0.252" height="14" fill="#111"/><rect x="142.726" y="216" width="0.252" height="14" fill="#111"/><rect x="142.958" y="216" width="0.252" height="14" fill="#111"/><rect x="143.189" y="216" width="0.252" height="14" fill="#111"/><rect x="143.653" y="216" width="0.252" height="14" fill="#111"/><rect x="144.116" y="216" width="0.252" height="14" fill="#111"/><rect x="144.579" y="216" width="0.252" height="14" fill="#111"/><rect x="144.811" y="216" width="0.252" height="14" fill="#111"/><rect x="145.042" y="216" width="0.252" height="14" fill="#111"/><rect x="145.505" y="216" width="0.252" height="14" fill="#111"/><rect x="146.200" y="216" width="0.252" height="14" fill="#111"/><rect x="146.432" y="216" width="0.252" height="14" fill="#111"/><rect x="146.663" y="216" width="0.252" height="14" fill="#111"/><rect x="147.358" y="216" width="0.252" height="14" fill="#111"/><rect x="147.821" y="216" width="0.252" height="14" fill="#111"/><rect x="148.516" y="216" width="0.252" height="14" fill="#111"/><rect x="149.442" y="216" width="0.252" height="14" fill="#111"/><rect x="150.137" y="216" width="0.252" height="14" fill="#111"/><rect x="151.063" y="216" width="0.252" height="14" fill="#111"/><rect x="151.989" y="216" width="0.252" height="14" fill="#111"/><rect x="152.684" y="216" width="0.252" height="14" fill="#111"/><rect x="153.611" y="216" width="0.252" height="14" fill="#111"/><rect x="154.305" y="216" width="0.252" height="14" fill="#111"/><rect x="154.768" y="216" width="0.252" height="14" fill="#111"/>
+      <text x="144" y="233.1" text-anchor="middle" font-family="Courier New, monospace" font-size="2.4" letter-spacing="1.15" fill="#111">9 786588 908877</text>
+    </g>
+
+  <rect x="165" y="20" width="12.5" height="220" fill="#000014"/>
+  <text class="sans" fill="#f7f4ed" font-size="5.2" font-weight="700" letter-spacing="0.35" text-anchor="middle" transform="translate(171.6 81) rotate(90)">TRANSFORM YOUR MIND</text>
+  <text class="sans gold" font-size="3.7" font-weight="700" letter-spacing="0.18" text-anchor="middle" transform="translate(171.6 205) rotate(90)">RICARDO BATISTA CAVASSIN</text>
+
+
+  <image href="transform-your-mind-background.png" x="177.5" y="20" width="145" height="220" preserveAspectRatio="xMidYMid slice"/>
+  <g filter="url(#titleShadow)">
+    <text x="247.5" y="95" class="title cream" font-size="24" stroke="#f2dab8" stroke-width="0.7" paint-order="stroke fill" text-anchor="middle" textLength="112" lengthAdjust="spacingAndGlyphs">TRANSFORM</text>
+    <text x="247.5" y="117" class="title gold" font-size="22.5" stroke="#f9bf3c" stroke-width="0.7" paint-order="stroke fill" text-anchor="middle" textLength="96" lengthAdjust="spacingAndGlyphs">YOUR MIND</text>
+  </g>
+  <line x1="211.5" y1="124" x2="283.5" y2="124" stroke="#a8772b" stroke-width="0.45" opacity="0.8"/>
+  <text x="247.5" y="132" class="sans cream" font-size="4.3" font-weight="700" text-anchor="middle" filter="url(#softShadow)">A PRACTICAL GUIDE TO HEALING EMOTIONAL TRAUMA</text>
+  <line x1="219.5" y1="137" x2="275.5" y2="137" stroke="#a8772b" stroke-width="0.42" opacity="0.8"/>
+  <text x="247.5" y="230" class="sans cream" font-size="7.1" font-weight="700" text-anchor="middle" filter="url(#softShadow)">Ricardo Batista Cavassin</text>
+
+  <g fill="none" stroke="#222" stroke-width="0.28">
+    <path d="M25 5 V18 M5 25 H18 M317.5 5 V18 M324.5 25 H337.5 M25 242 V255 M5 235 H18 M317.5 242 V255 M324.5 235 H337.5"/>
+  </g>
+  <g fill="none" stroke="#666" stroke-width="0.22" stroke-dasharray="2 2">
+    <path d="M165 5 V18 M165 242 V255 M177.5 5 V18 M177.5 242 V255"/>
+  </g>
+</svg>

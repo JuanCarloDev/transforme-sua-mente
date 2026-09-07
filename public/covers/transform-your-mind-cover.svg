@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="140mm" height="210mm" viewBox="0 0 140 210" role="img" aria-labelledby="title desc">
+  <title id="title">Transform Your Mind</title>
+  <desc id="desc">English front cover for Ricardo Batista Cavassin's book</desc>
+
+  <defs>
+    <filter id="titleShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="1.2" stdDeviation="1.1" flood-color="#000" flood-opacity="0.85"/>
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="0.65" stdDeviation="0.7" flood-color="#000" flood-opacity="0.75"/>
+    </filter>
+    <clipPath id="authorPhotoClip">
+      <rect x="32" y="199" width="20" height="35" rx="1.7"/>
+    </clipPath>
+    <style>
+      .title { font-family: "DIN Condensed", Impact, sans-serif; font-weight: 700; letter-spacing: 0.55mm; }
+      .sans { font-family: "Avenir Next", "Open Sans", sans-serif; }
+      .body { font-family: "Palatino", "Palatino Linotype", serif; fill: #f3eee7; }
+      .gold { fill: #f9bf3c; }
+      .cream { fill: #f2dab8; }
+      .muted { fill: #c9c2b8; }
+    </style>
+  </defs>
+
+  <image href="transform-your-mind-background.png" x="0" y="-2.5" width="140" height="215" preserveAspectRatio="xMidYMid slice"/>
+  <g filter="url(#titleShadow)">
+    <text x="70" y="72.5" class="title cream" font-size="24" stroke="#f2dab8" stroke-width="0.7" paint-order="stroke fill" text-anchor="middle" textLength="112" lengthAdjust="spacingAndGlyphs">TRANSFORM</text>
+    <text x="70" y="94.5" class="title gold" font-size="22.5" stroke="#f9bf3c" stroke-width="0.7" paint-order="stroke fill" text-anchor="middle" textLength="96" lengthAdjust="spacingAndGlyphs">YOUR MIND</text>
+  </g>
+  <line x1="34" y1="101.5" x2="106" y2="101.5" stroke="#a8772b" stroke-width="0.45" opacity="0.8"/>
+  <text x="70" y="109.5" class="sans cream" font-size="4.3" font-weight="700" text-anchor="middle" filter="url(#softShadow)">A PRACTICAL GUIDE TO HEALING EMOTIONAL TRAUMA</text>
+  <line x1="42" y1="114.5" x2="98" y2="114.5" stroke="#a8772b" stroke-width="0.42" opacity="0.8"/>
+  <text x="70" y="202.5" class="sans cream" font-size="7.1" font-weight="700" text-anchor="middle" filter="url(#softShadow)">Ricardo Batista Cavassin</text>
+</svg>

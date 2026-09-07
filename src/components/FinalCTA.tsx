@@ -1,4 +1,8 @@
-export default function FinalCTA({ onOpenModal }: { onOpenModal: () => void }) {
+import { siteContent, type SiteLocale } from "@/lib/site-content";
+
+export default function FinalCTA({ locale }: { locale: SiteLocale }) {
+  const copy = siteContent[locale].final;
+
   return (
     <section
       className="py-24 sm:py-36 px-5 sm:px-6 text-center border-t border-border relative overflow-hidden"
@@ -17,32 +21,32 @@ export default function FinalCTA({ onOpenModal }: { onOpenModal: () => void }) {
         <div className="flex items-center justify-center gap-3 mb-6">
           <span className="w-8 h-px bg-gold-dim/40" />
           <span className="text-[10px] tracking-[5px] uppercase text-gold-dim font-medium">
-            Seja o primeiro
+            {copy.eyebrow}
           </span>
           <span className="w-8 h-px bg-gold-dim/40" />
         </div>
 
         <h2 className="font-serif text-[clamp(32px,4.5vw,52px)] font-normal leading-[1.12] mb-5 tracking-tight">
-          Há esperança. Há cura.
+          {copy.title}
           <br />
-          <span className="text-text-dim">Há um caminho.</span>
+          <span className="text-text-dim">{copy.titleMuted}</span>
         </h2>
 
         <p className="text-[15px] sm:text-base text-text-dim max-w-[480px] leading-[1.85] mb-10 sm:mb-12 mx-auto">
-          O livro está em fase final de preparação. Entre na fila e seja notificado assim que estiver disponível.
+          {copy.description}
         </p>
 
-        <button
-          onClick={onOpenModal}
-          className="cta-btn relative overflow-hidden inline-flex items-center gap-3 px-12 sm:px-14 py-[20px] sm:py-[22px] bg-gradient-to-br from-gold-dim to-gold text-[#0a0908] font-semibold text-[15px] sm:text-base tracking-wide border-none rounded-full cursor-pointer transition-all duration-400"
+        <a
+          href="#downloads"
+          className="cta-btn relative overflow-hidden inline-flex items-center gap-3 px-12 sm:px-14 py-[20px] sm:py-[22px] bg-gradient-to-br from-gold-dim to-gold text-[#0a0908] font-semibold text-[15px] sm:text-base tracking-wide border-none rounded-full cursor-pointer transition-all duration-400 no-underline"
         >
-          <span className="relative z-1">Entrar na Fila de Espera</span>
+          <span className="relative z-1">{copy.button}</span>
           <svg className="relative z-1 w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M13 6l6 6-6 6" />
+            <path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14" />
           </svg>
-        </button>
+        </a>
         <span className="block mt-4 text-[11px] text-text-muted tracking-wide">
-          Gratuito &middot; Sem spam &middot; Você será notificado
+          {copy.note}
         </span>
       </div>
     </section>

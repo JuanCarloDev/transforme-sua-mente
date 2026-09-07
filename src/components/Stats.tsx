@@ -1,13 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-
-const stats = [
-  { target: 12, suffix: "", label: "Capítulos" },
-  { target: 34, suffix: "k", label: "Palavras" },
-  { target: 15, suffix: "+", label: "Autores Citados" },
-  { target: 30, suffix: "+", label: "Ref. Bíblicas" },
-];
+import { siteContent, type SiteLocale } from "@/lib/site-content";
 
 function useCountUp(target: number, duration: number, start: boolean) {
   const [count, setCount] = useState(0);
@@ -45,9 +39,10 @@ function StatItem({ target, suffix, label, active }: { target: number; suffix: s
   );
 }
 
-export default function Stats() {
+export default function Stats({ locale }: { locale: SiteLocale }) {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
+  const stats = siteContent[locale].stats;
 
   useEffect(() => {
     const el = ref.current;

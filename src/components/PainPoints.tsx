@@ -1,4 +1,6 @@
-const painCards = [
+import { siteContent, type SiteLocale } from "@/lib/site-content";
+
+const painCardStyles = [
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -8,8 +10,6 @@ const painCards = [
     ),
     color: "var(--color-rose)",
     bgColor: "rgba(179, 90, 90, 0.1)",
-    title: "Medo de não ser suficiente",
-    desc: 'Críticas internalizadas na infância que se tornaram crenças: "não sou bom o bastante", "não mereço amor".',
   },
   {
     icon: (
@@ -21,8 +21,6 @@ const painCards = [
     ),
     color: "var(--color-amber)",
     bgColor: "rgba(212, 136, 10, 0.1)",
-    title: "Padrões que se repetem",
-    desc: "Relacionamentos que sempre terminam igual. Autossabotagem quando tudo parece dar certo. O ciclo que não se quebra.",
   },
   {
     icon: (
@@ -35,12 +33,12 @@ const painCards = [
     ),
     color: "var(--color-sage)",
     bgColor: "rgba(106, 138, 106, 0.1)",
-    title: "Ansiedade e vazio crônico",
-    desc: "A hipervigilância constante, a dificuldade de confiar, a sensação de que algo essencial está faltando dentro de você.",
   },
 ];
 
-export default function PainPoints() {
+export default function PainPoints({ locale }: { locale: SiteLocale }) {
+  const copy = siteContent[locale].pain;
+
   return (
     <section
       className="py-20 sm:py-28 px-5 sm:px-6 relative border-t border-border"
@@ -52,22 +50,24 @@ export default function PainPoints() {
         <div className="reveal">
           <div className="section-ornament">
             <span className="text-[10px] tracking-[5px] uppercase text-gold-dim font-medium">
-              Você se reconhece?
+              {copy.eyebrow}
             </span>
           </div>
           <h2 className="font-serif text-[clamp(32px,4vw,48px)] font-normal leading-[1.15] mb-5 tracking-tight">
-            As feridas que ninguém vê
+            {copy.title}
             <br />
-            <span className="text-text-dim">mas que controlam tudo</span>
+            <span className="text-text-dim">{copy.titleMuted}</span>
           </h2>
           <p className="text-[15px] sm:text-base text-text-dim max-w-[560px] leading-[1.8] mb-12 sm:mb-16">
-            Muitos adultos carregam dores da infância sem perceber como elas moldam cada decisão, cada
-            relacionamento, cada padrão de autossabotagem.
+            {copy.description}
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
-          {painCards.map((card, i) => (
+          {copy.cards.map((card, i) => {
+            const cardStyle = painCardStyles[i];
+
+            return (
             <div
               key={card.title}
               className="reveal-card p-7 sm:p-8 border border-border rounded-2xl bg-bg-card transition-all duration-400 hover:border-border-glow hover:bg-bg-card-hover hover:-translate-y-1 group"
@@ -75,14 +75,15 @@ export default function PainPoints() {
             >
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110"
-                style={{ background: card.bgColor, color: card.color }}
+                style={{ background: cardStyle.bgColor, color: cardStyle.color }}
               >
-                {card.icon}
+                {cardStyle.icon}
               </div>
               <h3 className="font-serif text-xl font-semibold mb-3">{card.title}</h3>
               <p className="text-sm text-text-muted leading-[1.75]">{card.desc}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
